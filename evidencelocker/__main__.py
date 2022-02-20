@@ -16,4 +16,6 @@ def before_request():
 
 	session.permanent=True
 
-app.get('/')
+@app.get('/')
+def home():
+	return "placeholder page"
