@@ -1,4 +1,5 @@
 alembic==1.7.6
 flask==2.0.3
+Flask-Markdown==0.3
 gevent==21.12.0
 gunicorn==20.1.0
