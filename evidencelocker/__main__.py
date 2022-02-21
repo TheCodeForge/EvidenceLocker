@@ -35,6 +35,8 @@ db_session=scoped_session(
     )
 Base=declarative_base()
 
+from .routes import *
+
 @app.before_request
 def before_request():
 
