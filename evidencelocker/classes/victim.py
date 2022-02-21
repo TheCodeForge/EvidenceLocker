@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship, lazyload
 
 from evidencelocker.__main__ import Base
 
-VictimUser(Base):
+class VictimUser(Base):
 
     __tablename__="victim_users"
     
