@@ -46,7 +46,7 @@ from alembic import command
 #LOG.info('Running DB migrations in %r on %r', script_location, dsn)
 alembic_cfg = Config()
 alembic_cfg.set_main_option('sqlalchemy.url', app.config["DATABASE_URL"])
-alembic_cfg.set_main_option('script_location',  "alembic")
+alembic_cfg.set_main_option('script_location',  "/alembic/versions")
 alembic_cfg.attributes['target_metadata']=Base.metadata
 command.revision(alembic_cfg, autogenerate=True)
 command.upgrade(alembic_cfg, 'head')
@@ -59,4 +59,5 @@ def before_request():
 @app.get('/')
 def home():
     return render_template(
-        "base.html")
+        "base.html"
+        )
