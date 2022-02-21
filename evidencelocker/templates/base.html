@@ -6,6 +6,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
+
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/">EvidenceLocker</a>
@@ -19,9 +20,9 @@
           </li>
         </ul>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="vicDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Victims</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu" aria-labelledby="vicDropdown">
             <a class="dropdown-item" href="#">Victim Login</a>
             <a class="dropdown-item" href="#">Victim Signup</a>
             <div class="dropdown-divider"></div>
@@ -30,9 +31,9 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="leoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Police</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu" aria-labelledby="leoDropdown">
             <a class="dropdown-item" href="#">LEO Login</a>
             <a class="dropdown-item" href="#">Request LEO Account</a>
             <div class="dropdown-divider"></div>
@@ -43,6 +44,7 @@
     </nav>
 
     {% block content %}
+    Content goes here
     {% endblock %}
 
     <!--Bootstrap and Popper JS -->
