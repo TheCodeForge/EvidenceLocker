@@ -14,13 +14,25 @@ app=Flask(
 
 app.url_map.strict_slashes=False
 
-#map config vars
-config_vars=[
-    "SECRET_KEY",
-    "SERVER_NAME"
-]
-for x in config_vars:
-    app.config[x]=environ.get(x)
+#===CONFIGS===
+app.config['DATABASE_URL']                  = environ.get("DATABASE_URL")
+app.config["PERMANENT_SESSION_LIFETIME"]    = 60 * 60
+app.config["SESSION_REFRESH_EACH_REQUEST"]  = True
+app.config['SECRET_KEY']                    = environ.get("SECRET_KEY")
+app.config['SERVER_NAME']                   = environ.get("SERVER_NAME")
+
+
+#===SQLALCHEMY===
+_engine=create_engine(
+    app.config['DATABASE_URL'],
+    pool_use_lifo=True
+)
+db_session=scoped_session(
+    sessionmaker(
+        bind=_engine
+        )
+    )
+Base=declarative_base()
 
 @app.before_request
 def before_request():
