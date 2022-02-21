@@ -13,8 +13,8 @@ app.url_map.strict_slashes=False
 app.before_request
 def before_request():
 
-	session.permanent=True
+    session.permanent=True
 
 @app.get('/')
 def home():
-	return "placeholder page"
+    return "placeholder page"
