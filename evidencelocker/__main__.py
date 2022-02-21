@@ -1,6 +1,8 @@
 from os import environ
 import secrets
 
+import alembic.config
+
 from flask import *
 from flaskext.markdown import Markdown
 
@@ -17,7 +19,7 @@ app=Flask(
 app.url_map.strict_slashes=False
 
 #===CONFIGS===
-app.config['DATABASE_URL']                  = environ.get("DATABASE_URL").replace("postgres://", "postgresql://")
+app.config['DATABASE_URL']                  = environ.get("DATABASE_URL", input("Database URL: ")).replace("postgres://", "postgresql://")
 app.config["PERMANENT_SESSION_LIFETIME"]    = 60 * 60
 app.config["SESSION_REFRESH_EACH_REQUEST"]  = True
 app.config['SECRET_KEY']                    = environ.get("SECRET_KEY")
@@ -35,7 +37,18 @@ db_session=scoped_session(
     )
 Base=declarative_base()
 
+from .classes import *
 from .routes import *
+
+#===ALEMBIC DB SCHEMA UPDATE===
+from alembic.config import Config
+from alembic import command
+def run_migrations(script_location: str, dsn: str) -> None:
+    #LOG.info('Running DB migrations in %r on %r', script_location, dsn)
+    alembic_cfg = Config()
+    alembic_cfg.set_main_option('sqlalchemy.url', app.config["DATABASE_URL"])
+    command.revision(alembic_cfg, autogenerate=True)
+    command.upgrade(alembic_cfg, 'head')
 
 @app.before_request
 def before_request():
