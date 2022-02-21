@@ -1,3 +1,4 @@
 from evidencelocker.__main__ import Base
 
-class PoliceUser(Base)
+class PoliceUser(Base):
+	pass
