@@ -11,3 +11,11 @@ $small-font-size: 12px;
 
 // Bootstrap and its default variables
 @import "evidencelocker/assets/bootstrap/scss/bootstrap";
+
+.overlay-div{
+   height:100%;
+   width: 100%;
+   position:absolute;
+   background-color:$primary;
+   opacity:.5;
+}

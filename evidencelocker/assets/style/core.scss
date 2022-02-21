@@ -1,0 +1,12 @@
+.splash-1 {
+	background-image: url(/assets/images/splash/cover1.jpg);
+	background-size: 100%;
+}
+
+.overlay-div{
+   height:100%;
+   width: 100%;
+   position:absolute;
+   background-color:$primary;
+   opacity:.5;
+}
