@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card m-0 border-0">
+  <div class="card-body">
+    <h1 class="card-title text-primary fw-bold">Victim FAQ</h1>
+  </div>
+  <div class="accordion" id="faqaccordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          What should I put in my Locker?
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqaccordion">
+        <div class="accordion-body">
+          <p>You should use your Locker to store photos, video, audio, text descriptions, or other evidence of an abusive incident, and you should do this as soon as possible after the incident occurs.</p>
+          <p>You should <i>not</i> use your locker to store evidence obtained illegally - it could be used against you. Do not store unrelated content in your locker.</p>
+          <p>Do not use your locker to store photo/video evidence of underage sexual abuse. This counts as child pornography, and The Evidence Locker is not licensed to possess it.</p>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          How do I edit or delete the contents of my Locker?
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqaccordion">
+        <div class="accordion-body">
+          Content saved to your Locker is potential evidence in a case against your abuser. Therefore, you cannot edit or delete it. 
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingThree">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          With whom will my Locker be shared.?
+        </button>
+      </h2>
+      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqaccordion">
+        <div class="accordion-body">
+          <p>Your locker may be shared with:</p>
+          <ul>
+            <li>Specific law enforcement agencies that you select</li>
+            <li>Any law enforcement agency in your home country who requests it, if you select that option AND the country is not in our List of Restricted Countries</li>
+            <li>Any law enforcement agency from any country with a warrant that has been domesticated in the United States of America</li>
+          </ul>
+          <p>Additionally, we may look at your Locker for the purpose of ensuring compliance with the terms of use.</p>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFour">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+          I've shared my Locker with law enforcement. Now what?
+        </button>
+      </h2>
+      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqaccordion">
+        <div class="accordion-body">
+          The Evidence Locker cannot initiate legal action on your behalf. You will need to do that yourself. Provide the responding officer, detective, or other law enforcement agent with the link to your Locker.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFive">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+          Can you help review my Locker contents to make sure I have a good case?
+        </button>
+      </h2>
+      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqaccordion">
+        <div class="accordion-body">
+          No. The Evidence Locker does not provide legal advice or legal services of any kind. We are merely a data storage and sharing service.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
