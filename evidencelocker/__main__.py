@@ -42,4 +42,5 @@ def before_request():
 
 @app.get('/')
 def home():
-    return "placeholder page"
+    return render_template(
+        "base.html")
