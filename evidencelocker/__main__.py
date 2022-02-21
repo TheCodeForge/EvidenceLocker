@@ -44,7 +44,7 @@ from .routes import *
 from alembic.config import Config
 from alembic import command
 #LOG.info('Running DB migrations in %r on %r', script_location, dsn)
-alembic_cfg = Config(file="alembic.ini")
+alembic_cfg = Config("alembic.ini")
 command.revision(alembic_cfg, autogenerate=True)
 command.upgrade(alembic_cfg, 'head')
 
