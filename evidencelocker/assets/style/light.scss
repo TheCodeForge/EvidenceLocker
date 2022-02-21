@@ -9,6 +9,10 @@ $small-font-size: 12px;
     font-size: $small-font-size!important;
 }
 
+.card-body {
+	z-index:10;
+}
+
 // Bootstrap and its default variables
 @import "evidencelocker/assets/bootstrap/scss/bootstrap";
 
