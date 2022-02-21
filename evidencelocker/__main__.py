@@ -6,11 +6,23 @@ from flaskext.markdown import Markdown
 
 from sqlalchemy import *
 
-app=Flask(__name__)
+app=Flask(
+    __name__,
+    template_folder='./templates',
+    static_folder='./assets'
+    )
 
 app.url_map.strict_slashes=False
 
-app.before_request
+#map config vars
+config_vars=[
+    "SECRET_KEY",
+    "SERVER_NAME"
+]
+for x in config_vars:
+    app.config[x]=environ.get(x)
+
+@app.before_request
 def before_request():
 
     session.permanent=True
