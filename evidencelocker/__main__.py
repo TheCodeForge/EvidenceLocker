@@ -19,7 +19,7 @@ app=Flask(
 app.url_map.strict_slashes=False
 
 #===CONFIGS===
-app.config['DATABASE_URL']                  = environ.get("DATABASE_URL", input("Database URL: ")).replace("postgres://", "postgresql://")
+app.config['DATABASE_URL']                  = environ.get("DATABASE_URL").replace("postgres://", "postgresql://")
 app.config["PERMANENT_SESSION_LIFETIME"]    = 60 * 60
 app.config["SESSION_REFRESH_EACH_REQUEST"]  = True
 app.config['SECRET_KEY']                    = environ.get("SECRET_KEY")
