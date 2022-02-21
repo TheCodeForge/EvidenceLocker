@@ -1,6 +1,13 @@
-// Your variable overrides
+// Colors
 $primary: 		#2589bd;
 $secondary: 	#0b132b;
+
+//Fonts
+$small-font-size: 12px;
+
+.text-small {
+    font-size: $small-font-size!important;
+}
 
 // Bootstrap and its default variables
 @import "evidencelocker/assets/bootstrap/scss/bootstrap";
