@@ -3,9 +3,10 @@ import secrets
 
 from flask import *
 from flaskext.markdown import Markdown
-from sqlalchemy.orm import Session, sessionmaker, scoped_session
 
 from sqlalchemy import *
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import Session, sessionmaker, scoped_session
 
 app=Flask(
     __name__,
