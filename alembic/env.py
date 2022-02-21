@@ -17,7 +17,9 @@ config = context.config
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+from evidencelocker.__main__ import app, Base
+target_metadata = Base.metadata
+config.set_main_option('sqlalchemy.url', app.config['DATABASE_URL'])
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
