@@ -1,6 +1,7 @@
 // Your variable overrides
-$body-bg: #000;
-$body-color: #111;
+$theme-colors: (
+	"primary": #83aef2
+)
 
 // Bootstrap and its default variables
 @import "evidencelocker/assets/bootstrap/scss/bootstrap";
