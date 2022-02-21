@@ -46,6 +46,7 @@ from alembic import command
 #LOG.info('Running DB migrations in %r on %r', script_location, dsn)
 alembic_cfg = Config()
 alembic_cfg.set_main_option('sqlalchemy.url', app.config["DATABASE_URL"])
+alembic_cfg.set_main_option('script_location',  "~/EvidenceLocker/alembic/versions")
 command.revision(alembic_cfg, autogenerate=True)
 command.upgrade(alembic_cfg, 'head')
 
