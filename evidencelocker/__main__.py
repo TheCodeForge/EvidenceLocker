@@ -47,7 +47,7 @@ from alembic import command
 alembic_cfg = Config()
 alembic_cfg.set_main_option('sqlalchemy.url', app.config["DATABASE_URL"])
 alembic_cfg.set_main_option('script_location',  "alembic")
-alembic_cfg.attributes=['target_metadata']=Base.metadata
+alembic_cfg.attributes['target_metadata']=Base.metadata
 command.revision(alembic_cfg, autogenerate=True)
 command.upgrade(alembic_cfg, 'head')
 
