@@ -16,6 +16,7 @@ app=Flask(
     static_folder='./assets'
     )
 
+
 app.url_map.strict_slashes=False
 
 #===CONFIGS===
@@ -29,6 +30,12 @@ app.config["PERMANENT_SESSION_LIFETIME"]    = 60 * 60
 app.config["SESSION_REFRESH_EACH_REQUEST"]  = True
 app.config['SECRET_KEY']                    = environ.get("SECRET_KEY")
 app.config['SERVER_NAME']                   = environ.get("SERVER_NAME")
+
+
+#===EXTENSIONS
+
+Markdown(app)
+
 
 #===SQLALCHEMY===
 _engine=create_engine(
