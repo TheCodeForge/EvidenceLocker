@@ -1,5 +1,5 @@
 from sqlalchemy import *
-from sqlalchemy.orm import relationship, lazyload
+from sqlalchemy.orm import relationship, lazyload, deferred
 
 from .mixins import time_mixin
 from evidencelocker.__main__ import Base
@@ -15,5 +15,6 @@ class VictimUser(Base, time_mixin):
     country     =Column(String(2))
     pw_hash     =deferred(Column(String(256)))
     otp_secret  =Column(String(32))
+    email       =Column(String(256))
 
 

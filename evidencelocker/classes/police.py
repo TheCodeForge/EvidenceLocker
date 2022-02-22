@@ -1,4 +1,5 @@
 from sqlalchemy import *
+from sqlalchemy.orm import relationship, lazyload, deferred
 
 from evidencelocker.__main__ import Base
 
@@ -7,3 +8,9 @@ class PoliceUser(Base):
 	
 	id          =Column(Integer, primary_key=True)
 	name 		=Column(String(256))
+    username    =Column(String(64))
+    created_utc =Column(Integer)
+    name        =Column(String(128))
+    pw_hash     =deferred(Column(String(256)))
+    otp_secret  =Column(String(32))
+    email		=Column(String(256))

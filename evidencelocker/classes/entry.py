@@ -7,6 +7,9 @@ from evidencelocker.__main__ import Base
 
 class Entry(Base, time_mixin):
 
-	__tablename__="entries"
+    __tablename__="entries"
 
     id          =Column(Integer, primary_key=True)
+    text_raw    =Column(String(8192))
+    text_html   =Column(String(16384))
+    title       =Column(String(512))
