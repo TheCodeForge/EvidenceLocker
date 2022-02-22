@@ -13,7 +13,7 @@ class VictimUser(Base, time_mixin):
     created_utc =Column(Integer)
     name        =Column(String(128))
     country     =Column(String(2))
-    pw_hash     =Column(String(256))
+    pw_hash     =deferred(Column(String(256)))
     otp_secret  =Column(String(32))
 
 
