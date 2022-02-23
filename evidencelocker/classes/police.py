@@ -1,9 +1,10 @@
 from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload, deferred
 
+from .mixins import time_mixin
 from evidencelocker.__main__ import Base
 
-class PoliceUser(Base):
+class PoliceUser(Base, time_mixin):
     __tablename__="police_users"
     
     id          =Column(Integer, primary_key=True)
@@ -14,3 +15,6 @@ class PoliceUser(Base):
     pw_hash     =deferred(Column(String(256)))
     otp_secret  =Column(String(32))
     email       =Column(String(256))
+    agency_id   =Column(Integer, ForeignKey('agencies.id'))
+
+    agency      =relationship("Agency")
