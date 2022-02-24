@@ -13,3 +13,5 @@ class Entry(Base, time_mixin):
     text_raw    =Column(String(8192))
     text_html   =Column(String(16384))
     title       =Column(String(512))
+    created_utc =Column(Integer)
+    signed_utc  =Column(Integer)
