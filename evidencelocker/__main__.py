@@ -58,3 +58,5 @@ def before_request():
 
     session.permanent=True
 
+    g.db=db_session()
+
