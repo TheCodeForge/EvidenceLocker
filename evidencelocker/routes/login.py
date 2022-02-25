@@ -63,6 +63,6 @@ def login_police():
 def logout():
 
 	session.pop("utype")
-	session.pup("uid")
+	session.pop("uid")
 
 	return redirect ("/")
