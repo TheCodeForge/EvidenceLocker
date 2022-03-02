@@ -60,3 +60,16 @@ def before_request():
 
     g.db=db_session()
 
+@app.after_request
+def after_request(resp):
+    
+    resp.headers["Content-Security-Policy"] = "default-src: 'self'; script-src code.jquery.com cdn.jsdelivr.net; object-src: 'none'; style-src: 'self'; img-src: 'self'; media-src: 'none'; frame-src: 'none'; font-src: 'none'; connect-src: 'self'; form-action: 'self'; plugin-types: 'none';"
+    resp.headers["Cross-Origin-Embedder-Policy"] = "require-corp"
+    resp.headers["Cross-Origin-Opener-Policy"] = "same-origin"
+    resp.headers["Cross-Origin-Resource-Policy"] = "same-origin"
+    resp.headers["Referrer-Policy"] = "same-origin"
+    resp.headers["Strict-Transport-Security"] = "max-age=31536000"
+    resp.headers["X-Content-Type-Options"]="nosniff"
+    resp.headers["X-Frame-Options"]="DENY"
+    
+    return resp
