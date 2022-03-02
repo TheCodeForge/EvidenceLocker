@@ -2,6 +2,8 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/thecodeforge/evidencelocker) ![Lines of code](https://img.shields.io/tokei/lines/github.com/thecodeforge/evidencelocker)
 
+![GitHub](https://img.shields.io/github/license/thecodeforge/evidencelocker)
+
 # EvidenceLocker
 
 Evidence Locker will be a free tool for victims of domestic, sexual, financial or other abuse to document their experiences and preserve their evidence for law enforcement.
