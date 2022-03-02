@@ -67,6 +67,7 @@ def after_request(resp):
     resp.headers["Cross-Origin-Embedder-Policy"] = "require-corp"
     resp.headers["Cross-Origin-Opener-Policy"] = "same-origin"
     resp.headers["Cross-Origin-Resource-Policy"] = "same-origin"
+    resp.headers["Permissions-Policy"] = "geolocation=(self)"
     resp.headers["Referrer-Policy"] = "same-origin"
     resp.headers["Strict-Transport-Security"] = "max-age=31536000"
     resp.headers["X-Content-Type-Options"]="nosniff"
