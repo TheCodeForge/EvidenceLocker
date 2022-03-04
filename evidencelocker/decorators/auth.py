@@ -12,6 +12,9 @@ def logged_in_victim(f):
         user = get_victim_by_id(session.get("uid"))
             
         return f(user, *args, **kwargs)
+    
+    wrapper.__name__=f.__name__
+    return wrapper
         
 def logged_in_police(f):
 
@@ -23,3 +26,20 @@ def logged_in_police(f):
         user = get_police_by_id(session.get("uid"))
             
         return f(user, *args, **kwargs)
+    
+    wrapper.__name__=f.__name__
+    return wrapper
+
+def not_banned(f):
+    
+    def wrapper(*args, **kwargs):
+        
+        user=args[0]
+        
+        if user.is_banned:
+            abort(403)
+        
+        return f(*args, **kwargs)
+    
+    wrapper.__name__=f.__name__
+    return wrapper
