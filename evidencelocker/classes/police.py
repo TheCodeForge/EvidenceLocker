@@ -16,5 +16,10 @@ class PoliceUser(Base, time_mixin):
     otp_secret  =Column(String(32))
     email       =Column(String(256))
     agency_id   =Column(Integer, ForeignKey('agencies.id'))
+    banned_utc  =Column(Integer, default=0)
 
     agency      =relationship("Agency")
+    
+    @property
+    def is_banned(self):
+        return bool(self.banned_utc)
