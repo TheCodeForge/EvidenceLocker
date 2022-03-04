@@ -16,5 +16,8 @@ class VictimUser(Base, time_mixin):
     pw_hash     =deferred(Column(String(256)))
     otp_secret  =Column(String(32))
     email       =Column(String(256))
-
-
+    banned_utc  =Column(Integer)
+    
+    @property
+    def is_banned(self):
+        return bool(self.banned_utc)
