@@ -1,5 +1,6 @@
 from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload
+import re
 
 from .mixins import time_mixin
 from .victim import VictimUser
@@ -22,11 +23,6 @@ class Exhibit(Base, time_mixin):
 
     author = relationship("Victim")
 
-    @property
-    @lazy
-    def signed_string(self):
-        return time.strftime("%d %B %Y at %H:%M:%S", time.gmtime(self.created_utc))
-
 
     def can_be_read_by_user(self, user):
 
@@ -47,3 +43,27 @@ class Exhibit(Base, time_mixin):
             return True
 
         return False
+
+
+    @property
+    @lazy
+    def permalink(self):
+
+        output = self.title.lower()
+
+        output = re.sub('&\w{2,3};', '', output)
+
+        output = [re.sub('\W', '', word) for word in output.split()]
+        output = [x for x in output if x][0:6]
+
+        output = '-'.join(output)
+
+        if not output:
+            output = '-'
+
+        return f"/exhibit/{self.b36id}/{output}"
+
+    @property
+    @lazy
+    def signed_string(self):
+        return time.strftime("%d %B %Y at %H:%M:%S", time.gmtime(self.created_utc))
