@@ -1,0 +1,15 @@
+{% extends "base.html"}
+
+{% block content %}
+<div id="exhibit-{{ e.b36id }}" class="card border rounded">
+	<div class="card-title">{{ e.title }}</div>
+	<div class="card-body">
+    {{ e.text_html | safe }}
+	</div>
+	<div class="card-footer">
+		{% if e.signed_utc %}
+			<p class="text-small">signed on {{ e.signed_string }}
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

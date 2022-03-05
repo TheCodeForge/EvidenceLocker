@@ -1,6 +1,14 @@
 import time
 
 from evidencelocker.decorators.lazy import lazy
+from evidencelocker.helpers.b36 import *
+
+class b36ids():
+
+    @property
+    def b36id(self):
+        return base36encode(self.id)
+    
 
 class time_mixin():
 
