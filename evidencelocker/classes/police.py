@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship, lazyload, deferred
 import time
 
 from .mixins import time_mixin
-from evidencelocker.helpers.lazy import lazy
+from evidencelocker.decorators.lazy import lazy
 from evidencelocker.__main__ import Base
 
 class PoliceUser(Base, time_mixin):

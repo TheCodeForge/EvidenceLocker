@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship, lazyload
 from .mixins import time_mixin
 from .victim import VictimUser
 from .police import PoliceUser
+from evidencelocker.decorators.lazy import lazy
 from evidencelocker.__main__ import Base
 
 
