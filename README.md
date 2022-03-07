@@ -1,4 +1,4 @@
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fevidence-locker-staging.herokuapp.com)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Ftheevidencelocker.org)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/thecodeforge/evidencelocker) ![Lines of code](https://img.shields.io/tokei/lines/github.com/thecodeforge/evidencelocker)
 
