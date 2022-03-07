@@ -78,7 +78,8 @@ def mfa_qr(secret,):
     qr = qrcode.QRCode(
         error_correction=qrcode.constants.ERROR_CORRECT_L
     )
-    qr.add_data(x.provisioning_uri(issuer_name="TEL"))
+    issuer_name = request.args.get("issuer","TEL")
+    qr.add_data(x.provisioning_uri(issuer_name=issuer_name))
     img = qr.make_image(fill_color="#2589bd", back_color="white")
 
     mem = io.BytesIO()
