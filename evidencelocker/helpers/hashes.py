@@ -2,6 +2,7 @@ import hmac
 import secrets
 
 from flask import g, session
+from os import environ
 
 def generate_hash(string):
 
