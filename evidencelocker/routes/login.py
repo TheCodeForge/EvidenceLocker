@@ -88,9 +88,18 @@ def mfa_qr(secret,):
     mem.seek(0, 0)
     return send_file(mem, mimetype="image/png", as_attachment=False)
 
+@app.get("/signup")
+def get_signup_victim():
+    
+    return render_template(
+        "signup_victim.html",
+        otp_secret=pyotp.random_base32()
+        )
+
+
 #disabled for now to prevent usage on live staging while this function is incomplete
-#@app.post("/signup_victim")
-def signup_victim():
+@app.post("/signup_victim")
+def post_signup_victim():
     
     username=request.form.get("username")
     existing_user=get_victim_by_username(username, graceful=True)
