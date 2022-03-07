@@ -69,7 +69,7 @@ def logout():
 	return redirect ("/")
 
 
-@app.route("/otp_secret_qr/<secret>.png", methods=["GET"])
+@app.get("/otp_secret_qr/<secret>.png")
 def mfa_qr(secret,):
     x = pyotp.TOTP(secret)
     qr = qrcode.QRCode(
