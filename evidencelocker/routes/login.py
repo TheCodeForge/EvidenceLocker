@@ -144,4 +144,7 @@ def post_signup_victim():
     g.db.add(user)
     g.db.commit()
 
+    session["utype"]='v'
+    session["uid"]=user.id
+
     return redirect("/locker")

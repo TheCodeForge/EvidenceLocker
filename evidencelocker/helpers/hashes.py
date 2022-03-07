@@ -1,6 +1,6 @@
 import hmac
 
-from flask import g
+from flask import g, session
 
 def generate_hash(string):
 
