@@ -2,11 +2,11 @@ from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload, deferred
 import time
 
-from .mixins import time_mixin
+from .mixins import *
 from evidencelocker.decorators.lazy import lazy
 from evidencelocker.__main__ import Base
 
-class PoliceUser(Base, time_mixin):
+class PoliceUser(Base, time_mixin, user_mixin):
     __tablename__="police_users"
     
     id          =Column(Integer, primary_key=True)
@@ -23,11 +23,11 @@ class PoliceUser(Base, time_mixin):
     login_nonce =Column(Integer, default=0)
 
     agency      =relationship("Agency")
+
     
     @property
-    def is_banned(self):
-        return bool(self.banned_utc)
-
+    def type_id(self):
+        return f"p{self.id}"
 
     @property
     @lazy

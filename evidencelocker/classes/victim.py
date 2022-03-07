@@ -1,10 +1,10 @@
 from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload, deferred
 
-from .mixins import time_mixin
+from .mixins import *
 from evidencelocker.__main__ import Base
 
-class VictimUser(Base, time_mixin):
+class VictimUser(Base, time_mixin, user_mixin):
 
     __tablename__="victim_users"
     
@@ -20,6 +20,4 @@ class VictimUser(Base, time_mixin):
     banned_utc  =Column(Integer, default=0)
     login_nonce =Column(Integer, default=0)
     
-    @property
-    def is_banned(self):
-        return bool(self.banned_utc)
+
