@@ -9,6 +9,7 @@ from flask import *
 
 from evidencelocker.helpers.loaders import *
 from evidencelocker.helpers.hashes import *
+from evidencelocker.decorators.auth import *
 from evidencelocker.classes import *
 from evidencelocker.__main__ import app
 
