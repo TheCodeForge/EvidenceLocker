@@ -1,4 +1,5 @@
 import hmac
+import secrets
 
 from flask import g, session
 
