@@ -69,13 +69,34 @@ def logged_in_any(f):
             user = get_police_by_id(uid)
         elif utype=="a":
             user = get_admin_by_id(uid)
+        else:
+            abort(401)
 
         return f(user, *args, **kwargs)
 
     wrapper.__name__=f.__name__
     return wrapper
 
+def logged_in_desired(f):
 
+    def wrapper(*args, **kwargs):
+
+        utype=session.get("utype")
+        uid=session.get("uid")
+
+        if utype=="v":
+            user = get_victim_by_id(uid)
+        elif utype=="p":
+            user = get_police_by_id(uid)
+        elif utype=="a":
+            user = get_admin_by_id(uid)
+        else:
+            user=None
+
+        return f(user, *args, **kwargs)
+
+    wrapper.__name__=f.__name__
+    return wrapper
 
 def not_banned(f):
     

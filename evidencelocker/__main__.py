@@ -3,6 +3,7 @@ monkey.patch_all()
 
 from os import environ
 import secrets
+import time
 
 import alembic.config
 
@@ -29,6 +30,8 @@ if not app.config['DATABASE_URL']:
     app.config['DATABASE_URL']=cfg.get_main_option('sqlalchemy.url')
     del cfg
 
+app.config["HCAPTCHA_SECRET"]               = environ.get("HCAPTCHA_SECRET")
+app.config["HCAPTCHA_SITEKEY"]              = environ.get("HCAPTCHA_SITEKEY")
 app.config["PERMANENT_SESSION_LIFETIME"]    = 60 * 60
 app.config["SESSION_REFRESH_EACH_REQUEST"]  = True
 app.config['SECRET_KEY']                    = environ.get("SECRET_KEY")
@@ -62,6 +65,8 @@ def before_request():
     session.permanent=True
 
     g.db=db_session()
+    
+    g.time=int(time.time())
 
 @app.after_request
 def after_request(resp):

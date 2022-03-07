@@ -1,0 +1,49 @@
+{% extends "help/base.html" %}
+
+{% block pagecontent %}
+<div class="card m-0 border-0">
+  <div class="card-body">
+    <h1 class="card-title text-primary fw-bold">List of Restricted Countries</h1>
+
+    <p>The following countries are considerd by The Evidence Locker to be systemically discriminatory against certain classes of abuse victims, and in some cases even participate in the abuse themselves. Therefore, to help protect the safety of our victim users, law enforcement in these countries may not make warrant-less requests for victim data. All requests must be either approved by the Victim themselves (via their sharing options) or accompanied by a warrant that has been domesticated in the United States of America.</p>
+    
+    <table class="table table-striped mb-5">
+      <thead class="bg-primary text-white">
+        <tr>
+          <th>Country</th>
+          <th>Reason</th>
+        </tr>
+      </thead>
+      <tr>
+		    <td>Afghanistan</td>
+        <td>Oppression based on religion and sex</td>
+      </tr>
+      <tr>
+		    <td>China</td>
+        <td>Oppression/genocide based on religion and ethnicity</td>
+      </tr>
+      <tr>
+		    <td>Iran</td>
+        <td>Oppression based on religion and sex</td>
+      </tr>
+      <tr>
+		    <td>Iraq</td>
+        <td>Oppression based on religion and sex</td>
+      </tr>
+      <tr>
+		    <td>North Korea</td>
+        <td>Oppression based on political views</td>
+      </tr>
+      <tr>
+		    <td>Russia</td>
+        <td>Oppression based on political views</td>
+      </tr>
+      <tr>
+		    <td>Saudi Arabia</td>
+        <td>Oppression based on religion and sex</td>
+      </tr>
+    </table>
+  </div>
+ </div>
+
+ {% endblock %}

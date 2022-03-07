@@ -22,6 +22,13 @@
             <li class="nav-item">
               <a class="nav-link" href="#">About</a>
             </li>
+            {% if user %}
+            <li class="nav-item">
+              <form action="/logout" method="post">
+                <input class="nav-link" type="submit">Log Out</input>
+              </form>
+            </li>
+            {% else %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="vicDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Victims
@@ -44,6 +51,7 @@
                 <li><a class="dropdown-item" href="#">FAQ</a></li>
               </ul>
             </li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -59,7 +67,7 @@
           <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
           <li class="nav-item"><a href="/help/faq" class="nav-link px-2 text-muted">FAQ</a></li>
           <li class="nav-item"><a href="/help/terms" class="nav-link px-2 text-muted">Terms of Use</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Donate</a></li>
+          <li class="nav-item"><a href="/help/donate" class="nav-link px-2 text-muted">Donate</a></li>
           <li class="nav-item"><a href="https://github.com/TheCodeForge/EvidenceLocker" class="nav-link px-2 text-muted" target="_blank">Code</a></li>
         </ul>
       </footer>
