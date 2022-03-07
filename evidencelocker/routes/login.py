@@ -1,7 +1,9 @@
-import time
-import random
-import werkzeug.security
 import pyotp
+import qrcode
+import random
+import time
+import werkzeug.security
+
 from flask import *
 
 from evidencelocker.helpers.loaders import *
