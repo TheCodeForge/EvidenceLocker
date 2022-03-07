@@ -25,6 +25,7 @@
             {% if user %}
             <li class="nav-item">
               <form action="/logout" method="post">
+                <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
                 <input class="nav-link" type="submit">Log Out</input>
               </form>
             </li>

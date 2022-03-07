@@ -1,6 +1,8 @@
 import hmac
 import secrets
 
+from .b36 import *
+
 from flask import g, session
 from os import environ
 
@@ -32,3 +34,14 @@ def validate_logged_out_csrf_token(t, token):
         return False
 
     return validate_hash(f"{t}+{session['session_id']}", token)
+
+def compute_otp_recovery_code(user, otp_secret):
+
+    hashstr = generate_hash(f"{otp_secret}+{user.type_id}+{user.username}")
+
+    removal_code = base36encode(int(hashstr,16))
+    
+    while len(removal_code)<25:
+        removal_code="0"+removal_code
+
+    return removal_code
