@@ -94,9 +94,20 @@ def get_signup_victim():
     
     return render_template(
         "signup_victim.html",
-        otp_secret=pyotp.random_base32(),
-        token=logged_out_csrf_token(),
-        hcaptcha=app.config["HCAPTCHA_SITEKEY"]
+        token=logged_out_csrf_token()
+        )
+
+@app.get("/set_otp")
+@logged_in_any
+def get_set_otp(user):
+
+    otp_secret=pyotp.random_base32()
+
+    return render_template(
+        "set_otp.html"
+        otp_secret = otp_secret,
+        recovery = compute_otp_removal_code(user, otp_secret),
+        user=user
         )
 
 @app.post("/signup")
@@ -148,3 +159,4 @@ def post_signup_victim():
     session["uid"]=user.id
 
     return redirect("/locker")
+

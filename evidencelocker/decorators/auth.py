@@ -13,6 +13,9 @@ def logged_in_victim(f):
             abort(403)
             
         user = get_victim_by_id(session.get("uid"))
+
+        if not user.otp_secret and request.path != "/set_otp":
+            return redirect("/set_otp")
             
         return f(user, *args, **kwargs)
     
@@ -30,6 +33,9 @@ def logged_in_police(f):
             abort(403)
             
         user = get_police_by_id(session.get("uid"))
+
+        if not user.otp_secret and request.path != "/set_otp":
+            return redirect("/set_otp")
             
         return f(user, *args, **kwargs)
     
@@ -47,6 +53,9 @@ def logged_in_admin(f):
             abort(403)
 
         user=get_admin_by_id(session.get("uid"))
+
+        if not user.otp_secret and request.path != "/set_otp":
+            return redirect("/set_otp")
 
         return f(user, *args, **kwargs)
 
@@ -72,6 +81,9 @@ def logged_in_any(f):
         else:
             abort(401)
 
+        if not user.otp_secret and request.path != "/set_otp":
+            return redirect("/set_otp")
+
         return f(user, *args, **kwargs)
 
     wrapper.__name__=f.__name__
@@ -93,6 +105,9 @@ def logged_in_desired(f):
         else:
             user=None
 
+        if user and not user.otp_secret and request.path != "/set_otp":
+            return redirect("/set_otp")
+
         return f(user, *args, **kwargs)
 
     wrapper.__name__=f.__name__
@@ -106,6 +121,9 @@ def not_banned(f):
         
         if user.is_banned:
             abort(403)
+
+        if not user.otp_secret and request.path != "/set_otp":
+            return redirect("/set_otp")
         
         return f(*args, **kwargs)
     

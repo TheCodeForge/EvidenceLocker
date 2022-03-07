@@ -7,9 +7,9 @@
       <a href="/" class="text-decoration-none"><span class="h3 text-primary">The Evidence Locker</span></a>
     </div>
     <div id="signup-form">
-      <h1 class="h2">Create your Locker</h1>
-      <p>Begin protecting yourself today.</p>
-      <form action="/signup" method="post">
+      <h1 class="h2">Set up Two-Factor Authentication</h1>
+      <p>To help ensure the safety of users, two-factor authentication is required.</p>
+      <form action="/set_otp" method="post">
 
         <input type="hidden" name="time" value="{{ g.time }}">
         <input type="hidden" name="csrf_token" value="{{ token }}">
