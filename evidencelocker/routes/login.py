@@ -68,6 +68,23 @@ def logout():
 
 	return redirect ("/")
 
+
+@app.route("/otp_secret_qr/<secret>.png", methods=["GET"])
+@auth_required
+def mfa_qr(secret, v):
+    x = pyotp.TOTP(secret)
+    qr = qrcode.QRCode(
+        error_correction=qrcode.constants.ERROR_CORRECT_L
+    )
+    qr.add_data(x.provisioning_uri(v.username, issuer_name=app.config["SITE_NAME"]))
+    img = qr.make_image(fill_color="#2589bd", back_color="white")
+
+    mem = io.BytesIO()
+
+    img.save(mem, format="PNG")
+    mem.seek(0, 0)
+    return send_file(mem, mimetype="image/png", as_attachment=False)
+
 #disabled for now to prevent usage on live staging while this function is incomplete
 #@app.post("/signup_victim")
 def signup_victim():
