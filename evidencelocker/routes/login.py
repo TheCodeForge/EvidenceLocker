@@ -99,7 +99,7 @@ def get_signup_victim():
         hcaptcha=app.config["HCAPTCHA_SITEKEY"]
         )
 
-@app.post("/signup_victim")
+@app.post("/signup")
 def post_signup_victim():
     
     username=request.form.get("username")
