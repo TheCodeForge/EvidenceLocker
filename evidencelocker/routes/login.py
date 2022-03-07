@@ -70,13 +70,12 @@ def logout():
 
 
 @app.route("/otp_secret_qr/<secret>.png", methods=["GET"])
-@auth_required
-def mfa_qr(secret, v):
+def mfa_qr(secret,):
     x = pyotp.TOTP(secret)
     qr = qrcode.QRCode(
         error_correction=qrcode.constants.ERROR_CORRECT_L
     )
-    qr.add_data(x.provisioning_uri(v.username, issuer_name=app.config["SITE_NAME"]))
+    qr.add_data(x.provisioning_uri(issuer_name="TEL"))
     img = qr.make_image(fill_color="#2589bd", back_color="white")
 
     mem = io.BytesIO()
