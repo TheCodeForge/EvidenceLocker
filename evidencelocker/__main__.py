@@ -64,6 +64,8 @@ def before_request():
     session.permanent=True
 
     g.db=db_session()
+    
+    g.time=int(time.time())
 
 @app.after_request
 def after_request(resp):
