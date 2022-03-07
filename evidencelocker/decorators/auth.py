@@ -129,3 +129,25 @@ def not_banned(f):
     
     wrapper.__name__=f.__name__
     return wrapper
+
+
+def validate_csrf_token(f):
+    """Always use authentication wrapper above this one"""
+
+    def wrapper(user, *args, **kwargs):
+
+        if not request.path.startswith("/api/v1"):
+
+            submitted_key = request.values.get("csrf_token", "none")
+
+            if not submitted_key:
+                abort(401)
+
+            elif not user.validate_csrf_token(submitted_key):
+                abort(401)
+
+        return f(*args, v=v, **kwargs)
+
+    wrapper.__name__ = f.__name__
+    wrapper.__doc__ = f.__doc__
+    return wrapper
