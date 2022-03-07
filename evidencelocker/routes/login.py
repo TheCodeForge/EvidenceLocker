@@ -8,6 +8,7 @@ import werkzeug.security
 from flask import *
 
 from evidencelocker.helpers.loaders import *
+from evidencelocker.helpers.hashes import *
 from evidencelocker.classes import *
 from evidencelocker.__main__ import app
 
@@ -93,11 +94,11 @@ def get_signup_victim():
     
     return render_template(
         "signup_victim.html",
-        otp_secret=pyotp.random_base32()
+        otp_secret=pyotp.random_base32(),
+        token=logged_out_csrf_token(),
+        hcaptcha=app.config["HCAPTCHA_SITEKEY"]
         )
 
-
-#disabled for now to prevent usage on live staging while this function is incomplete
 @app.post("/signup_victim")
 def post_signup_victim():
     
@@ -139,3 +140,8 @@ def post_signup_victim():
         otp_secret=otp_secret,
         creation_country=request.headers.get("cf-ipcountry")
     )
+
+    g.db.add(user)
+    g.db.commit()
+
+    return redirect("/locker")

@@ -30,6 +30,10 @@ class PoliceUser(Base, time_mixin, user_mixin):
         return f"p{self.id}"
 
     @property
+    def username(self):
+        return self.email
+
+    @property
     @lazy
     def is_recently_verified(self):
         return int(time.time()) - self.last_verified_utc < 60*60*24*14 #2 weeks

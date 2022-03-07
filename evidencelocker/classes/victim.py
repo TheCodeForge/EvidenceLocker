@@ -20,4 +20,7 @@ class VictimUser(Base, time_mixin, user_mixin):
     banned_utc  =Column(Integer, default=0)
     login_nonce =Column(Integer, default=0)
     
+    @property
+    def type_id(self):
+        return f"v{self.id}"
 

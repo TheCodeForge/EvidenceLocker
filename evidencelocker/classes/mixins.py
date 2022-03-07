@@ -48,3 +48,19 @@ class user_mixin():
 
     def validate_csrf_token(self, token):
         return validate_hash(f"{session['session_id']}+{self.type_id}+{self.login_nonce}", token)
+
+
+    @property
+    def otp_secret_reset_code(self):
+
+        hashstr = f"{self.otp_secret}+{self.type_id}+{self.username}"
+
+        hashstr= generate_hash(hashstr)
+
+        removal_code = base36encode(int(hashstr,16))
+
+        #should be 25char long, left pad if needed
+        while len(removal_code)<25:
+            removal_code="0"+removal_code
+
+        return removal_code
