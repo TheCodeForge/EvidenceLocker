@@ -2,7 +2,7 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/thecodeforge/evidencelocker) ![Lines of code](https://img.shields.io/tokei/lines/github.com/thecodeforge/evidencelocker)
 
-![GitHub issues](https://img.shields.io/github/issues-raw/thecodeforge/evidencelocker)![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/thecodeforge/evidencelocker)
+![GitHub issues](https://img.shields.io/github/issues-raw/thecodeforge/evidencelocker) ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/thecodeforge/evidencelocker)
 
 ![GitHub](https://img.shields.io/github/license/thecodeforge/evidencelocker)
 
