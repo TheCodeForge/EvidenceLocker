@@ -142,7 +142,7 @@ def post_signup_victim():
     x = requests.post(url, data=data)
 
     if not x.json()["success"]:
-        return abort(400)
+        return redirect("/signup_victim?error=Hcaptcha%20failed")
     
     #create new vic user
     user = VictimUser(
@@ -161,4 +161,3 @@ def post_signup_victim():
     session["uid"]=user.id
 
     return redirect("/locker")
-
