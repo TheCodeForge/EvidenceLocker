@@ -18,6 +18,7 @@ class VictimUser(Base, time_mixin):
     otp_secret  =Column(String(32))
     email       =Column(String(256))
     banned_utc  =Column(Integer, default=0)
+    login_nonce =Column(Integer, default=0)
     
     @property
     def is_banned(self):

@@ -20,6 +20,7 @@ class PoliceUser(Base, time_mixin):
     agency_id   =Column(Integer, ForeignKey('agencies.id'))
     banned_utc  =Column(Integer, default=0)
     last_verified_utc=Column(Integer, default=0)
+    login_nonce =Column(Integer, default=0)
 
     agency      =relationship("Agency")
     
