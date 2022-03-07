@@ -5,6 +5,7 @@ import pyotp
 from flask import *
 
 from evidencelocker.helpers.loaders import *
+from evidencelocker.classes import *
 from evidencelocker.__main__ import app
 
 @app.post("/login_victim")
@@ -20,7 +21,7 @@ def login_victim():
 	if not user:
 		return invalid_login_victim()
 
-	if not werkzeug.security.check_password_hash(user.password_hash, request.form.get("password")):
+	if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")):
 		return invalid_login_victim()
 
 	totp=pyotp.TOTP(user.otp_secret)
@@ -66,3 +67,48 @@ def logout():
 	session.pop("uid")
 
 	return redirect ("/")
+
+#disabled for now to prevent usage on live staging while this function is incomplete
+#@app.post("/signup_victim")
+def signup_victim():
+    
+    username=request.form.get("username")
+    existing_user=get_victim_by_username(username, graceful=True)
+    if existing_user:
+        return redirect("/signup_victim?error=Username%20already%20taken")
+        
+    if request.form.get("password") != request.form.get("password_confirm"):
+        return redirect("/signup_victim?error=Passwords%20do%20not%20match")
+    
+    #verify 2fa
+    otp_secret=request.form.get("otp_secret")
+    totp=pyotp.TOTP(otp_secret)
+	if not totp.verify(request.form.get("otp_code")):
+		return redirect("/signup_victim?error=Incorrect%20two-factor%20code")
+    
+    #verify hcaptcha
+    token = request.form.get("h-captcha-response")
+    if not token:
+        abort(400)
+
+    data = {"secret": app.config["HCAPTCHA_SECRET"],
+            "response": token,
+            "sitekey": app.config["HCAPTCHA_SITEKEY"]}
+    url = "https://hcaptcha.com/siteverify"
+
+    x = requests.post(url, data=data)
+
+    if not x.json()["success"]:
+        return abort(400)
+    
+    #create new vic user
+    user = VictimUser(
+        username=username,
+        pw_hash=werkzeug.security.generate_password_hash(request.form.get("password")),
+        created_utc=g.time,
+        name=request.form.get(real_name),
+        otp_secret=otp_secret,
+        creation_country=request.headers.get("cf-ipcountry")
+    )
+        
+        
