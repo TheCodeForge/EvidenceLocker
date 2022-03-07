@@ -106,7 +106,7 @@ def get_set_otp(user):
     recovery=" ".join([recovery[i:i+5] for i in range(0,len(recovery),5)])
 
     return render_template(
-        "set_otp.html"
+        "set_otp.html",
         otp_secret = otp_secret,
         recovery = recovery,
         user=user
