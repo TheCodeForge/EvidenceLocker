@@ -122,13 +122,13 @@ def post_signup_victim():
     username=request.form.get("username")
     existing_user=get_victim_by_username(username, graceful=True)
     if existing_user:
-        return redirect("/signup_victim?error=Username%20already%20taken")
+        return redirect("/signup?error=Username%20already%20taken")
         
     if request.form.get("password") != request.form.get("password_confirm"):
-        return redirect("/signup_victim?error=Passwords%20do%20not%20match")
+        return redirect("/signup?error=Passwords%20do%20not%20match")
 
     if request.form.get("terms_agree") != "true":
-        return redirect("/signup_victim?error=You%20must%20agree%20to%20the%terms")
+        return redirect("/signup?error=You%20must%20agree%20to%20the%terms")
 
     
     #verify hcaptcha
@@ -144,7 +144,7 @@ def post_signup_victim():
     x = requests.post(url, data=data)
 
     if not x.json()["success"]:
-        return redirect("/signup_victim?error=Hcaptcha%20failed")
+        return redirect("/signup?error=Hcaptcha%20failed")
     
     #create new vic user
     user = VictimUser(
