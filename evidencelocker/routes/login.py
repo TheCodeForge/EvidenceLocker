@@ -5,12 +5,13 @@ import random
 import time
 import werkzeug.security
 
-from flask import *
+from flask import session, g, redirect, render_template
 
 from evidencelocker.helpers.loaders import *
 from evidencelocker.helpers.hashes import *
 from evidencelocker.decorators.auth import *
 from evidencelocker.classes import *
+
 from evidencelocker.__main__ import app
 
 @app.post("/login_victim")
