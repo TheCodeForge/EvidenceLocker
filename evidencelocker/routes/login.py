@@ -125,12 +125,6 @@ def post_signup_victim():
     if request.form.get("password") != request.form.get("password_confirm"):
         return redirect("/signup_victim?error=Passwords%20do%20not%20match")
     
-    #verify 2fa
-    otp_secret=request.form.get("otp_secret")
-    totp=pyotp.TOTP(otp_secret)
-    if not totp.verify(request.form.get("otp_code")):
-        return redirect("/signup_victim?error=Incorrect%20two-factor%20code")
-    
     #verify hcaptcha
     token = request.form.get("h-captcha-response")
     if not token:
