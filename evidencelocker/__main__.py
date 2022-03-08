@@ -7,14 +7,14 @@ import time
 
 import alembic.config
 
-from flask import *
+import flask
 from flaskext.markdown import Markdown
 
 from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session, sessionmaker, scoped_session
 
-app=Flask(
+app=flask.Flask(
     __name__,
     template_folder='./templates',
     static_folder='./assets'
@@ -62,11 +62,11 @@ from .routes import *
 @app.before_request
 def before_request():
 
-    session.permanent=True
+    flask.session.permanent=True
 
-    g.db=db_session()
+    flask.g.db=db_session()
     
-    g.time=int(time.time())
+    flask.g.time=int(time.time())
 
 @app.after_request
 def after_request(resp):
