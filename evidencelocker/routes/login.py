@@ -22,7 +22,7 @@ def login_victim():
     #Random sleep is to ensure timing analysis cannot be used to deduce which part of the login failed
     def invalid_login_victim():
         time.sleep(max(0, random.gauss(1.5, 0.33)))
-        return redirect("/login_victim?invalid")
+        return redirect("/login?invalid=1")
 
     user = get_victim_by_username(request.form.get("username"), graceful=True)
     if not user:
