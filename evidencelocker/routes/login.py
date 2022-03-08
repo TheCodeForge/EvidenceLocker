@@ -4,6 +4,7 @@ import qrcode
 import random
 import time
 import werkzeug.security
+import requests
 
 from flask import *
 
