@@ -151,7 +151,7 @@ def get_set_otp(user):
 @validate_csrf_token
 def post_set_otp(user):
     otp_secret = request.form.get("otp_secret")
-    code = request.form.get(otp_code)
+    code = request.form.get("otp_code")
 
     totp = pyotp.TOTP(otp_secret)
 
