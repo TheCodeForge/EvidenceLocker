@@ -19,7 +19,7 @@ class Exhibit(Base, time_mixin):
     signed_utc  =Column(Integer)
     author_id   =Column(Integer, ForeignKey("victim_users.id"))
 
-    author = relationship("Victim")
+    author = relationship("VictimUser")
 
 
     def can_be_read_by_user(self, user):
