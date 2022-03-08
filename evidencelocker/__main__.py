@@ -20,12 +20,12 @@ app=Flask(
     static_folder='./assets'
     )
 
+app.url_map.strict_slashes=False
+
 #===CLASSES AND ROUTES
 
 from .routes import *
 
-
-app.url_map.strict_slashes=False
 
 #===CONFIGS===
 app.config['DATABASE_URL']                  = environ.get("DATABASE_URL",'').replace("postgres://", "postgresql://")
