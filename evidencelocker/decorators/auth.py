@@ -144,7 +144,7 @@ def validate_csrf_token(f):
         elif not user.validate_csrf_token(submitted_key):
             abort(401)
 
-        return f(*args, v=v, **kwargs)
+        return f(user, *args, **kwargs)
 
     wrapper.__name__ = f.__name__
     wrapper.__doc__ = f.__doc__
