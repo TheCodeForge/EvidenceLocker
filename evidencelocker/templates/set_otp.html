@@ -15,19 +15,19 @@
         <input type="hidden" name="otp_secret" value="{{ otp_secret }}">
 
         <p>
-          <span class="font-weight-bold">Step 1:</span> Scan this barcode (or enter the code) using a two-factor authentication app such as Google Authenticator or Authy.
+          <span class="fw-bold">Step 1:</span> Scan this barcode (or enter the code) using a two-factor authentication app such as Google Authenticator or Authy.
         </p>
         <div class="text-center mb-3">
-          <img class="img-fluid" style="width: 175px;" src="/otp_secret_qr/{{ mfa_secret }}.png">
-          <div class="text-small text-muted">Or, enter this code into your authenticator app: {{ mfa_secret }}</div>
+          <img class="img-fluid" style="width: 175px;" src="/otp_secret_qr/{{ otp_secret }}.png">
+          <div class="text-small text-muted">Or, enter this code into your authenticator app: {{ otp_secret }}</div>
         </div>
 
         <p>
-          <span class="font-weight-bold">Step 2:</span> Write down your Two-Factor Recovery Code and store it in a safe place. This code will <span class="font-weight-bold">never</span> be shown again. <span class="font-weight-bold">If you lose your two-factor device, you will not be able to recover your account without this code.</span>
+          <span class="fw-bold">Step 2:</span> Write down your Two-Factor Recovery Code and store it in a safe place. This code will <span class="fw-bold">never</span> be shown again. <span class="font-weight-bold">If you lose your two-factor device, you will not be able to recover your account without this code.</span>
         </p>
-        <p class="font-weight-bold text-primary text-center text-monospace">{{ recovery }}</p>
+        <p class="fw-bold text-primary text-center font-monospace text-uppercase">{{ recovery }}</p>
         <p>
-          <span class="font-weight-bold">Step 3:</span> Enter your account password and the six digit code generated in your authenticator app
+          <span class="fw-bold">Step 3:</span> Enter your account password and the six digit code generated in your authenticator app
         </p>
 
         <label for="2fa_input_password">Password</label>
