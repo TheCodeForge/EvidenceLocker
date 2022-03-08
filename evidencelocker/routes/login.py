@@ -15,7 +15,7 @@ from evidencelocker.helpers.loaders import *
 
 from evidencelocker.__main__ import app
 
-@app.post("/login_victim")
+@app.post("/login")
 def login_victim():
 
     #define the response for an invalid login attempt
@@ -48,7 +48,7 @@ def login_victim():
     session["utype"]="v"
     session["uid"]=user.id
 
-    return redirect("/locker")
+    return redirect("/")
 
 @app.post("/login_police")
 def login_police():
@@ -109,6 +109,14 @@ def mfa_qr(secret,):
     img.save(mem, format="PNG")
     mem.seek(0, 0)
     return send_file(mem, mimetype="image/png", as_attachment=False)
+
+@app.get("/login")
+def get_login_victim():
+
+    return render_template(
+        "login_victim.html",
+        token=logged_out_csrf_token()
+        )
 
 @app.get("/signup")
 def get_signup_victim():
