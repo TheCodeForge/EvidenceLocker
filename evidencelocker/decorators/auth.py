@@ -1,6 +1,6 @@
 from flask import *
 
-from evidencelocker.helpers.loaders import get_victim_by_id, get_admin_by_id, get_police_by_id
+from evidencelocker.helpers.loaders import *
 
 def logged_in_victim(f):
 
@@ -14,7 +14,7 @@ def logged_in_victim(f):
             
         user = get_victim_by_id(session.get("uid"))
 
-        if not user.otp_secret and request.path != "/set_otp":
+        if not user.otp_secret and request.path != "/set_otp" and not request.path.startswith("/otp_secret_qr/"):
             return redirect("/set_otp")
             
         return f(user, *args, **kwargs)
@@ -34,7 +34,7 @@ def logged_in_police(f):
             
         user = get_police_by_id(session.get("uid"))
 
-        if not user.otp_secret and request.path != "/set_otp":
+        if not user.otp_secret and request.path != "/set_otp" and not request.path.startswith("/otp_secret_qr/"):
             return redirect("/set_otp")
             
         return f(user, *args, **kwargs)
@@ -54,7 +54,7 @@ def logged_in_admin(f):
 
         user=get_admin_by_id(session.get("uid"))
 
-        if not user.otp_secret and request.path != "/set_otp":
+        if not user.otp_secret and request.path != "/set_otp" and not request.path.startswith("/otp_secret_qr/"):
             return redirect("/set_otp")
 
         return f(user, *args, **kwargs)
@@ -81,7 +81,7 @@ def logged_in_any(f):
         else:
             abort(401)
 
-        if not user.otp_secret and request.path != "/set_otp":
+        if not user.otp_secret and request.path != "/set_otp" and not request.path.startswith("/otp_secret_qr/"):
             return redirect("/set_otp")
 
         return f(user, *args, **kwargs)
