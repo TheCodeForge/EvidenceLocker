@@ -71,7 +71,6 @@ def before_request():
 def after_request(resp):
     
     resp.headers["Content-Security-Policy"] = "default-src 'self'; script-src hcaptcha.com code.jquery.com cdn.jsdelivr.net ; object-src 'none'; style-src 'self'; img-src w3.org; media-src 'none'; frame-src newassets.hcaptcha.com; font-src 'none'; connect-src 'self'; form-action 'self'; object-types 'none';"
-    resp.headers["Cross-Origin-Embedder-Policy"] = "credentialless"
     resp.headers["Cross-Origin-Opener-Policy"] = "same-origin"
     resp.headers["Cross-Origin-Resource-Policy"] = "same-origin"
     resp.headers["Permissions-Policy"] = "geolocation=(self)"
