@@ -22,6 +22,18 @@ app=Flask(
 
 app.url_map.strict_slashes=False
 
+#===SQLALCHEMY===
+_engine=create_engine(
+    app.config['DATABASE_URL'],
+    pool_use_lifo=True
+)
+db_session=scoped_session(
+    sessionmaker(
+        bind=_engine
+        )
+    )
+Base=declarative_base()
+
 #===CLASSES AND ROUTES
 
 from .routes import *
@@ -47,17 +59,7 @@ app.config['SERVER_NAME']                   = environ.get("SERVER_NAME")
 Markdown(app)
 
 
-#===SQLALCHEMY===
-_engine=create_engine(
-    app.config['DATABASE_URL'],
-    pool_use_lifo=True
-)
-db_session=scoped_session(
-    sessionmaker(
-        bind=_engine
-        )
-    )
-Base=declarative_base()
+
 
 
 #===BEFORE/AFTER REQS===
