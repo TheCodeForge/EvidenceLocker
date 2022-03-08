@@ -14,7 +14,7 @@ def home(user):
 
 @app.get("/help/<pagename>")
 @logged_in_desired
-def help(pagename):
+def help(user, pagename):
 	return render_template(
 		safe_join("/help", pagename)+'.html',
 		user=user
