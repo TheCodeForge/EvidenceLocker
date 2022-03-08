@@ -132,6 +132,9 @@ def get_signup_victim():
 @logged_in_any
 def get_set_otp(user):
 
+    if user.otp_secret:
+        return redirect("/")
+
     otp_secret=pyotp.random_base32()
     recovery = compute_otp_recovery_code(user, otp_secret)
     recovery=" ".join([recovery[i:i+5] for i in range(0,len(recovery),5)])
