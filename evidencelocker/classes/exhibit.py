@@ -3,8 +3,6 @@ from sqlalchemy.orm import relationship, lazyload
 import re
 
 from .mixins import time_mixin
-from .victim import VictimUser
-from .police import PoliceUser
 from evidencelocker.decorators.lazy import lazy
 from evidencelocker.__main__ import Base
 
@@ -26,11 +24,11 @@ class Exhibit(Base, time_mixin):
 
     def can_be_read_by_user(self, user):
 
-        if isinstance(user, VictimUser) and user==self.author and not user.is_banned:
+        if user.type_id.startswith('v') and user==self.author and not user.is_banned:
 
             return True
 
-        elif isinstance(user, PoliceUser) and user.is_recently_verified and not user.is_banned:
+        elif user.type_id.startswith('p') and user.is_recently_verified and not user.is_banned:
 
             #if police belongs to agency that Vic has shared to:
             #    return True
@@ -38,7 +36,7 @@ class Exhibit(Base, time_mixin):
             #    return False
             pass
 
-        elif isinstance(user, AdminUser) and not user.is_banned:
+        elif user.type_id.startswith('a') and not user.is_banned:
 
             return True
 
