@@ -96,7 +96,8 @@ def get_signup_victim():
     
     return render_template(
         "signup_victim.html",
-        token=logged_out_csrf_token()
+        token=logged_out_csrf_token(),
+        hcaptcha = app.config["HCAPTCHA_SITEKEY"]
         )
 
 @app.get("/set_otp")
