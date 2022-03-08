@@ -13,7 +13,7 @@
       {% if request.args.get("invalid") %}
       <p class="text-danger my-4">Incorrect username, password, or two-factor token.</p>
       {% endif %}
-      <form action="/signup" method="post">
+      <form action="/login" method="post">
 
         <input type="hidden" name="time" value="{{ g.time }}">
         <input type="hidden" name="csrf_token" value="{{ token }}">

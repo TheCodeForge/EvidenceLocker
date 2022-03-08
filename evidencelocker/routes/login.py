@@ -112,7 +112,11 @@ def mfa_qr(user, secret):
     return send_file(mem, mimetype="image/png", as_attachment=False)
 
 @app.get("/login")
-def get_login_victim():
+@logged_in_desired
+def get_login_victim(user):
+
+    if user:
+        return redirect("/")
 
     return render_template(
         "login_victim.html",
@@ -120,7 +124,11 @@ def get_login_victim():
         )
 
 @app.get("/signup")
-def get_signup_victim():
+@logged_in_desired
+def get_signup_victim(user):
+
+    if user:
+        return redirect("/")
     
     return render_template(
         "signup_victim.html",
