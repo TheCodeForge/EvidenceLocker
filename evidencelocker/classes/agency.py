@@ -9,6 +9,6 @@ class Agency(Base, time_mixin):
 	__tablename__="agencies"
 
 	id=Column(Integer, primary_key=True)
-	name=Column(String(256))
+	name=Column(String(256), unique=True)
 	country=Column(String(2))
 	domain=Column(String(128))

@@ -160,4 +160,4 @@ def post_signup_victim():
     session["utype"]='v'
     session["uid"]=user.id
 
-    return redirect("/")
+    return redirect("/set_otp")

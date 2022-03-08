@@ -11,12 +11,11 @@ class PoliceUser(Base, time_mixin, user_mixin):
     
     id          =Column(Integer, primary_key=True)
     name        =Column(String(256))
-    username    =Column(String(64))
     created_utc =Column(Integer)
     name        =Column(String(128))
     pw_hash     =deferred(Column(String(256)))
     otp_secret  =Column(String(32))
-    email       =Column(String(256))
+    email       =Column(String(256), unique=True)
     agency_id   =Column(Integer, ForeignKey('agencies.id'))
     banned_utc  =Column(Integer, default=0)
     last_verified_utc=Column(Integer, default=0)
