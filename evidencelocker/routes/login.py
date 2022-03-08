@@ -106,7 +106,7 @@ def get_signup_victim():
 def get_set_otp(user):
 
     otp_secret=pyotp.random_base32()
-    recovery = compute_otp_removal_code(user, otp_secret)
+    recovery = compute_otp_recovery_code(user, otp_secret)
     recovery=" ".join([recovery[i:i+5] for i in range(0,len(recovery),5)])
 
     return render_template(
