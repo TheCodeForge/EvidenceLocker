@@ -1,6 +1,6 @@
 from flask import *
 
-from evidencelocker.helpers.loaders import *
+from evidencelocker.helpers.loaders import get_victim_by_id, get_admin_by_id, get_police_by_id
 
 def logged_in_victim(f):
 
