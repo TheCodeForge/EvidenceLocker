@@ -95,7 +95,8 @@ def logout():
 
 
 @app.get("/otp_secret_qr/<secret>.png")
-def mfa_qr(secret,):
+@logged_in_any
+def mfa_qr(user, secret):
     x = pyotp.TOTP(secret)
     qr = qrcode.QRCode(
         error_correction=qrcode.constants.ERROR_CORRECT_L
