@@ -143,8 +143,6 @@ def post_signup_victim():
 
     x = requests.post(url, data=data)
 
-    print(x.json)
-
     if not x.json()["success"]:
         return redirect("/signup?error=hCaptcha%20failed")
     
@@ -153,8 +151,6 @@ def post_signup_victim():
         username=username,
         pw_hash=werkzeug.security.generate_password_hash(request.form.get("password")),
         created_utc=g.time,
-        name=request.form.get(real_name),
-        otp_secret=otp_secret,
         creation_country=request.headers.get("cf-ipcountry")
     )
 
