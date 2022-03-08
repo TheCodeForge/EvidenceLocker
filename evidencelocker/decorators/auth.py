@@ -136,15 +136,13 @@ def validate_csrf_token(f):
 
     def wrapper(user, *args, **kwargs):
 
-        if not request.path.startswith("/api/v1"):
+        submitted_key = request.values.get("csrf_token", "none")
 
-            submitted_key = request.values.get("csrf_token", "none")
+        if not submitted_key:
+            abort(401)
 
-            if not submitted_key:
-                abort(401)
-
-            elif not user.validate_csrf_token(submitted_key):
-                abort(401)
+        elif not user.validate_csrf_token(submitted_key):
+            abort(401)
 
         return f(*args, v=v, **kwargs)
 
