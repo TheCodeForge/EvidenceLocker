@@ -20,6 +20,10 @@ app=Flask(
     static_folder='./assets'
     )
 
+#===CLASSES AND ROUTES
+
+from .routes import *
+
 
 app.url_map.strict_slashes=False
 
@@ -55,9 +59,8 @@ db_session=scoped_session(
     )
 Base=declarative_base()
 
-from .classes import *
-from .routes import *
 
+#===BEFORE/AFTER REQS===
 
 @app.before_request
 def before_request():
