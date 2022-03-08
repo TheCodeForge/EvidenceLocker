@@ -5,7 +5,7 @@ import random
 import time
 import werkzeug.security
 
-from flask import session, g, redirect, render_template
+from flask import session, g, redirect, render_template, send_file
 
 from evidencelocker.helpers.loaders import *
 from evidencelocker.helpers.hashes import *
