@@ -126,6 +126,10 @@ def post_signup_victim():
         
     if request.form.get("password") != request.form.get("password_confirm"):
         return redirect("/signup_victim?error=Passwords%20do%20not%20match")
+
+    if request.form.get("terms_agree") != "true":
+        return redirect("/signup_victim?error=You%20must%20agree%20to%20the%terms")
+
     
     #verify hcaptcha
     token = request.form.get("h-captcha-response")
