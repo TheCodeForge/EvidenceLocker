@@ -1,6 +1,6 @@
 from .b36 import *
-from evidencelocker.classes import *
 from flask import *
+from evidencelocker.classes import *
 
 
 def get_victim_by_username(name, graceful=False):

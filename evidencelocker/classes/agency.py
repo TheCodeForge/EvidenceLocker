@@ -1,7 +1,7 @@
 from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload, deferred
 
-from .mixins import time_mixin
+from .mixins import *
 from evidencelocker.__main__ import Base
 
 class Agency(Base, time_mixin):

@@ -2,7 +2,8 @@ from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload
 import re
 
-from .mixins import time_mixin
+from .mixins import *
+
 from evidencelocker.decorators.lazy import lazy
 from evidencelocker.__main__ import Base
 
