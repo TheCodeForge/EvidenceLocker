@@ -33,6 +33,15 @@ def login_victim():
 
     totp=pyotp.TOTP(user.otp_secret)
     if not totp.verify(request.form.get("otp_code")):
+
+        if request.form.get("otp_code")==user.otp_secret_reset_code:
+            user.otp_secret==None
+            g.db.add(user)
+            g.db.commit()
+            session['utype']='v'
+            session['uid']=user.id
+            return redirect('/set_otp')
+
         return invalid_login_victim()
 
     #set cookie and continue to locker
@@ -59,6 +68,15 @@ def login_police():
 
     totp=pyotp.TOTP(user.otp_secret)
     if not totp.verify(request.form.get("otp_code")):
+
+        if request.form.get("otp_code")==user.otp_secret_reset_code:
+            user.otp_secret==None
+            g.db.add(user)
+            g.db.commit()
+            session['utype']='v'
+            session['uid']=user.id
+            return redirect('/set_otp')
+
         return invalid_login_police()
 
     #set cookie and continue to lockers
@@ -83,7 +101,7 @@ def mfa_qr(secret,):
         error_correction=qrcode.constants.ERROR_CORRECT_L
     )
     issuer_name = request.args.get("issuer","TEL")
-    qr.add_data(x.provisioning_uri(issuer_name=issuer_name))
+    qr.add_data(x.provisioning_uri(user.username, issuer_name=issuer_name))
     img = qr.make_image(fill_color="#2589bd", back_color="white")
 
     mem = io.BytesIO()
@@ -115,6 +133,27 @@ def get_set_otp(user):
         recovery = recovery,
         user=user
         )
+
+@app.post("/set_otp")
+@logged_in_any
+def post_set_otp(user):
+    otp_secret = request.form.get(otp_secret)
+    code = request.form.get(otp_code)
+
+    totp = pyotp.TOTP(otp_secret)
+
+    if not totp.verify(code):
+        return redirect('/set_otp?error=Incorrect%20code')
+
+
+
+    user.otp_secret=otp_secret
+    g.db.add(user)
+    g.db.commit()
+
+    return redirect("/")
+
+
 
 @app.post("/signup")
 def post_signup_victim():

@@ -53,14 +53,4 @@ class user_mixin():
     @property
     def otp_secret_reset_code(self):
 
-        hashstr = f"{self.otp_secret}+{self.type_id}+{self.username}"
-
-        hashstr= generate_hash(hashstr)
-
-        removal_code = base36encode(int(hashstr,16))
-
-        #should be 25char long, left pad if needed
-        while len(removal_code)<25:
-            removal_code="0"+removal_code
-
-        return removal_code
+        return compute_otp_recovery_code(self, self.otp_secret)
