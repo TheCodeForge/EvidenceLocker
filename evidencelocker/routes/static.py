@@ -33,7 +33,7 @@ def help(user, pagename):
         user=user
         )
 
-@app.get("/assets/style/<stylefile>")
+@app.get("/assets/style/<stylefile>.css")
 def light_css(stylefile):
 	with open(safe_join("/assets/style/", stylefile)+'.scss') as stylesheet:
 		return Response(
