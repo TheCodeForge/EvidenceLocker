@@ -10,12 +10,13 @@ def qrcode_filter(x):
     qr.add_data(x)
   
     mem=io.BytesIO()
-    img=qr.make_image()
-    img.save(
-        mem, 
-        format="PNG", 
+    img=qr.make_image(,
         fill_color="#2589bd",
         back_color="white"
+    )
+    img.save(
+        mem, 
+        format="PNG"
     )
     mem.seek(0)
     
