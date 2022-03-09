@@ -9,7 +9,7 @@ def qrcode_filter(x):
     mem=io.BytesIO()
     qr=qrcode.QRCode()
     qr.add_data(x)
-    img=qrcode.make_image(
+    img=qr.make_image(
         fill_color="#2589bd",
         back_color="white",
     )
