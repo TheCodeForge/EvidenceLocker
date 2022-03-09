@@ -7,3 +7,14 @@
 	opacity: 0.3;
 	background-position: center;
 }
+
+//Fonts
+$small-font-size: 12px;
+
+.text-small {
+    font-size: $small-font-size!important;
+}
+
+.card-body {
+	z-index:10;
+}
