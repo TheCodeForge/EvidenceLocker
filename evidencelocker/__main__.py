@@ -51,6 +51,7 @@ Base=declarative_base()
 #===CLASSES AND ROUTES
 
 from .routes import *
+from .helpers.filters import *
 
 #===EXTENSIONS
 
