@@ -28,10 +28,10 @@ def help(user, pagename):
             ltc='M8NePw5tQgSGKm2jEHkvr8CmxHJfjkdoQ7'
         )
     
-	return render_template(
-		safe_join("/help", pagename)+'.html',
-		user=user
-		)
+    return render_template(
+        safe_join("/help", pagename)+'.html',
+        user=user
+        )
 
 @app.get("/assets/style/light.css")
 def light_css():
