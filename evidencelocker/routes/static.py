@@ -33,9 +33,9 @@ def help(user, pagename):
         user=user
         )
 
-@app.get("/assets/style/light.css")
-def light_css():
-	with open('evidencelocker/assets/style/light.scss') as stylesheet:
+@app.get("/assets/style/<stylefile>")
+def light_css(stylefile):
+	with open(safe_join("/assets/style/", stylefile)+'.scss') as stylesheet:
 		return Response(
 			sass.compile(string=stylesheet.read()),
 			mimetype="text/css"
