@@ -11,7 +11,12 @@ def qrcode_filter(x):
   
     mem=io.BytesIO()
     img=qr.make_image()
-    img.save(mem, format="PNG")
+    img.save(
+        mem, 
+        format="PNG", 
+        fill_color="#2589bd",
+        back_color="white"
+    )
     mem.seek(0)
     
     data=base64.b64encode(mem.read()).decode('ascii')
