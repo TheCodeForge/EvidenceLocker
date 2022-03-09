@@ -4,7 +4,7 @@ import base64
 from evidencelocker.__main__ import app
 
 @app.template_filter('qrcode_img_data')
-def qrcode(x):
+def qrcode_filter(x):
   
     qr = qrcode.QRCode()
     qr.add_data(x)
