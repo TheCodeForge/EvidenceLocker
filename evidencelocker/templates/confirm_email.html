@@ -5,7 +5,7 @@
   <div class="col-12 col-md-6 my-auto p-3">
     <div id="signup-form">
       {% if expired or invalid %}
-      <p class="text-danger">That link {{ 'has expired' if expired }}{{ 'is invalid' if invalid }}. Please try again.</p>
+      <p class="text-danger">This link {{ 'has expired' if expired }}{{ 'is invalid' if invalid }}. Please try again.</p>
       {% endif %}
       <h1 class="h2">Confirm Email</h1>
       <p>We need to make sure you{% if user.last_verified_utc %} still{% endif %} work for {% if user.agency %}{{ user.agency.name }}{% else %}a law enforcement agency{% endif %}.</p>

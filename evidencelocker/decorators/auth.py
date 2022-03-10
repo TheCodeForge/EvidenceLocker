@@ -84,10 +84,10 @@ def logged_in_any(f):
         else:
             abort(401)
 
-        if not user.otp_secret and request.path != "/set_otp" and not request.path.startswith("/otp_secret_qr/"):
+        if not user.otp_secret and request.path not in ["/set_otp","/verify_email"] and not request.path.startswith("/otp_secret_qr/"):
             return redirect("/set_otp")
 
-        if user.type_id.startswith('p') and not user.is_recently_verified and request.path != "/verify_email":
+        if user.type_id.startswith('p') and not user.is_recently_verified and request.path not in ["/set_otp","/verify_email"]:
             return redirect("/verify_email")
 
         return f(user, *args, **kwargs)
