@@ -13,7 +13,7 @@ class Agency(Base, time_mixin):
 	city=Column(String(128))
 	state=Column(String(128))
 	country=Column(String(2))
-	domain=Column(String(128))
+	domain=Column(String(128), unique=True)
 
 
 class BadDomain(Base):
@@ -21,4 +21,4 @@ class BadDomain(Base):
 	__tablename__="bad_domains"
 
 	id=Column(Integer, primary_key=True)
-	domain=Column(String(128))
+	domain=Column(String(128), unique=True)

@@ -21,7 +21,7 @@ def _send_mail(to_address, subject, html, plaintext=None, files={}):
         url,
         auth=(
             "api", app.config["MAILGUN_KEY"]
-            )
+            ),
         data=data,
         files=[("attachment", (k, files[k])) for k in files]
         )
