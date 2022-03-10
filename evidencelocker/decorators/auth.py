@@ -16,6 +16,9 @@ def logged_in_victim(f):
 
         if not user.otp_secret and request.path != "/set_otp" and not request.path.startswith("/otp_secret_qr/"):
             return redirect("/set_otp")
+
+        if user.banned_utc:
+            return render_template('banned.html', user=user), 403
             
         return f(user, *args, **kwargs)
     
@@ -39,6 +42,9 @@ def logged_in_police(f):
 
         if not user.is_recently_verified and request.path !="/verify_email":
             return redirect("/verify_email")
+
+        if user.banned_utc:
+            return render_template('banned.html', user=user), 403
             
         return f(user, *args, **kwargs)
     
@@ -59,6 +65,9 @@ def logged_in_admin(f):
 
         if not user.otp_secret and request.path != "/set_otp" and not request.path.startswith("/otp_secret_qr/"):
             return redirect("/set_otp")
+
+        if user.banned_utc:
+            return render_template('banned.html', user=user), 403
 
         return f(user, *args, **kwargs)
 
@@ -90,6 +99,9 @@ def logged_in_any(f):
         if user.type_id.startswith('p') and not user.is_recently_verified and request.path not in ["/set_otp","/verify_email"] and not request.path.startswith("/otp_secret_qr/"):
             return redirect("/verify_email")
 
+        if user.banned_utc:
+            return render_template('banned.html', user=user), 403
+
         return f(user, *args, **kwargs)
 
     wrapper.__name__=f.__name__
@@ -113,6 +125,9 @@ def logged_in_desired(f):
 
         if user and not user.otp_secret and request.path != "/set_otp":
             return redirect("/set_otp")
+
+        if user.banned_utc:
+            return render_template('banned.html', user=user), 403
 
         return f(user, *args, **kwargs)
 
