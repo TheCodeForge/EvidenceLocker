@@ -255,13 +255,13 @@ def post_signup_police():
     email=request.form.get("email")
     existing_user=get_police_by_email(email, graceful=True)
     if existing_user:
-        return redirect("/signup?error=Email%20already%20in%20use")
+        return redirect("/signup_police?error=Email%20already%20in%20use")
         
     if request.form.get("password") != request.form.get("password_confirm"):
-        return redirect("/signup?error=Passwords%20do%20not%20match")
+        return redirect("/signup_police?error=Passwords%20do%20not%20match")
 
     if request.form.get("terms_agree") != "true":
-        return redirect("/signup?error=You%20must%20agree%20to%20the%terms")
+        return redirect("/signup_police?error=You%20must%20agree%20to%20the%terms")
 
     #see if existing agency
     domain=email.split('@')[1]
@@ -289,7 +289,7 @@ def post_signup_police():
     x = requests.post(url, data=data)
 
     if not x.json()["success"]:
-        return redirect("/signup?error=hCaptcha%20failed")
+        return redirect("/signup_police?error=hCaptcha%20failed")
     
     #create new leo user
     user = PoliceUser(
