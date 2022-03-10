@@ -126,7 +126,7 @@ def not_banned(f):
         user=args[0]
         
         if user.is_banned:
-            abort(403)
+            return render_template("banned.html", user=user), 403
 
         if not user.otp_secret and request.path != "/set_otp":
             return redirect("/set_otp")
