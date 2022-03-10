@@ -32,7 +32,7 @@ def get_police_by_email(email, graceful=False):
 	if not isinstance(email, str):
 		raise TypeError("Police email must be str")
 
-	user = g.db.query(PoliceUser).filter_by(email=name).first()
+	user = g.db.query(PoliceUser).filter_by(email=email).first()
 
 	if not user and not graceful:
 		abort(404)
