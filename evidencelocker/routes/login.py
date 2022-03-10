@@ -296,7 +296,6 @@ def post_signup_police():
         email=email,
         pw_hash=werkzeug.security.generate_password_hash(request.form.get("password")),
         created_utc=g.time,
-        created_country=request.headers.get("cf-ipcountry"),
         agency_id=agency_id,
         banned_utc=g.time if banned_domain else 0,
         ban_reason="You are not affiliated with a law enforcement agency" if banned_domain else None
