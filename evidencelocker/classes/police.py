@@ -18,6 +18,7 @@ class PoliceUser(Base, time_mixin, user_mixin):
     email       =Column(String(256), unique=True)
     agency_id   =Column(Integer, ForeignKey('agencies.id'))
     banned_utc  =Column(Integer, default=0)
+    ban_reason  =Column(String(128), default="")
     last_verified_utc=Column(Integer, default=0)
     login_nonce =Column(Integer, default=0)
 

@@ -77,3 +77,52 @@ def get_exhibit_by_id(id, graceful=False):
 
 	return exhibit
 
+def get_agency_by_domain(domain):
+
+    # parse domain into all possible subdomains
+    parts = domain.split(".")
+    domain_list = set([])
+    for i in range(len(parts)):
+        new_domain = parts[i]
+        for j in range(i + 1, len(parts)):
+            new_domain += "." + parts[j]
+
+        domain_list.add(new_domain)
+
+    domain_list = tuple(list(domain_list))
+
+    agencies = [x for x in g.db.query(Agency).filter(Agency.domain.in_(domain_list)).all()]
+
+    if not agencies:
+        return None
+
+    # return the most specific agency - the one with the longest domain
+    # property
+    agencies = sorted(agencies, key=lambda x: len(x.domain), reverse=True)
+
+    return agencies[0]
+
+def get_bad_domain(domain):
+
+    # parse domain into all possible subdomains
+    parts = domain.split(".")
+    domain_list = set([])
+    for i in range(len(parts)):
+        new_domain = parts[i]
+        for j in range(i + 1, len(parts)):
+            new_domain += "." + parts[j]
+
+        domain_list.add(new_domain)
+
+    domain_list = tuple(list(domain_list))
+
+    domains = [x for x in g.db.query(BadDomain).filter(BadDomain.domain.in_(domain_list)).all()]
+
+    if not domains:
+        return None
+
+    # return the most specific domain - the one with the longest domain
+    # property
+    domains = sorted(domains, key=lambda x: len(x.domain), reverse=True)
+
+    return domains[0]

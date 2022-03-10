@@ -12,6 +12,7 @@ from evidencelocker.helpers.hashes import *
 from evidencelocker.decorators.auth import *
 from evidencelocker.classes import *
 from evidencelocker.helpers.loaders import *
+from evidencelocker.helpers.mail import send_email
 
 from evidencelocker.__main__ import app
 
@@ -239,7 +240,7 @@ def post_signup_victim():
 @app.post("/signup_police")
 def post_signup_police():
     
-    username=request.form.get("email")
+    email=request.form.get("email")
     existing_user=get_police_by_email(email, graceful=True)
     if existing_user:
         return redirect("/signup?error=Email%20already%20in%20use")
@@ -249,6 +250,18 @@ def post_signup_police():
 
     if request.form.get("terms_agree") != "true":
         return redirect("/signup?error=You%20must%20agree%20to%20the%terms")
+
+    #see if existing agency
+    domain=email.split('@')[1]
+    agency=get_agency_by_domain(domain)
+    if agency:
+        agency_id=agency.id
+    else:
+        agency_id=None
+
+    #verify no banned domain
+    #autoban LEO signups known to not be LEO email
+    banned_domain = get_bad_domain(domain)
 
     
     #verify hcaptcha
@@ -271,7 +284,10 @@ def post_signup_police():
         email=email,
         pw_hash=werkzeug.security.generate_password_hash(request.form.get("password")),
         created_utc=g.time,
-        created_country=request.headers.get("cf-ipcountry")
+        created_country=request.headers.get("cf-ipcountry"),
+        agency_id=agency_id,
+        banned_utc=g.time if banned_domain else 0,
+        ban_reason="You are not affiliated with a law enforcement agency" if banned_domain else None
     )
 
     g.db.add(user)
@@ -281,3 +297,55 @@ def post_signup_police():
     session["uid"]=user.id
 
     return redirect("/set_otp")
+
+@app.get("/verify_email")
+@logged_in_any
+def get_verify_email(user):
+
+    if not request.args.get("token"):
+
+        return render_template(
+            "confirm_email",
+            user=user
+            )
+
+    t=int(request.args.get('t'))
+    if g.time - t > 60 * 60 *24:
+        return render_template(
+            "confirm_email",
+            user=user,
+            expired=True
+            )
+    
+    if not validate_hash(f"verify_email+{user.type_id}+{user.email}+{t}"):
+        return render_template(
+            "confirm_email",
+            user=user,
+            invalid=True
+            )
+
+    #(re)confirmation successful
+    user.last_verified_utc=g.time
+    g.db.add(user)
+    g.db.commit()
+    return redirect("/")
+
+@app.post("/verify_email")
+@logged_in_any
+def post_verify_email(user):
+
+    if user.last_verified_utc:
+        subject="Reconfirm your email"
+    else:
+        subject="Confirm your email"
+
+    token=generate_hash(f"verify_email+{user.type_id}+{user.email}+{g.time}")
+
+    send_email(
+        user,
+        "police_reconfirm",
+        subject=subject,
+        link_text="Confirm Email"
+        link_url=f"/verify_email?t={g.time}&token={token}"
+        )
+

@@ -21,3 +21,8 @@ def qrcode_filter(x):
     
     data=base64.b64encode(mem.read()).decode('ascii')
     return f"data:image/png;base64,{data}"
+
+@app.template_filter('full_link')
+def full_link(x):
+
+    return f"https://theevidencelocker.org{'/' if not x.startswith('/') else ''}{x}"
