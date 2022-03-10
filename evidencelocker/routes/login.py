@@ -136,6 +136,19 @@ def get_signup_victim(user):
         hcaptcha = app.config["HCAPTCHA_SITEKEY"]
         )
 
+@app.get("/signup_police")
+@logged_in_desired
+def get_signup_police(user):
+
+    if user:
+        return redirect("/")
+    
+    return render_template(
+        "signup_police.html",
+        token=logged_out_csrf_token(),
+        hcaptcha = app.config["HCAPTCHA_SITEKEY"]
+        )
+
 @app.get("/set_otp")
 @logged_in_any
 def get_set_otp(user):
@@ -218,6 +231,53 @@ def post_signup_victim():
     g.db.commit()
 
     session["utype"]='v'
+    session["uid"]=user.id
+
+    return redirect("/set_otp")
+
+
+@app.post("/signup_police")
+def post_signup_police():
+    
+    username=request.form.get("email")
+    existing_user=get_police_by_email(email, graceful=True)
+    if existing_user:
+        return redirect("/signup?error=Email%20already%20in%20use")
+        
+    if request.form.get("password") != request.form.get("password_confirm"):
+        return redirect("/signup?error=Passwords%20do%20not%20match")
+
+    if request.form.get("terms_agree") != "true":
+        return redirect("/signup?error=You%20must%20agree%20to%20the%terms")
+
+    
+    #verify hcaptcha
+    token = request.form.get("h-captcha-response")
+    if not token:
+        abort(400)
+
+    data = {"secret": app.config["HCAPTCHA_SECRET"],
+            "response": token,
+            "sitekey": app.config["HCAPTCHA_SITEKEY"]}
+    url = "https://hcaptcha.com/siteverify"
+
+    x = requests.post(url, data=data)
+
+    if not x.json()["success"]:
+        return redirect("/signup?error=hCaptcha%20failed")
+    
+    #create new leo user
+    user = PoliceUser(
+        email=email,
+        pw_hash=werkzeug.security.generate_password_hash(request.form.get("password")),
+        created_utc=g.time,
+        created_country=request.headers.get("cf-ipcountry")
+    )
+
+    g.db.add(user)
+    g.db.commit()
+
+    session["utype"]='p'
     session["uid"]=user.id
 
     return redirect("/set_otp")

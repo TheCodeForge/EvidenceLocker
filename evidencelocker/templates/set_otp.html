@@ -8,7 +8,7 @@
     </div>
     <div id="signup-form">
       <h1 class="h2">Set up Two-Factor Authentication</h1>
-      <p>To help ensure the safety of users, two-factor authentication is required.</p>
+      <p>To help ensure the safety of abuse victims, two-factor authentication is mandatory for all users.</p>
       <form action="/set_otp" method="post">
 
         <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
@@ -19,11 +19,14 @@
         </p>
         <div class="text-center mb-3">
           <img class="img-fluid w-75" src="/otp_secret_qr/{{ otp_secret }}.png">
-          <div class="text-small text-muted">Or, enter this code into your authenticator app: <span class="font-monospace">{{ otp_secret }}</span></div>
+          <div class="text-small text-muted">
+            <p>Or, enter this code into your authenticator app:</p>
+            <p><span class="font-monospace">{{ otp_secret }}</span></p>
+          </div>
         </div>
 
         <p>
-          <span class="fw-bold">Step 2:</span> Write down your Two-Factor Recovery Code and store it in a safe place. This code will <span class="fw-bold">never</span> be shown again. <span class="font-weight-bold">If you lose your two-factor device, you will not be able to recover your account without this code.</span>
+          <span class="fw-bold">Step 2:</span> Write down your Two-Factor Recovery Code and store it in a safe place. This code will <span class="fw-bold">never</span> be shown again. <span class="text-danger">If you lose your two-factor device, you will not be able to recover your account without this code.</span>
         </p>
         <p class="fw-bold text-primary text-center font-monospace text-uppercase">{{ recovery }}</p>
         <p>
