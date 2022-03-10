@@ -124,6 +124,18 @@ def get_login_victim(user):
         token=logged_out_csrf_token()
         )
 
+@app.get("/login_police")
+@logged_in_desired
+def get_login_police(user):
+
+    if user:
+        return redirect("/")
+
+    return render_template(
+        "login_police.html",
+        token=logged_out_csrf_token()
+        )
+
 @app.get("/signup")
 @logged_in_desired
 def get_signup_victim(user):
