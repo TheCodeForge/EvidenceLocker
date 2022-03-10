@@ -316,21 +316,21 @@ def get_verify_email(user):
     if not request.args.get("token"):
 
         return render_template(
-            "confirm_email",
+            "confirm_email.html",
             user=user
             )
 
     t=int(request.args.get('t'))
     if g.time - t > 60 * 60 *24:
         return render_template(
-            "confirm_email",
+            "confirm_email.html",
             user=user,
             expired=True
             )
     
     if not validate_hash(f"verify_email+{user.type_id}+{user.email}+{t}"):
         return render_template(
-            "confirm_email",
+            "confirm_email.html",
             user=user,
             invalid=True
             )
