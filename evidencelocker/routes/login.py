@@ -345,7 +345,7 @@ def post_verify_email(user):
         user,
         "police_reconfirm",
         subject=subject,
-        link_text="Confirm Email"
+        link_text="Confirm Email",
         link_url=f"/verify_email?t={g.time}&token={token}"
         )
 
