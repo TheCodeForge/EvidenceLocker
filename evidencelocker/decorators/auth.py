@@ -126,7 +126,7 @@ def logged_in_desired(f):
         if user and not user.otp_secret and request.path != "/set_otp":
             return redirect("/set_otp")
 
-        if user.banned_utc:
+        if if user and user.banned_utc:
             return render_template('banned.html', user=user), 403
 
         return f(user, *args, **kwargs)
