@@ -144,10 +144,7 @@ def validate_csrf_token(f):
 
         submitted_key = request.values.get("csrf_token", "none")
 
-        if not submitted_key:
-            abort(401)
-
-        elif not user.validate_csrf_token(submitted_key):
+        if not user.validate_csrf_token(submitted_key):
             abort(401)
 
         return f(user, *args, **kwargs)
