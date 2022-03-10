@@ -120,6 +120,7 @@ def logged_in_desired(f):
     return wrapper
 
 def not_banned(f):
+    """Always use authentication wrapper above this one"""
     
     def wrapper(*args, **kwargs):
         
@@ -127,9 +128,6 @@ def not_banned(f):
         
         if user.is_banned:
             return render_template("banned.html", user=user), 403
-
-        if not user.otp_secret and request.path != "/set_otp":
-            return redirect("/set_otp")
         
         return f(*args, **kwargs)
     
