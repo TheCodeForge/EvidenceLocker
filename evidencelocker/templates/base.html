@@ -5,6 +5,14 @@
     <link href="/assets/style/light.css" rel="stylesheet">
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% if user %}
+    <script>
+      csrftoken=function(){
+        return '{{ user.csrf_token }}'
+      }
+    </script>
+    {% endif %}
   </head>
 
   <body>
