@@ -3,5 +3,5 @@
 {% block title %}Employment Reconfirmation{% endblock %}
 
 {% block body %}
-<p>To help assure victim safety, we need to confirm that you{% if user.last_verified_utc %} still{% endif %} work for {% if user.agency %}{{ user.agency.name }}{% else %}a law enforcement agency{% endif %}. Click below and you'll be taken back to The Evidence Locker.</p>
+<p>To help assure victim safety, we need to confirm that you{% if user.last_verified_utc %} still{% endif %} work for {% if user.agency %}{{ user.agency.name }}{% else %}a law enforcement agency{% endif %}. Click below to complete verification, and you'll be taken back to The Evidence Locker.</p>
 {% endblock %}
