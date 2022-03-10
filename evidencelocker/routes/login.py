@@ -64,7 +64,7 @@ def login_police():
     if not user:
         return invalid_login_police()
 
-    if not werkzeug.security.check_password_hash(user.password_hash, request.form.get("password")):
+    if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")):
         return invalid_login_police()
 
     totp=pyotp.TOTP(user.otp_secret)
