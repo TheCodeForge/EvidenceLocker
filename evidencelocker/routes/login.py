@@ -60,7 +60,7 @@ def login_police():
         time.sleep(max(0, random.gauss(1.5, 0.33)))
         return redirect("/login_police?invalid=1")
 
-    user = get_police_by_email(request.form.get("email"), graceful=True)
+    user = get_police_by_email(request.form.get("email",""), graceful=True)
     if not user:
         return invalid_login_police()
 
