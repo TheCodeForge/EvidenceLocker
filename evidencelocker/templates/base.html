@@ -28,7 +28,7 @@
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="/help/faq">FAQ</a>
             </li>
             {% if user %}
             <li class="nav-item">
@@ -45,8 +45,6 @@
               <ul class="dropdown-menu" aria-labelledby="vicDropdown">
                 <li><a class="dropdown-item" href="/login">Victim Login</a></li>
                 <li><a class="dropdown-item" href="/signup">Victim Signup</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="/help/faq">Victim FAQ</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -54,10 +52,8 @@
                 Police
               </a>
               <ul class="dropdown-menu" aria-labelledby="policeDropdown">
-                <li><a class="dropdown-item" href="#">LEO Login</a></li>
-                <li><a class="dropdown-item" href="#">Request LEO Account</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">FAQ</a></li>
+                <li><a class="dropdown-item" href="/login_police">LEO Login</a></li>
+                <li><a class="dropdown-item" href="/signup_police">Request LEO Account</a></li>
               </ul>
             </li>
             {% endif %}
