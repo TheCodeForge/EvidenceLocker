@@ -359,4 +359,6 @@ def post_verify_email(user):
         link_text="Confirm Email",
         link_url=f"/verify_email?t={g.time}&token={token}"
         )
+    
+    return render_template("check_your_email.html", user=user)
 
