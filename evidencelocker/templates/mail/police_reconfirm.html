@@ -1,6 +1,6 @@
 {% extends "mail/base.html" %}
 
-{% block title %}Employment Reconfirmation{% endblock %}
+{% block title %}Employment {% if user.last_verified_utc %}Confirmation{% else %}Reconfirmation{% endif %}{% endblock %}
 
 {% block body %}
 <p>To help assure victim safety, we need to confirm that you{% if user.last_verified_utc %} still{% endif %} work for {% if user.agency %}{{ user.agency.name }}{% else %}a law enforcement agency{% endif %}. Click below to complete verification, and you'll be taken back to The Evidence Locker.</p>
