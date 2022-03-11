@@ -123,8 +123,11 @@ def logged_in_desired(f):
         else:
             user=None
 
-        if user and not user.otp_secret and request.path != "/set_otp":
+        if user and not user.otp_secret and request.path not in ["/set_otp","/verify_email"] and not request.path.startswith("/otp_secret_qr/"):
             return redirect("/set_otp")
+
+        if user and user.type_id.startswith('p') and not user.is_recently_verified and request.path not in ["/set_otp","/verify_email"] and not request.path.startswith("/otp_secret_qr/"):
+            return redirect("/verify_email")
 
         if user and user.banned_utc:
             return render_template('banned.html', user=user), 403
