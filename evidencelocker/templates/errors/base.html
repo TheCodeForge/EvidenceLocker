@@ -1,0 +1,18 @@
+{% extends "base_centered.html"}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-6 my-auto p-3">
+    <div>
+      <h1 class="h2 text-center">{% block error_code %}{% endblock %}</h1>
+      <h2 class="h4 text-center">{% block errorname %}{% endblock %}</h2>
+      <p>{% block errormsg %}{% endblock %}</p>
+      <div class="mx-auto">
+      {% block btn %}
+        <a href="/" class="btn btn-primary" role="button">Home</a>
+      {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "errors/base.html" %}
+
+{% block error_code %}401{% endblock %}
+
+{% block errorname %}Authentication Required{% endblock %}
+
+{% block errormsg %}You need to sign up or log in to do that.{% endblock %}
+
+{% block btn %}
+<a href="/login" class="btn btn-primary" role="button">Log in</a>
+<a href="/login_police" class="btn btn-secondary" role="button">LEO Log in</a>
+{% endblock %}
