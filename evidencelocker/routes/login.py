@@ -84,7 +84,7 @@ def login_police():
     session["utype"]="p"
     session["uid"]=user.id
 
-    return redirect("/lockers")
+    return redirect("/")
 
 @app.post("/logout")
 def logout():
