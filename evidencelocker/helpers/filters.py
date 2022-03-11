@@ -25,4 +25,4 @@ def qrcode_filter(x):
 @app.template_filter('full_link')
 def full_link(x):
 
-    return f"https://theevidencelocker.org{'/' if not x.startswith('/') else ''}{x}"
+    return f"https://{app.config['SERVER_NAME']}{'/' if not x.startswith('/') else ''}{x}"
