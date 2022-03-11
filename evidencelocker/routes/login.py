@@ -328,7 +328,7 @@ def get_verify_email(user):
             expired=True
             )
     
-    if not validate_hash(f"verify_email+{user.type_id}+{user.email}+{t}"):
+    if not validate_hash(f"verify_email+{user.type_id}+{user.email}+{t}", request.args.get('token','')):
         return render_template(
             "confirm_email.html",
             user=user,
