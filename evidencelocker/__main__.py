@@ -31,6 +31,7 @@ if not app.config['DATABASE_URL']:
 
 app.config["HCAPTCHA_SECRET"]               = environ.get("HCAPTCHA_SECRET")
 app.config["HCAPTCHA_SITEKEY"]              = environ.get("HCAPTCHA_SITEKEY")
+app.config["MAILGUN_KEY"]                   = environ.get("MAILGUN_KEY")
 app.config["PERMANENT_SESSION_LIFETIME"]    = 60 * 60
 app.config["SESSION_REFRESH_EACH_REQUEST"]  = True
 app.config['SECRET_KEY']                    = environ.get("SECRET_KEY")
