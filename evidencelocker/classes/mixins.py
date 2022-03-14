@@ -42,12 +42,12 @@ class user_mixin():
         if "session_id" not in session:
             session["session_id"]=secrets.token_hex(16)
 
-        msg = f"{session['session_id']}+{request.path}+{self.type_id}+{self.login_nonce}"
+        msg = f"{session['session_id']}+{self.type_id}+{self.login_nonce}"
 
         return generate_hash(msg)
 
     def validate_csrf_token(self, token):
-        return validate_hash(f"{session['session_id']}+{request.path}+{self.type_id}+{self.login_nonce}", token)
+        return validate_hash(f"{session['session_id']}+{self.type_id}+{self.login_nonce}", token)
 
 
     @property
