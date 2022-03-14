@@ -22,16 +22,16 @@
 
         <div class="custom-control custom-checkbox mt-4">
           <input type="checkbox" class="custom-control-input" id="oathcheck" name="oath_perjury" value="true" required>
-          <label class="custom-control-label terms" for="oathcheck">I swear, under penalty of perjury, that the contents of this Exhibit are true, to the best of my current knowledge.</label>
+          <label class="custom-control-label terms" for="oathcheck">I swear, under penalty of perjury, that to the best of my current knowledge, the foregoing statement is true.</label>
         </div>
 
         <label for="input-password" class="mt-3">Password</label>
-        <input class="form-control" id="input-password" type="password" name="password" required>
+        <input class="form-control" id="input-password" type="password" name="password" disabled>
 
         <label for="2fa_input">Two-Factor Code</label>
-        <input type="text" class="form-control mb-2" id="2fa_input" name="otp_code" placeholder="# # # # # #" required>
+        <input type="text" class="form-control mb-2" id="2fa_input" name="otp_code" placeholder="# # # # # #" disabled>
 
-        <input class="btn btn-primary w-100 my-3" value="Sign and Save" type="submit"></input>
+        <input class="btn btn-primary w-100 my-3" value="Save" type="submit"></input>
 
       </form>
     </div>
