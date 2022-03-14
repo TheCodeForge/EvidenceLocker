@@ -25,7 +25,7 @@ def logged_out_csrf_token():
     if "session_id" not in session:
         session["session_id"]=secrets.token_hex(16)
 
-    return generate_hash(f"{g.time}+{request.path}+{session['session_id']}")
+    return generate_hash(f"{g.time}+{session['session_id']}")
 
 def validate_logged_out_csrf_token(t, token):
 
@@ -33,7 +33,7 @@ def validate_logged_out_csrf_token(t, token):
     if g.time-t > 3600:
         return False
 
-    return validate_hash(f"{t}+{request.path}+{session['session_id']}", token)
+    return validate_hash(f"{t}+{session['session_id']}", token)
 
 def compute_otp_recovery_code(user, otp_secret):
 
