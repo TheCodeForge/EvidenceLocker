@@ -189,6 +189,9 @@ def post_set_otp(user):
 
     totp = pyotp.TOTP(otp_secret)
 
+    if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")):
+        return redirect('/set_otp?error=Incorrect%20password')
+
     if not totp.verify(code):
         return redirect('/set_otp?error=Incorrect%20code')
 
