@@ -15,14 +15,14 @@
         <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
 
         <label for="input-title" class="mt-3">Title</label>
-        <input class="form-control" id="input-title" aria-describedby="usernameHelpRegister" type="text" name="username" value="{{ title }}" required>
+        <input class="form-control" id="input-title" aria-describedby="usernameHelpRegister" type="text" name="title" value="{{ title }}" required>
 
         <label for="input-body" class="mt-3">Text</label>
         <textarea id="input-body" form="exhibit-create-form" name="body" class="form-control w-100" rows=5>{{ body }}</textarea>
 
         <div class="custom-control custom-checkbox mt-4">
           <input type="checkbox" class="custom-control-input" id="oathcheck" name="oath_perjury" value="true">
-          <label class="custom-control-label terms" for="oathcheck">I swear, under penalty of perjury, that to the best of my current knowledge, the foregoing statement is true.</label>
+          <label class="custom-control-label" for="oathcheck">I swear, under penalty of perjury, that to the best of my current knowledge, the foregoing statement is true.</label>
         </div>
 
         <label for="input-password" class="mt-3">Password</label>
