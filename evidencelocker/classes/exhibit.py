@@ -20,7 +20,7 @@ class Exhibit(Base, time_mixin):
     signed_utc  =Column(Integer)
     author_id   =Column(Integer, ForeignKey("victim_users.id"))
 
-    author = relationship("VictimUser")
+    author = relationship("VictimUser")    
 
 
     def can_be_read_by_user(self, user):
@@ -60,9 +60,9 @@ class Exhibit(Base, time_mixin):
         if not output:
             output = '-'
 
-        return f"/exhibit/{self.b36id}/{output}"
+        return f"/locker/{self.author.username}/exhibit/{self.b36id}/{output}"
 
     @property
     @lazy
     def signed_string(self):
-        return time.strftime("%d %B %Y at %H:%M:%S", time.gmtime(self.created_utc))
+        return time.strftime("%d %B %Y at %H:%M:%S", time.gmtime(self.created_utc)) if self.signed_utc else None
