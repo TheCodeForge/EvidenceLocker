@@ -72,7 +72,7 @@ def before_request():
 @app.after_request
 def after_request(resp):
     
-    resp.headers["Content-Security-Policy"] = "default-src * data:; script-src hcaptcha.com code.jquery.com cdn.jsdelivr.net ; object-src 'none'; style-src 'self'; media-src 'none';"
+    resp.headers["Content-Security-Policy"] = "default-src * data:; script-src 'self' hcaptcha.com code.jquery.com cdn.jsdelivr.net ; object-src 'none'; style-src 'self'; media-src 'none';"
     resp.headers["Cross-Origin-Opener-Policy"] = "same-origin"
     resp.headers["Cross-Origin-Resource-Policy"] = "same-origin"
     resp.headers["Permissions-Policy"] = "geolocation=(self)"
