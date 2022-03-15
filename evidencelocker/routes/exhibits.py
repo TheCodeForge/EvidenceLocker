@@ -37,3 +37,15 @@ def post_create_exhibit(user):
                 title=title,
                 body=body_raw
                 )
+
+    exhibit = Exhibit(
+        text_raw=body_raw,
+        text_html=body_html,
+        title=title,
+        created_utc=g.time,
+        signed_utc=g.time if signed else 0,
+        author_id=user.id
+        )
+    g.db.add(exhibit)
+    g.db.commit()
+    return redirect(exhibit.permalink)
