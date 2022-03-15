@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship, lazyload, deferred
 from .mixins import *
 from evidencelocker.__main__ import Base
 
-class Agency(Base, time_mixin):
+class Agency(Base, b36ids, time_mixin):
 
 	__tablename__="agencies"
 

@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship, lazyload, deferred
 from .mixins import *
 from evidencelocker.__main__ import Base
 
-class AdminUser(Base, time_mixin, user_mixin):
+class AdminUser(Base, b36ids, time_mixin, user_mixin):
 
     __tablename__="admin_users"
     

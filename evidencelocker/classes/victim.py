@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship, lazyload, deferred
 from .mixins import *
 from evidencelocker.__main__ import Base
 
-class VictimUser(Base, time_mixin, user_mixin):
+class VictimUser(Base, b36ids, time_mixin, user_mixin):
 
     __tablename__="victim_users"
     
@@ -25,3 +25,7 @@ class VictimUser(Base, time_mixin, user_mixin):
     def type_id(self):
         return f"v{self.id}"
 
+    @property
+    def permalink(self):
+        return f"/locker/{self.username}"
+    

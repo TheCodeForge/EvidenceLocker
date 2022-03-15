@@ -6,7 +6,7 @@ from .mixins import *
 from evidencelocker.decorators.lazy import lazy
 from evidencelocker.__main__ import Base
 
-class PoliceUser(Base, time_mixin, user_mixin):
+class PoliceUser(Base, b36ids, time_mixin, user_mixin):
     __tablename__="police_users"
     
     id          =Column(Integer, primary_key=True)
