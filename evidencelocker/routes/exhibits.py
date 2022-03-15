@@ -49,3 +49,18 @@ def post_create_exhibit(user):
     g.db.add(exhibit)
     g.db.commit()
     return redirect(exhibit.permalink)
+
+@app.get("/locker/<username>/exhibit/<eid>/<anything>")
+@logged_in_any
+def get_locker_username_exhibit_eid_anything(user, username, eid, anything):
+
+    exhibit = get_exhibit_by_id(eid)
+
+    if not exhibit.can_be_read_by_user(user):
+        abort(404)
+
+    return render_template(
+        "exhibit_page.html",
+        e=exhibit,
+        user=user
+        )
