@@ -1,4 +1,5 @@
 import bleach
+from bleach.linkifier import LinkifyFilter
 from functools import partial
 import mistletoe
 
