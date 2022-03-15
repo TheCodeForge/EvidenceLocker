@@ -4,6 +4,9 @@
 <div class="row justify-content-center">
   <div class="col-12 col-md-6 my-auto p-3">
     <div id="signup-form">
+      {% if error %}
+      <p class="text-danger">{{ error }}</p>
+      {% endif %}
       <h1 class="h2">Create Exhibit</h1>
       <p>Add an entry to your Locker.</p>
 
