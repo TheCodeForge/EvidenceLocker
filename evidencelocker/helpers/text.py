@@ -2,7 +2,7 @@ import bleach
 from bleach.linkifier import LinkifyFilter
 from functools import partial
 import mistletoe
-
+import werkzeug.security
 
 _allowed_tags = [
     'a',
