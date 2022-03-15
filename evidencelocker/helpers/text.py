@@ -1,5 +1,7 @@
 import bleach
+import functools.partial
 import mistletoe
+
 
 _allowed_tags = [
     'a',
@@ -61,7 +63,8 @@ cleaner=bleach.Cleaner(
     attributes=_allowed_attributes,
     protocols=_allowed_protocols,
     filters=[
-        lambda:LinkifyFilter(
+        functools.partial(
+            LinkifyFilter,
             skip_tags=["pre"],
             parse_email=False,
             callbacks=[a_modify]
