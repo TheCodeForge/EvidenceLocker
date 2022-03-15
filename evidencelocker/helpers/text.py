@@ -1,5 +1,5 @@
 import bleach
-import functools.partial
+from functools import partial
 import mistletoe
 
 
@@ -63,7 +63,7 @@ cleaner=bleach.Cleaner(
     attributes=_allowed_attributes,
     protocols=_allowed_protocols,
     filters=[
-        functools.partial(
+        partial(
             LinkifyFilter,
             skip_tags=["pre"],
             parse_email=False,
