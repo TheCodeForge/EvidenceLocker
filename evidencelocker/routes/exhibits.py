@@ -59,6 +59,9 @@ def get_locker_username_exhibit_eid_anything(user, username, eid, anything):
     if not exhibit.can_be_read_by_user(user):
         abort(404)
 
+    if request.path != exhibit.permalink:
+        return redirect(exhibit.permalink)
+
     return render_template(
         "exhibit_page.html",
         e=exhibit,
