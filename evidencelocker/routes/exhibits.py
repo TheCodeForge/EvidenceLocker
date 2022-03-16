@@ -77,6 +77,9 @@ def get_edit_exhibit_eid(user):
     if not exhibit.can_be_read_by_user(user):
         abort(404)
 
+    if exhibit.signed_utc:
+        return redirect(exhibit.permalink)
+
     return render_template(
         "create_exhibit.html",
         user=user,
