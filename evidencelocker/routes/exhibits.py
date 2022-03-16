@@ -88,7 +88,7 @@ def get_edit_exhibit_eid(user, eid):
 
 @app.post("/edit_exhibit/<eid>")
 @logged_in_victim
-def get_edit_exhibit_eid(user, eid):
+def post_edit_exhibit_eid(user, eid):
 
     exhibit = get_exhibit_by_id(eid)
 
