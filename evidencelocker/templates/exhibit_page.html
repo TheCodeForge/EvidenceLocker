@@ -2,15 +2,15 @@
 
 {% block pagecontent %}
 <div id="exhibit-{{ e.b36id }}" class="card border rounded">
-	<div class="card-title"><h1 class="h3 text-primary">{{ e.title }}</h1></div>
-	<div class="card-body">
+  <div class="card-title"><h1 class="h3 text-primary">{{ e.title }}</h1></div>
+  <div class="card-body">
     {{ e.text_html | safe }}
-	</div>
-	<div class="card-footer">
-		<p class="text-small">created on {{ e.created_string }}</p>
-		{% if e.signed_utc %}
-			<p class="text-small">signed on {{ e.signed_string }}
-		{% endif %}
-	</div>
+  </div>
+  <div class="card-footer">
+    <p class="text-small">created on {{ e.created_string }}</p>
+    {% if e.signed_utc %}
+      <p class="text-small">signed on {{ e.signed_string }}
+    {% endif %}
+  </div>
 </div>
 {% endblock %}
