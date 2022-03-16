@@ -2,7 +2,7 @@
 $("#oathcheck").change(function(){
   $('.signature-field').prop('disabled', !$('#oathcheck').prop('checked'));
   var txt ='Save'
-  if (('#oathcheck').prop('checked')){
+  if ($('#oathcheck').prop('checked')){
     txt='Sign and Save'
   }
   $('#savebutton').prop('value', txt)
