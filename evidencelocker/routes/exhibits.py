@@ -70,7 +70,7 @@ def get_locker_username_exhibit_eid_anything(user, username, eid, anything):
 
 @app.get("/edit_exhibit/<eid>")
 @logged_in_victim
-def get_edit_exhibit_eid(user):
+def get_edit_exhibit_eid(user, eid):
 
     exhibit = get_exhibit_by_id(eid)
 
