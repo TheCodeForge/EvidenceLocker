@@ -27,7 +27,7 @@
         <input class="form-control" id="input-title" aria-describedby="usernameHelpRegister" type="text" name="title" value="{{ e.title if e else title }}" required>
 
         <label for="input-body" class="mt-3">Text</label>
-        <textarea id="input-body" form="exhibit-create-form" name="body" class="form-control w-100" rows=5>{{ e.body if e else body }}</textarea>
+        <textarea id="input-body" form="exhibit-create-form" name="body" class="form-control w-100" rows=5>{{ e.text_raw if e else body }}</textarea>
 
         <div class="custom-control custom-checkbox mt-4">
           <input type="checkbox" class="custom-control-input" id="oathcheck" name="oath_perjury" value="true">
