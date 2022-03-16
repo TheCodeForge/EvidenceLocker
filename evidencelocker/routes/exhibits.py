@@ -85,3 +85,42 @@ def get_edit_exhibit_eid(user, eid):
         user=user,
         e=exhibit
         )
+
+@app.post("/edit_exhibit/<eid>")
+@logged_in_victim
+def get_edit_exhibit_eid(user, eid):
+
+    exhibit = get_exhibit_by_id(eid)
+
+    if not exhibit.can_be_read_by_user(user):
+        abort(404)
+
+    if exhibit.signed_utc:
+        abort(403)
+
+    title = request.form.get("title")
+
+    body_raw = request.form.get("body")
+
+    body_html = raw_to_html(body_raw)
+
+    signed = request.form.get("oath_perjury", False)
+
+    if signed:
+        if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")) or not pyotp.TOTP(user.otp_secret).verify(request.form.get("otp_code")):
+            return render_template(
+                "create_exhibit.html",
+                user=user,
+                error="Invalid signature",
+                e=exhibit
+                )
+
+    exhibit.signed_utc = g.time if signed else exhibit.signed_utc
+    exhibit.text_raw = request.form.get("body")
+    exhibit.text_html = raw_to_html(request.form.get("body"))
+    exhibit.title = request.form.get("title")
+
+    g.db.add(exhibit)
+    g.db.commit()
+
+    return redirect(exhibit.permalink)
