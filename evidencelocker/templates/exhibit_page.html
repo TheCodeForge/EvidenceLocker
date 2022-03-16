@@ -9,7 +9,11 @@
   <div class="card-footer">
     <p class="text-small">created on {{ e.created_string }}</p>
     {% if e.signed_utc %}
-      <p class="text-small">signed on {{ e.signed_string }}
+      <p class="text-small">signed on {{ e.signed_string }}</p>
+    {% else %}
+    <div class="ml-auto">
+      <a class="btn btn-primary" role="button" href="/edit_exhibit/{{ e.b36id }}">Edit</a>
+    </div>
     {% endif %}
   </div>
 </div>
