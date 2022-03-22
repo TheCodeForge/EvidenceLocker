@@ -7,6 +7,9 @@ from evidencelocker.__main__ import app
 @app.get('/')
 @logged_in_desired
 def home(user):
+    if user and user.type_id.startswith('v'):
+        return redirect(user.permalink)
+        
     return render_template(
         "home.html",
         user=user

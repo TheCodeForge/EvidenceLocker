@@ -49,7 +49,7 @@ def login_victim():
     session["utype"]="v"
     session["uid"]=user.id
 
-    return redirect("/")
+    return redirect(user.permalink)
 
 @app.post("/login_police")
 def login_police():
