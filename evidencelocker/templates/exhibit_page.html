@@ -3,17 +3,17 @@
 {% block rightsidebar %}
 <div id="exhibit-infocard" class="card border rounded d-none d-lg-block">
   <div class="card-title bg-primary rounded-top px-2 py-1">
-    <p class="fw-bold text-white m-0"><i class="fas fa-circle-info"></i> Exhibit Information</p>
+    <p class="fw-bold text-white m-0"><i class="fas fa-fw fa-circle-info"></i> Exhibit Information</p>
   </div>
   <div class="card-body">
-    <p><i class="fas fa-file" data-toggle="tooltip" data-placement="top" title="Exhibit created"></i> <span class="text-small">{{ e.created_string }}</span></p>
+    <p><i class="fas fa-fw fa-file" data-toggle="tooltip" data-placement="top" title="Exhibit created"></i> <span class="text-small">{{ e.created_string }}</span></p>
     {% if e.edited_utc %}
-      <p><i class="fas fa-pen" data-toggle="tooltip" data-placement="top" title="Exhibit last edited"></i> <span class="text-small">{{ e.edited_string }}</span></p>
+      <p><i class="fas fa-fw fa-pen" data-toggle="tooltip" data-placement="top" title="Exhibit last edited"></i> <span class="text-small">{{ e.edited_string }}</span></p>
     {% endif %}
     {% if e.signed_utc %}
-      <p><i class="fas fa-signature text-success" data-toggle="tooltip" data-placement="top" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
+      <p><i class="fas fa-fw fa-signature text-success" data-toggle="tooltip" data-placement="top" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
     {% else %}
-      <p><i class="fas fa-signature text-danger"></i> <span class="text-small">not signed</span></p>
+      <p><i class="fas fa-fw fa-signature text-danger"></i> <span class="text-small">not signed</span></p>
       <div class="ml-auto">
         {% if e.author==user %}
         <a class="btn btn-primary text-white" role="button" href="/edit_exhibit/{{ e.b36id }}">Edit</a>
@@ -31,14 +31,14 @@
     {{ e.text_html | safe }}
   </div>
   <div class="card-footer d-lg-none">
-    <p><i class="fas fa-file" data-toggle="tooltip" data-placement="top" title="Exhibit created"></i> <span class="text-small">{{ e.created_string }}</span></p>
+    <p><i class="fas fa-fw fa-file" data-toggle="tooltip" data-placement="top" title="Exhibit created"></i> <span class="text-small">{{ e.created_string }}</span></p>
     {% if e.edited_utc %}
-      <p><i class="fas fa-pen" data-toggle="tooltip" data-placement="top" title="Exhibit last edited"></i> <span class="text-small">{{ e.edited_string }}</span></p>
+      <p><i class="fas fa-fw fa-pen" data-toggle="tooltip" data-placement="top" title="Exhibit last edited"></i> <span class="text-small">{{ e.edited_string }}</span></p>
     {% endif %}
     {% if e.signed_utc %}
-      <p><i class="fas fa-signature text-success" data-toggle="tooltip" data-placement="top" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
+      <p><i class="fas fa-fw fa-signature text-success" data-toggle="tooltip" data-placement="top" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
     {% else %}
-      <p><i class="fas fa-signature text-danger"></i> <span class="text-small">not signed</span></p>
+      <p><i class="fas fa-fw fa-signature text-danger"></i> <span class="text-small">not signed</span></p>
       <div class="ml-auto">
         {% if e.author==user %}
         <a class="btn btn-primary text-white" role="button" href="/edit_exhibit/{{ e.b36id }}">Edit</a>
