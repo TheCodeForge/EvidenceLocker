@@ -22,7 +22,7 @@ class Exhibit(Base, b36ids, time_mixin):
     signed_utc  =Column(Integer)
     author_id   =Column(Integer, ForeignKey("victim_users.id"))
 
-    author = relationship("VictimUser")
+    author = relationship("VictimUser", lazy="joined")
 
     def __repr__(self):
         return f'<Exhibit(id={self.id})>'
