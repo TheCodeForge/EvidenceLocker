@@ -19,24 +19,24 @@
       {% if request.args.get("error") %}
       <p class="text-danger my-4">{{ request.args.get("error") }}</p>
       {% endif %}
-      <form id="exhibit-create-form" action="{{ request.path }}" method="post">
+      <form id="exhibit-create-form" action="{{ request.path }}" method="post" class="m-1">
 
         <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
 
-        <label for="input-title" class="mt-3">Title</label>
+        <label for="input-title" class="mt-3 fw-bold">Title</label>
         <input class="form-control" id="input-title" aria-describedby="usernameHelpRegister" type="text" name="title" value="{{ e.title if e else title }}" required>
 
-        <label for="input-body" class="mt-3">Text</label>
+        <label for="input-body" class="mt-3 fw-bold">Text</label>
         <textarea id="input-body" form="exhibit-create-form" name="body" class="form-control w-100" rows=5>{{ e.text_raw if e else body }}</textarea>
 
-        <div class="custom-control custom-checkbox mt-4">
+        <div class="custom-control custom-checkbox mt-4 d-flex">
           <input type="checkbox" class="custom-control-input" id="oathcheck" name="oath_perjury" value="true">
           <label class="custom-control-label" for="oathcheck">I swear, under penalty of perjury, that to the best of my current knowledge, the foregoing statement is true.</label>
         </div>
 
-        <div class="m-2 p-2 border rounded">
+        <div class="p-2 border rounded">
 
-          <p class="fw-bold text-small">This section is a legally binding e-signature</p>
+          <p class="fw-bold text-small">This section is a legally binding e-signature. You will not be able to edit this exhibit after you sign it.</p>
 
           <label for="input-password" class="mt-3">Password</label>
           <input class="form-control signature-field" id="input-password" type="password" name="password" disabled>
