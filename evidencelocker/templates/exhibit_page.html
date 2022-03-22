@@ -7,12 +7,12 @@
     {{ e.text_html | safe }}
   </div>
   <div class="card-footer">
-    <p><i class="fas fa-pen"></i> <span class="text-small">{{ e.created_string }}</span></p>
+    <p><i class="fas fa-pen" data-toggle="tooltop" data-placement="top" title="Exhibit created"></i> <span class="text-small">{{ e.created_string }}</span></p>
     {% if e.edited_utc %}
-      <p><i class="fas fa-pen-to-square"></i> <span class="text-small">{{ e.edited_string }}</span></p>
+      <p><i class="fas fa-pen-to-square" data-toggle="tooltop" data-placement="top" title="Exhibit last edited"></i> <span class="text-small">{{ e.edited_string }}</span></p>
     {% endif %}
     {% if e.signed_utc %}
-      <p><i class="fas fa-signature text-success"></i> <span class="text-small">{{ e.signed_string }}</span></p>
+      <p><i class="fas fa-signature text-success" data-toggle="tooltop" data-placement="top" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
     {% else %}
       <p><i class="fas fa-signature text-danger"></i> <span class="text-small">not signed</span></p>
       <div class="ml-auto">

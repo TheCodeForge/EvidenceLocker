@@ -72,4 +72,4 @@ class Exhibit(Base, b36ids, time_mixin):
     @property
     @lazy
     def edited_string(self):
-        return time.strftime("%d %B %Y at %H:%M:%S", time.gmtime(self.edited_utc)) if self.signed_utc else None
+        return time.strftime("%d %B %Y at %H:%M:%S", time.gmtime(self.edited_utc)) if self.edited_utc else None
