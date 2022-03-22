@@ -33,6 +33,8 @@ def full_link(x):
 
 @app.template_filter('nonce')
 def nonce(x):
-    return f"{x}{x}"
-    return generate_hash(f"{session.get('session_id')}+{x}")
+    print('nonce call')
+    n=generate_hash(f"{session.get('session_id')}+{x}")
+    print(n)
+    return n
 
