@@ -79,7 +79,7 @@ def after_request(resp):
     #script nonce
     nonce=generate_hash(f"{session.get('session_id')}+{g.time}")
     
-    resp.headers["Content-Security-Policy"] = f"default-src * data:; script-src 'self' hcaptcha.com code.jquery.com cdn.jsdelivr.net nonce-{nonce}; object-src 'none'; style-src 'self'; media-src 'none';"
+    resp.headers["Content-Security-Policy"] = f"default-src * data:; script-src 'self' hcaptcha.com code.jquery.com cdn.jsdelivr.net 'nonce-{nonce}'; object-src 'none'; style-src 'self'; media-src 'none';"
     resp.headers["Cross-Origin-Opener-Policy"] = "same-origin"
     resp.headers["Cross-Origin-Resource-Policy"] = "same-origin"
     resp.headers["Permissions-Policy"] = "geolocation=(self)"
