@@ -15,6 +15,9 @@ class Agency(Base, b36ids, time_mixin):
 	country=Column(String(2))
 	domain=Column(String(128), unique=True)
 
+	def __repr__(self):
+		return f'<Agency(id={self.id})>'
+
 
 class BadDomain(Base):
 

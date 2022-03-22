@@ -20,6 +20,9 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin):
     banned_utc  =Column(Integer, default=0)
     ban_reason  =Column(String(128))
     login_nonce =Column(Integer, default=0)
+
+    def __repr__(self):
+        return f'<VictimUser(id={self.id})>'
     
     @property
     def type_id(self):
