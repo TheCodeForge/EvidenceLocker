@@ -53,6 +53,7 @@ Base=declarative_base()
 
 from .routes import *
 from .helpers.filters import *
+from .helpers.hashes import generate_hash
 
 #===EXTENSIONS
 
@@ -69,10 +70,16 @@ def before_request():
     
     g.time=int(time.time())
 
+    if "session_id" not in session:
+        session["session_id"]=secrets.token_hex(16)
+
 @app.after_request
 def after_request(resp):
+
+    #script nonce
+    nonce=generate_hash(f"{session.get("session_id")}+{g.time}")
     
-    resp.headers["Content-Security-Policy"] = "default-src * data:; script-src 'self' hcaptcha.com code.jquery.com cdn.jsdelivr.net ; object-src 'none'; style-src 'self'; media-src 'none';"
+    resp.headers["Content-Security-Policy"] = f"default-src * data:; script-src 'self' hcaptcha.com code.jquery.com cdn.jsdelivr.net nonce-{nonce}; object-src 'none'; style-src 'self'; media-src 'none';"
     resp.headers["Cross-Origin-Opener-Policy"] = "same-origin"
     resp.headers["Cross-Origin-Resource-Policy"] = "same-origin"
     resp.headers["Permissions-Policy"] = "geolocation=(self)"

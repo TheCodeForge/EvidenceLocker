@@ -1,6 +1,10 @@
 import qrcode
 import io
 import base64
+
+from .hashes import *
+from flask import session
+
 from evidencelocker.__main__ import app
 
 @app.template_filter('qrcode_img_data')
@@ -26,3 +30,8 @@ def qrcode_filter(x):
 def full_link(x):
 
     return f"https://{app.config['SERVER_NAME']}{'/' if not x.startswith('/') else ''}{x}"
+
+@app.template_filter('nonce')
+def nonce(x):
+    return generate_hash(f"{session.get("session_id")}+{str(x)}")
+
