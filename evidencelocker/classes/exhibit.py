@@ -70,7 +70,7 @@ class Exhibit(Base, b36ids, time_mixin):
     @property
     @lazy
     def signed_string(self):
-        return time.strftime("%d %B %Y at %H:%M:%S", time.gmtime(self.created_utc)) if self.signed_utc else None
+        return time.strftime("%d %B %Y at %H:%M:%S", time.gmtime(self.signed_utc)) if self.signed_utc else None
 
     @property
     @lazy
