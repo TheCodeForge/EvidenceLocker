@@ -2,7 +2,7 @@ import qrcode
 import io
 import base64
 
-from .hashes import *
+from .hashes import generate_hash
 from flask import session
 
 from evidencelocker.__main__ import app
