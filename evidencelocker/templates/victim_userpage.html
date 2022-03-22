@@ -1,5 +1,7 @@
 {% extends "base_centered.html" %}
 
+{% block title %}TEL - {{ target_user.username }}{% endblock %}
+
 {% block pagecontent %}
 <div class="col border rounded">
   {% for e in target_user.exhibits %}
