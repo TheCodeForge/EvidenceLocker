@@ -1,10 +1,10 @@
 {% extends "base_centered.html" %}
 
 {% block pagecontent %}
-<div class="col border-1 rounded">
+<div class="col border rounded">
   {% for e in target_user.exhibits %}
   <div class="{% if not loop.first %}border-top{% endif %}">
-    <div class="card border">
+    <div class="card border-0">
       <div class="card-title px-3 py-2"><h1 class="h3 text-primary"><a href="{{ e.permalink }}">{{ e.title }}</a></h1></div>
       <div class="card-body py-0">
         {% if e.signed_utc %}
