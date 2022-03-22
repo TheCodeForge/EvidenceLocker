@@ -32,3 +32,18 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin):
     def permalink(self):
         return f"/locker/{self.username}"
     
+    def can_be_viewed_by_user(self, other):
+
+        if other is self:
+            return True
+
+        elif other.type_id.startswith("v"):
+            return False
+
+        elif other.type_id.startswith("a"):
+            return True
+
+        elif False: #replace with logic to identify police sharing:
+            return True
+
+        return False
