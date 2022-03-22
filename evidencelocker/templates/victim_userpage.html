@@ -6,7 +6,7 @@
   <div class="row {% if not loop.first %}border-top{% endif %}">
     <div class="card border-0">
       <div class="card-title"><h1 class="h3 text-primary"><a href="{{ e.permalink }}">{{ e.title }}</a></h1></div>
-      {% if entry.signed_utc %}
+      {% if e.signed_utc %}
         <p><i class="fas fa-fw fa-file-signature text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
       {% else %}
         <p><i class="fas fa-fw fa-file-signature text-danger"></i> <span class="text-small">not signed</span></p>
