@@ -29,8 +29,17 @@
 <div id="exhibit-{{ e.b36id }}" class="card border rounded">
   <div class="card-title"><h1 class="h3 text-primary px-3 py-2">{{ e.title }}</h1></div>
   <div class="card-body">
+    <div>
     {{ e.text_html | safe }}
+    </div>
+    {% if e.signed_utc %}
+    <div class="custom-control custom-checkbox mt-4 d-flex">
+      <input type="checkbox" class="custom-control-input m-1" id="oathcheck" disabled checked>
+      <label class="custom-control-label" for="oathcheck">I swear, under penalty of perjury, that to the best of my current knowledge, the foregoing statement is true.</label>
+    </div>
+    {% endif %}
   </div>
+
   <div class="card-footer d-lg-none">
     <p><i class="fas fa-fw fa-user-pen" data-toggle="tooltip" data-placement="top" title="Exhibit Author"></i> <span class="text-small"><a href="{{ e.author.permalink }}">{{ e.author.username }}</a></span></p>
     <p><i class="fas fa-fw fa-file-circle-plus" data-toggle="tooltip" data-placement="top" title="Exhibit created"></i> <span class="text-small">{{ e.created_string }}</span></p>
