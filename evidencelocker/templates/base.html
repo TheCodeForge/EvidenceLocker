@@ -10,7 +10,7 @@
     <link href="/assets/fontawesome/css/all.css" rel="stylesheet">
 
     {% if user %}
-    <script nonce="456">
+    <script nonce="{{ g.time | nonce }}">
       csrftoken=function(){
         return '{{ user.csrf_token }}'
       }
