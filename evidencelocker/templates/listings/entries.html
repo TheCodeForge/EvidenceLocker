@@ -1,7 +1,7 @@
 {% extends "listings/base.html" %}
 
 {% block listentry %}
-<div class="card">
+<div class="card border-0">
 	<div class="card-title"><h1 class="h3 text-primary"><a href="{{ entry.permalink }}">{{ entry.title }}</a></h1></div>
 	{% if entry.signed_utc %}
     <p><i class="fas fa-fw fa-file-signature text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small">{{ entry.signed_string }}</span></p>

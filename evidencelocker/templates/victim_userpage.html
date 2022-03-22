@@ -1,5 +1,18 @@
 {% extends "base_centered.html" %}
 
 {% block pagecontent %}
-{% include "listings/entries.html" %}
+<div class="col border-1 rounded">
+  {% for e in target_user.exhibits %}
+  <div class="row {% if not loop.first %}border-top{% endif %}">
+    <div class="card border-0">
+      <div class="card-title"><h1 class="h3 text-primary"><a href="{{ e.permalink }}">{{ e.title }}</a></h1></div>
+      {% if entry.signed_utc %}
+        <p><i class="fas fa-fw fa-file-signature text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
+      {% else %}
+        <p><i class="fas fa-fw fa-file-signature text-danger"></i> <span class="text-small">not signed</span></p>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}
