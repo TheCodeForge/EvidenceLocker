@@ -11,15 +11,8 @@
     {% if e.edited_utc %}
       <p><i class="fas fa-fw fa-file-pen" data-toggle="tooltip" data-placement="bottom" title="Exhibit last edited"></i> <span class="text-small">{{ e.edited_string }}</span></p>
     {% endif %}
-    {% if e.signed_utc %}
-      <p><i class="fas fa-fw fa-file-signature text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
-    {% else %}
-      <p><i class="fas fa-fw fa-file-signature text-danger"></i> <span class="text-small">not signed</span></p>
-      <div class="ml-auto">
-        {% if e.author==user %}
-        <a class="btn btn-primary text-white" role="button" href="/edit_exhibit/{{ e.b36id }}">Edit</a>
-        {% endif %}
-      </div>
+    {% if e.author==user and not e.signed_utc %}
+      <a class="btn btn-primary text-white" role="button" href="/edit_exhibit/{{ e.b36id }}">Edit</a>
     {% endif %}
   </div>
 </div>
@@ -32,12 +25,14 @@
     <div>
     {{ e.text_html | safe }}
     </div>
+    <div class="mt-4 border-top pt-4 d-flex">
     {% if e.signed_utc %}
-    <div class="custom-control custom-checkbox mt-4 d-flex">
-      <input type="checkbox" class="custom-control-input m-1" id="oathcheck" disabled checked>
-      <label class="custom-control-label" for="oathcheck">I swear, under penalty of perjury, that to the best of my current knowledge, the foregoing statement is true.</label>
-    </div>
+      <p class="text-small" for="oathcheck">I swear, under penalty of perjury, that to the best of my current knowledge, the foregoing statement is true.</p>
+      <p><i class="fas fa-fw fa-file-signature text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
+    {% else %}
+      <p><i class="fas fa-fw fa-file-signature text-danger"></i> Not signed</p>
     {% endif %}
+    </div>
   </div>
 
   <div class="card-footer d-lg-none">
@@ -46,15 +41,8 @@
     {% if e.edited_utc %}
       <p><i class="fas fa-fw fa-file-pen" data-toggle="tooltip" data-placement="top" title="Exhibit last edited"></i> <span class="text-small">{{ e.edited_string }}</span></p>
     {% endif %}
-    {% if e.signed_utc %}
-      <p><i class="fas fa-fw fa-file-signature text-success" data-toggle="tooltip" data-placement="top" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
-    {% else %}
-      <p><i class="fas fa-fw fa-file-signature text-danger"></i> <span class="text-small">not signed</span></p>
-      <div class="ml-auto">
-        {% if e.author==user %}
-        <a class="btn btn-primary text-white" role="button" href="/edit_exhibit/{{ e.b36id }}">Edit</a>
-        {% endif %}
-      </div>
+    {% if e.author==user and not e.signed_utc %}
+      <a class="btn btn-primary text-white" role="button" href="/edit_exhibit/{{ e.b36id }}">Edit</a>
     {% endif %}
   </div>
 </div>
