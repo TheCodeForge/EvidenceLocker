@@ -18,6 +18,7 @@ class Exhibit(Base, b36ids, time_mixin):
     text_html   =Column(String(16384))
     title       =Column(String(512))
     created_utc =Column(Integer)
+    edited_utc  =Column(Integer)
     signed_utc  =Column(Integer)
     author_id   =Column(Integer, ForeignKey("victim_users.id"))
 
@@ -67,3 +68,8 @@ class Exhibit(Base, b36ids, time_mixin):
     @lazy
     def signed_string(self):
         return time.strftime("%d %B %Y at %H:%M:%S", time.gmtime(self.created_utc)) if self.signed_utc else None
+
+    @property
+    @lazy
+    def edited_string(self):
+        return time.strftime("%d %B %Y at %H:%M:%S", time.gmtime(self.edited_utc)) if self.signed_utc else None

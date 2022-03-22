@@ -98,11 +98,6 @@ def post_edit_exhibit_eid(user, eid):
     if exhibit.signed_utc:
         abort(403)
 
-    title = request.form.get("title")
-
-    body_raw = request.form.get("body")
-
-    body_html = raw_to_html(body_raw)
 
     signed = request.form.get("oath_perjury", False)
 
@@ -115,9 +110,17 @@ def post_edit_exhibit_eid(user, eid):
                 e=exhibit
                 )
 
+
+    title = request.form.get("title")
+
+    body_raw = request.form.get("body")
+
+    body_html = raw_to_html(body_raw)
+
+    exhibit.edited_utc = g.time if (body_raw != exhibit.text_raw or title != exhibit.title) else exhibit.edited_utc
     exhibit.signed_utc = g.time if signed else exhibit.signed_utc
-    exhibit.text_raw = request.form.get("body")
-    exhibit.text_html = raw_to_html(request.form.get("body"))
+    exhibit.text_raw = body_raw
+    exhibit.text_html = body_html
     exhibit.title = request.form.get("title")
 
     g.db.add(exhibit)
