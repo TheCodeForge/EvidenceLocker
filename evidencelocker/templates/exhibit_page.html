@@ -25,9 +25,9 @@
     <div>
     {{ e.text_html | safe }}
     </div>
-    <div class="mt-4 border-top pt-4 d-flex">
+    <div class="mt-4 border-top pt-4">
     {% if e.signed_utc %}
-      <p class="text-small" for="oathcheck">I swear, under penalty of perjury, that to the best of my current knowledge, the foregoing statement is true.</p>
+      <p>I swear, under penalty of perjury, that to the best of my current knowledge, the foregoing statement is true.</p>
       <p><i class="fas fa-fw fa-file-signature text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
     {% else %}
       <p><i class="fas fa-fw fa-file-signature text-danger"></i> Not signed</p>
