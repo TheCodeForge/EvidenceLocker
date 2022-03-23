@@ -9,7 +9,7 @@ from evidencelocker.__main__ import app
 def home(user):
     if user and user.type_id.startswith('v'):
         return redirect(user.permalink)
-        
+
     return render_template(
         "home.html",
         user=user
@@ -18,19 +18,6 @@ def home(user):
 @app.get("/help/<pagename>")
 @logged_in_desired
 def help(user, pagename):
-    
-    if pagename=="donate":
-        
-        return render_template(
-            'help/donate.html',
-            user=user,
-            btc='37fctBbwVHwkMoF97FzvUHhurncMfwEqV4',
-            eth='0xf7378b181fa40e447a18f05efff5713c1519318b',
-            bch='qrpqs09gqdzpdpxj7kj2nuskpaaxum32rsjrlustyu',
-            xmr='481Zwedy6ydWGSBKBFZ5dCAV1DuMHTc7Y4xNSwYd63VHcfKf9bmpvoUXVognjjbb6fQA8pQXRgqUHcEJ88so62iqFxXaTyY',
-            ltc='M8NePw5tQgSGKm2jEHkvr8CmxHJfjkdoQ7',
-            xlm='GCXONVKCJRTTA46N4ML35TAJYRMIV7NBA4TXNKM7CWLZJTSOQ3U5MGBB'
-        )
     
     return render_template(
         safe_join("/help", pagename)+'.html',

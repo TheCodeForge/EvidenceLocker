@@ -1,5 +1,12 @@
 {% extends "base_centered.html" %}
 
+{% set btc='37fctBbwVHwkMoF97FzvUHhurncMfwEqV4' %}
+{% set eth='0xf7378b181fa40e447a18f05efff5713c1519318b' %}
+{% set bch='qrpqs09gqdzpdpxj7kj2nuskpaaxum32rsjrlustyu' %}
+{% set xmr='481Zwedy6ydWGSBKBFZ5dCAV1DuMHTc7Y4xNSwYd63VHcfKf9bmpvoUXVognjjbb6fQA8pQXRgqUHcEJ88so62iqFxXaTyY' %}
+{% set ltc='M8NePw5tQgSGKm2jEHkvr8CmxHJfjkdoQ7' %}
+{% set xlm='GCXONVKCJRTTA46N4ML35TAJYRMIV7NBA4TXNKM7CWLZJTSOQ3U5MGBB' %}
+
 {% block pagecontent %}
 <div class="card m-0 border-0">
   <div class="card-body">
@@ -16,7 +23,7 @@
       <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#donateaccordion">
         <div class="accordion-body">
           <img class="mx-auto d-block w-75" src="{{ btc | qrcode_img_data }}">
-          <input readonly="readonly" value="{{ btc }}" data-clipboard-text="{{ btc }}" role="button" class="clipboard-copy form-control rounded">
+          <input readonly="readonly" value="{{ btc }}" data-clipboard-text="{{ btc }}" role="button" class="clipboard-copy form-control rounded text-center">
         </div>
       </div>
     </div>
@@ -29,7 +36,7 @@
       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#donateaccordion">
         <div class="accordion-body">
           <img class="mx-auto d-block w-75" src="{{ eth | qrcode_img_data }}">
-          <p class="text-center">{{ eth }}</p>
+          <input readonly="readonly" value="{{ eth }}" data-clipboard-text="{{ eth }}" role="button" class="clipboard-copy form-control rounded text-center">
           <p>The following Ethereum blockchain tokens are also accepted at this address:</p>
           <ul>
             <li>BAND</li>
@@ -49,7 +56,7 @@
       <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#donateaccordion">
         <div class="accordion-body">
           <img class="mx-auto d-block w-75" src="{{ bch | qrcode_img_data }}">
-          <p class="text-center">{{ bch }}</p>
+          <input readonly="readonly" value="{{ bch }}" data-clipboard-text="{{ bch }}" role="button" class="clipboard-copy form-control rounded text-center">
         </div>
       </div>
     </div>
@@ -62,7 +69,7 @@
       <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#donateaccordion">
         <div class="accordion-body">
           <img class="mx-auto d-block w-75" src="{{ xmr | qrcode_img_data }}">
-          <p class="text-center">{{ xmr }}</p>
+          <input readonly="readonly" value="{{ xmr }}" data-clipboard-text="{{ xmr }}" role="button" class="clipboard-copy form-control rounded text-center">
         </div>
       </div>
     </div>
@@ -75,7 +82,7 @@
       <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#donateaccordion">
         <div class="accordion-body">
           <img class="mx-auto d-block w-75" src="{{ ltc | qrcode_img_data }}">
-          <p class="text-center">{{ ltc }}</p>
+          <input readonly="readonly" value="{{ ltc }}" data-clipboard-text="{{ ltc }}" role="button" class="clipboard-copy form-control rounded text-center">
         </div>
       </div>
     </div>
@@ -88,7 +95,7 @@
       <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#donateaccordion">
         <div class="accordion-body">
           <img class="mx-auto d-block w-75" src="{{ xlm | qrcode_img_data }}">
-          <p class="text-center">{{ xlm }}</p>
+          <input readonly="readonly" value="{{ xlm }}" data-clipboard-text="{{ xlm }}" role="button" class="clipboard-copy form-control rounded text-center">
         </div>
       </div>
     </div>
