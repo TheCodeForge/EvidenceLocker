@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <link href="/assets/images/favicon.png" rel="icon">
-    
+
     <!--Bootstrap-->
     <link href="/assets/style/light.css" rel="stylesheet">
     
@@ -13,7 +13,7 @@
 
     {% if user %}
     <script nonce="{{ g.time | nonce }}">
-      csrftoken=function(){
+      function csrftoken(){
         return '{{ user.csrf_token }}'
       }
     </script>
@@ -83,6 +83,30 @@
           <li class="nav-item"><a href="https://github.com/TheCodeForge/EvidenceLocker" class="nav-link px-2 text-muted" target="_blank">Code</a></li>
         </ul>
       </footer>
+    </div>
+
+
+    <!-- Toasts -->
+    <div class="toast clipboard" id="toast-success" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000">
+      <div class="toast-body text-center">
+        <i class="fas fa-check-circle fa-fw text-success mr-2"></i>Link copied to clipboard
+      </div>
+    </div>
+
+    <div class="toast clipboard" id="toast-error" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000">
+      <div class="toast-body text-center">
+        <i class="fas fa-exclamation-circle fa-fw text-danger mr-2"></i>Unable to copy link
+      </div>
+    </div>
+    <div class="toast" id="toast-success"  role="alert" aria-live="assertive" data-animation="true" data-autohide="true" data-delay="5000">
+      <div class="toast-body bg-success text-center text-white">
+        <i class="fas fa-comment-alt-smile fa-fw mr-2"></i><span id="toast-post-success-text"></span>
+      </div>
+    </div>
+    <div class="toast" id="toast-error" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000">
+      <div class="toast-body bg-danger text-center text-white">
+        <i class="fas fa-exclamation-circle fa-fw mr-2"></i><span id="toast-post-error-text"></span>
+      </div>
     </div>
     
     <!--JQuery, Bootstrap, and Popper JS -->
