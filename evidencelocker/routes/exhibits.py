@@ -44,13 +44,18 @@ def post_create_exhibit(user):
         title=title,
         created_utc=g.time,
         signed_utc=g.time if signed else 0,
-        author_id=user.id
+        author_id=user.id,
+        created_country = request.headers.get("cf-ipcountry"),
+        signed_country  = request.headers.get("cf-ipcountry") if signed else None,
+        created_ip  = request.remote_addr,
+        signed_ip = request.remote_addr if signed else None
         )
     g.db.add(exhibit)
     g.db.commit()
     return redirect(exhibit.permalink)
 
 @app.get("/locker/<username>/exhibit/<eid>/<anything>")
+@app.get("/locker/<username>/exhibit/<eid>/<anything>.json")
 @logged_in_any
 def get_locker_username_exhibit_eid_anything(user, username, eid, anything):
 
@@ -65,6 +70,9 @@ def get_locker_username_exhibit_eid_anything(user, username, eid, anything):
     if request.path != exhibit.permalink:
         return redirect(exhibit.permalink)
 
+    if request.path.endswith(".json"):
+        return jsonify(exhibit.json)
+
     return render_template(
         "exhibit_page.html",
         e=exhibit,
@@ -77,7 +85,7 @@ def get_edit_exhibit_eid(user, eid):
 
     exhibit = get_exhibit_by_id(eid)
 
-    if not exhibit.can_be_read_by_user(user):
+    if exhibit.author != user:
         abort(404)
 
     if exhibit.signed_utc:
@@ -95,7 +103,7 @@ def post_edit_exhibit_eid(user, eid):
 
     exhibit = get_exhibit_by_id(eid)
 
-    if not exhibit.can_be_read_by_user(user):
+    if exhibit.author != user:
         abort(404)
 
     if exhibit.signed_utc:
@@ -120,8 +128,14 @@ def post_edit_exhibit_eid(user, eid):
 
     body_html = raw_to_html(body_raw)
 
-    exhibit.edited_utc = g.time if (body_raw != exhibit.text_raw or title != exhibit.title) else exhibit.edited_utc
+    edited = (body_raw != exhibit.text_raw or title != exhibit.title)
+
+    exhibit.edited_utc = g.time if edited else exhibit.edited_utc
+    exhibit.edited_ip = request.remote_addr if edited else exhibit.edited_ip
+    exhibit.edited_country = request.headers.get("cf-ipcountry") if edited else exhibit.edited_country
     exhibit.signed_utc = g.time if signed else exhibit.signed_utc
+    exhibit.signed_ip = request.remote_addr if signed else None
+    exhibit.signed_country = request.headers.get("cf-ipcountry") if signed else None
     exhibit.text_raw = body_raw
     exhibit.text_html = body_html
     exhibit.title = request.form.get("title")

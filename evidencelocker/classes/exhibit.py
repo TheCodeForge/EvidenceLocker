@@ -18,14 +18,25 @@ class Exhibit(Base, b36ids, time_mixin):
     text_html   =Column(String(16384))
     title       =Column(String(512))
     created_utc =Column(Integer)
-    edited_utc  =Column(Integer)
-    signed_utc  =Column(Integer)
+    edited_utc  =Column(Integer, default=None)
+    signed_utc  =Column(Integer, default=None)
     author_id   =Column(Integer, ForeignKey("victim_users.id"))
+    created_ip  =Column(String(16))
+    edited_ip   =Column(String(16))
+    signed_ip   =Column(String(16))
+    created_country=Column(String(2))
+    edited_country=Column(String(2))
+    signed_country=Column(String(2))
 
     author = relationship("VictimUser", lazy="joined", backref="exhibits")
 
     def __repr__(self):
         return f'<Exhibit(id={self.id})>'
+
+    @property
+    def json(self):
+        return self.__dict__
+    
 
 
     def can_be_read_by_user(self, user):
