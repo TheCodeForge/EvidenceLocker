@@ -81,3 +81,12 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     @lazy
     def edited_string(self):
         return time.strftime("%d %B %Y at %H:%M:%S", time.gmtime(self.edited_utc)) if self.edited_utc else None
+
+    @property
+    def json(self):
+        data = super().json(self)
+
+        data["author"]=self.author.json
+
+        return data
+    
