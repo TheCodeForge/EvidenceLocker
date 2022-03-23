@@ -62,7 +62,7 @@ class json_mixin():
         
         data = self.__dict__
 
-        for entry in data.keys():
+        for entry in [x for x in data.keys()]:
             if type(data[entry]) not in [str, int, type(None)]:
                 data.pop(entry)
 
