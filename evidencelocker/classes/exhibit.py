@@ -84,7 +84,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
 
     @property
     def json(self):
-        data = super().json(self)
+        data = super().json
 
         data["author"]=self.author.json
 
