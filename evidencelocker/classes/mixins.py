@@ -63,3 +63,7 @@ class json_mixin():
 
         data.pop()
     
+    @property
+    def jsonlink(self):
+        return f"{self.permalink}.json"
+    
