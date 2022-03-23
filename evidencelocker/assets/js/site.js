@@ -37,7 +37,7 @@ $("#dark-mode-toggle").click(function(){
         s.prop('href','/assets/style/dark.css')
       }
       else{
-        s.prop('href','/assets/style/dark.css')
+        s.prop('href','/assets/style/light.css')
       }
     })
 })
