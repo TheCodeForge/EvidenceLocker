@@ -2,7 +2,7 @@ import qrcode
 import io
 import base64
 
-from .hashes import generate_hash
+from .hashes import *
 from flask import session
 
 from evidencelocker.__main__ import app
@@ -34,4 +34,9 @@ def full_link(x):
 @app.template_filter('nonce')
 def nonce(x):
     return generate_hash(f"{session.get('session_id')}+{x}")
+
+@app.template_filter('logged_out_token')
+def logged_out_token(x):
+    return logged_out_csrf_token()
+
 

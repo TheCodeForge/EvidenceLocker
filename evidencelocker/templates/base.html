@@ -21,6 +21,12 @@
         return '{{ user.csrf_token }}'
       }
     </script>
+    {% else %}
+    <script nonce="{{ g.time | nonce }}">
+      function csrftoken(){
+        return '{{ g.time | logged_out_token }}'
+      }
+    </script>
     {% endif %}
 
     <title>{% block title %}The Evidence Locker{% endblock %}</title>
