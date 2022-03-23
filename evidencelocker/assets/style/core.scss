@@ -19,8 +19,15 @@ $small-font-size: 12px;
     z-index:10;
 }
 
-//Enable negative margins
-$enable-negative-margins: true;
+//Input overlay icon label for donate page
+.input-overlay-icon {
+    margin-left:2em;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+    background-color: $white;
+}
 
 //Toast positioning
 
