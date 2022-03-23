@@ -33,7 +33,7 @@ $("#dark-mode-toggle").click(function(){
   post('/toggle_darkmode',
     callback=function(){
       var s = $('#mainstyle')
-      if( s.prop('href').endswith('light.css')){
+      if( s.prop('href').endsWith('light.css')){
         s.prop('href','/assets/style/dark.css')
       }
       else{
