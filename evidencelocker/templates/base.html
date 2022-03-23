@@ -87,13 +87,13 @@
 
 
     <!-- Toasts -->
-    <div class="toast clipboard" id="toast-success" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000">
+    <div class="toast clipboard" id="toast-copy-success" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000">
       <div class="toast-body text-center">
         <i class="fas fa-check-circle fa-fw text-success mr-2"></i>Copied to clipboard
       </div>
     </div>
 
-    <div class="toast clipboard" id="toast-error" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000">
+    <div class="toast clipboard" id="toast-copy-error" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000">
       <div class="toast-body text-center">
         <i class="fas fa-exclamation-circle fa-fw text-danger mr-2"></i>Unable to copy
       </div>
@@ -112,6 +112,28 @@
     <!--JQuery, Bootstrap, and Popper JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!--Clipboard -->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" importance="high"></script>
+
+    <!-- Instantiate clipboard by passing a string selector -->
+    <script type="text/javascript">
+      var clipboard = new ClipboardJS('.copy-link');
+      clipboard.on('success', function(e) {
+
+        jQuery(function($) {
+          $('#toast-copy-success').toast('show');
+        })
+        console.log(e);
+      });
+      clipboard.on('error', function(e) {
+
+        jQuery(function($) {
+          $('#toast-copyerror').toast('show');
+        })
+        console.log(e);
+      });
+    </script>
 
     <!--Site js -->
     <script src="/assets/js/site.js"></script>
