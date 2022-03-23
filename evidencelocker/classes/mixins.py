@@ -66,6 +66,9 @@ class json_mixin():
             if type(data[entry]) not in [str, int, type(None)]:
                 data.pop(entry)
 
+            if entry in ["otp_secret", "pw_hash"]:
+                data.pop(entry)
+
         return data
     
     @property
