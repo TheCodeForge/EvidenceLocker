@@ -23,7 +23,12 @@
       <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#donateaccordion">
         <div class="accordion-body">
           <img class="mx-auto d-block w-75" src="{{ btc | qrcode_img_data }}">
-          <input readonly="readonly" value="{{ btc }}" data-clipboard-text="{{ btc }}" role="button" class="clipboard-copy form-control rounded text-center">
+          <div class="d-flex w-75 mx-auto">
+            <input id="copy-btc" readonly="readonly" value="{{ btc }}" data-clipboard-text="{{ btc }}" role="button" class="clipboard-copy form-control rounded text-center">
+            <label for="copy-btc">
+              <i class="fas fa-copy fa-fw"></i>
+            </label>
+          </div>
         </div>
       </div>
     </div>
@@ -56,7 +61,12 @@
       <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#donateaccordion">
         <div class="accordion-body">
           <img class="mx-auto d-block w-75" src="{{ bch | qrcode_img_data }}">
-          <input readonly="readonly" value="{{ bch }}" data-clipboard-text="{{ bch }}" role="button" class="clipboard-copy form-control rounded text-center">
+          <div class="d-flex w-75 mx-auto">
+            <input id="copy-bch" readonly="readonly" value="{{ bch }}" data-clipboard-text="{{ bch }}" role="button" class="clipboard-copy form-control rounded text-center">
+            <label for="copy-bch">
+              <i class="fas fa-copy fa-fw"></i>
+            </label>
+          </div>
         </div>
       </div>
     </div>
