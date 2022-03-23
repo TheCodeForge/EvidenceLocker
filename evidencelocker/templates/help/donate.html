@@ -25,7 +25,7 @@
           <img class="mx-auto d-block w-75" src="{{ btc | qrcode_img_data }}">
           <div class="d-flex w-75 mx-auto">
             <input id="copy-btc" readonly="readonly" value="{{ btc }}" data-clipboard-text="{{ btc }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
-            <label for="copy-btc">
+            <label for="copy-btc" class="input-overlay-icon" role="button">
               <i class="fas fa-copy fa-fw text-muted"></i>
             </label>
           </div>
@@ -63,7 +63,7 @@
           <img class="mx-auto d-block w-75" src="{{ bch | qrcode_img_data }}">
           <div class="d-flex w-75 mx-auto">
             <input id="copy-bch" readonly="readonly" value="{{ bch }}" data-clipboard-text="{{ bch }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
-            <label for="copy-bch">
+            <label for="copy-bch" class="my-auto">
               <i class="fas fa-copy fa-fw text-muted"></i>
             </label>
           </div>
