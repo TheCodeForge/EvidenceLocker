@@ -60,7 +60,7 @@ class json_mixin():
     @property
     def json(self):
         
-        data = self.__dict__
+        data = {x: self.__dict__[x] for x in self.__dict__}
 
         for entry in [x for x in data.keys()]:
             if type(data[entry]) not in [str, int, type(None)]:
