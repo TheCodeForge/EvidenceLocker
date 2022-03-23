@@ -87,24 +87,24 @@
 
 
     <!-- Toasts -->
-    <div class="toast clipboard" id="toast-copy-success" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000">
-      <div class="toast-body text-center">
+    <div class="toast" id="toast-copy-success" role="alert" data-animation="true" data-autohide="true" data-delay="5000">
+      <div class="toast-body text-center bg-white rounded">
         <i class="fas fa-check-circle fa-fw text-success mr-2"></i>Copied to clipboard
       </div>
     </div>
 
-    <div class="toast clipboard" id="toast-copy-error" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000">
-      <div class="toast-body text-center">
+    <div class="toast" id="toast-copy-error" role="alert" data-animation="true" data-autohide="true" data-delay="5000">
+      <div class="toast-body text-center bg-black text-white rounded">
         <i class="fas fa-exclamation-circle fa-fw text-danger mr-2"></i>Unable to copy
       </div>
     </div>
-    <div class="toast" id="toast-success"  role="alert" aria-live="assertive" data-animation="true" data-autohide="true" data-delay="5000">
-      <div class="toast-body bg-success text-center text-white">
-        <i class="fas fa-comment-alt-smile fa-fw mr-2"></i><span id="toast-post-success-text"></span>
+    <div class="toast" id="toast-success"  role="alert"  data-animation="true" data-autohide="true" data-delay="5000">
+      <div class="toast-body bg-success text-center text-white rounded">
+        <i class="fas fa-smile fa-fw mr-2"></i><span id="toast-post-success-text"></span>
       </div>
     </div>
-    <div class="toast" id="toast-error" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000">
-      <div class="toast-body bg-danger text-center text-white">
+    <div class="toast" id="toast-error" role="alert"  data-animation="true" data-autohide="true" data-delay="5000">
+      <div class="toast-body bg-danger text-center text-white rounded">
         <i class="fas fa-exclamation-circle fa-fw mr-2"></i><span id="toast-post-error-text"></span>
       </div>
     </div>
@@ -129,7 +129,7 @@
       clipboard.on('error', function(e) {
 
         jQuery(function($) {
-          $('#toast-copyerror').toast('show');
+          $('#toast-copy-error').toast('show');
         })
         console.log(e);
       });
