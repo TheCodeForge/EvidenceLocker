@@ -15,7 +15,7 @@ function post(url, callback, errortext) {
   var xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
   var form = new FormData()
-  form.append("formkey", formkey());
+  form.append("csrf_token", csrftoken());
   xhr.withCredentials=true;
   xhr.onerror=function() { alert(errortext); };
   xhr.onload = function() {
