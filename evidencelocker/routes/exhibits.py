@@ -67,7 +67,7 @@ def get_locker_username_exhibit_eid_anything(user, username, eid, anything):
     if username != exhibit.author.username:
         abort(404)
 
-    if request.path != exhibit.permalink:
+    if request.path != exhibit.permalink and request.path != exhibit.jsonlink:
         return redirect(exhibit.permalink)
 
     if request.path.endswith(".json"):
