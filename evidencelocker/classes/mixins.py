@@ -61,6 +61,8 @@ class json_mixin():
     def json(self):
         data=self.__dict__
 
+        print(data)
+
         return data
     
     @property
