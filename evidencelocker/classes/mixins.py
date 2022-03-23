@@ -59,9 +59,12 @@ class json_mixin():
 
     @property
     def json(self):
-        data=self.__dict__
+        
+        data = self.__dict__
 
-        print(data)
+        for entry in data.keys():
+            if type(data[entry]) not in [str, int, type(None)]:
+                data.pop(entry)
 
         return data
     
