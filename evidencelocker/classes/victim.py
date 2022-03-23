@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship, lazyload, deferred
 from .mixins import *
 from evidencelocker.__main__ import Base
 
-class VictimUser(Base, b36ids, time_mixin, user_mixin):
+class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
 
     __tablename__="victim_users"
     
