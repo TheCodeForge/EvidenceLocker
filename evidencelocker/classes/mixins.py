@@ -61,7 +61,7 @@ class json_mixin():
     def json(self):
         data=self.__dict__
 
-        data.pop()
+        return data
     
     @property
     def jsonlink(self):
