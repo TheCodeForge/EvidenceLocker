@@ -9,3 +9,35 @@ $("#oathcheck").change(function(){
   $('#savebutton').prop('value', txt)
 });
 
+
+//post utility function
+function post(url, callback, errortext) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  var form = new FormData()
+  form.append("formkey", formkey());
+  xhr.withCredentials=true;
+  xhr.onerror=function() { alert(errortext); };
+  xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      callback();
+    } else {
+      xhr.onerror();
+    }
+  };
+  xhr.send(form);
+}
+
+//Dark mode toggle
+$("#dark-mode-toggle").click(function(){
+  post('/toggle_darkmode',
+    callback=function(){
+      var s = $('#mainstyle')
+      if( s.prop('href').endswith('light.css'){
+        s.prop('href','/assets/style/dark.css')
+      }
+      else{
+        s.prop('href','/assets/style/dark.css')
+      })
+    })
+})

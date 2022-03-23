@@ -31,3 +31,8 @@ def light_css(stylefile):
 			sass.compile(string=stylesheet.read()),
 			mimetype="text/css"
 			)
+
+@app.post("/toggle_darkmode")
+def post_toggle_darkmode():
+    session["darkmode"] = not session.get('darkmode', False)
+    return "", 201
