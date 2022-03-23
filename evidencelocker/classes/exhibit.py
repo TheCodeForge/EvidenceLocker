@@ -9,7 +9,7 @@ from evidencelocker.decorators.lazy import lazy
 from evidencelocker.__main__ import Base
 
 
-class Exhibit(Base, b36ids, time_mixin):
+class Exhibit(Base, b36ids, time_mixin, json_mixin):
 
     __tablename__="entries"
 
@@ -32,13 +32,7 @@ class Exhibit(Base, b36ids, time_mixin):
 
     def __repr__(self):
         return f'<Exhibit(id={self.id})>'
-
-    @property
-    def json(self):
-        return self.__dict__
     
-
-
     def can_be_read_by_user(self, user):
 
         if user.type_id.startswith('v') and user==self.author and not user.is_banned:

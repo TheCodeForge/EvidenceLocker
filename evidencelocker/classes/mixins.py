@@ -54,3 +54,12 @@ class user_mixin():
     def otp_secret_reset_code(self):
 
         return compute_otp_recovery_code(self, self.otp_secret)
+
+class json_mixin():
+
+    @property
+    def json(self):
+        data=self.__dict__
+
+        data.pop()
+    
