@@ -15,9 +15,9 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     country     =Column(String(2))
     created_country=Column(String(2))
     pw_hash     =deferred(Column(String(256)))
-    otp_secret  =Column(String(32))
+    otp_secret  =deferred(Column(String(32)))
     email       =Column(String(256), unique=True)
-    banned_utc  =Column(Integer, default=0)
+    banned_utc  =Column(Integer, default=None)
     ban_reason  =Column(String(128))
     login_nonce =Column(Integer, default=0)
 
