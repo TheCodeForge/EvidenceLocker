@@ -5,85 +5,85 @@ from evidencelocker.classes import *
 
 def get_victim_by_username(name, graceful=False):
 
-	if not isinstance(name, str):
-		raise TypeError("Victim username must be str")
+    if not isinstance(name, str):
+        raise TypeError("Victim username must be str")
 
     name = name.replace('\\', '')
     name = name.replace('_', '\_')
     name = name.replace('%', '')
 
-	user = g.db.query(VictimUser).filter(VictimUser.username.ilike(name)).first()
+    user = g.db.query(VictimUser).filter(VictimUser.username.ilike(name)).first()
 
-	if not user and not graceful:
-		abort(404)
+    if not user and not graceful:
+        abort(404)
 
-	return user
+    return user
 
 def get_victim_by_id(id, graceful=False):
 
-	if isinstance(id, str):
-		id=base36decode(id)
+    if isinstance(id, str):
+        id=base36decode(id)
 
-	user = g.db.query(VictimUser).filter_by(id=id).first()
+    user = g.db.query(VictimUser).filter_by(id=id).first()
 
-	if not user and not graceful:
-		abort(404)
+    if not user and not graceful:
+        abort(404)
 
-	return user
+    return user
 
 def get_police_by_email(email, graceful=False):
 
-	if not isinstance(email, str):
-		raise TypeError("Police email must be str")
+    if not isinstance(email, str):
+        raise TypeError("Police email must be str")
 
     email = email.replace('\\', '')
     email = email.replace('_', '\_')
     email = email.replace('%', '')
 
-	user = g.db.query(PoliceUser).filter(PoliceUser.email.ilike(email)).first()
+    user = g.db.query(PoliceUser).filter(PoliceUser.email.ilike(email)).first()
 
-	if not user and not graceful:
-		abort(404)
+    if not user and not graceful:
+        abort(404)
 
-	return user
+    return user
 
 
 def get_police_by_id(id, graceful=False):
 
-	if isinstance(id, str):
-		id=base36decode(id)
+    if isinstance(id, str):
+        id=base36decode(id)
 
-	user = g.db.query(PoliceUser).filter_by(id=id).first()
+    user = g.db.query(PoliceUser).filter_by(id=id).first()
 
-	if not user and not graceful:
-		abort(404)
+    if not user and not graceful:
+        abort(404)
 
-	return user
+    return user
 
 
 def get_admin_by_id(id, graceful=False):
 
-	if isinstance(id, str):
-		id=base36decode(id)
+    if isinstance(id, str):
+        id=base36decode(id)
 
-	user = g.db.query(AdminUser).filter_by(id=id).first()
+    user = g.db.query(AdminUser).filter_by(id=id).first()
 
-	if not user and not graceful:
-		abort(404)
+    if not user and not graceful:
+        abort(404)
 
-	return user
+    return user
 
 def get_exhibit_by_id(id, graceful=False):
 
-	if isinstance(id, str):
-		id=base36decode(id)
+    if isinstance(id, str):
+        id=base36decode(id)
 
-	exhibit = g.db.query(Exhibit).filter_by(id=id).first()
+    exhibit = g.db.query(Exhibit).filter_by(id=id).first()
 
-	if not exhibit and not graceful:
-		abort(404)
+    if not exhibit and not graceful:
+        abort(404)
 
-	return exhibit
+    return exhibit
 
 def get_agency_by_domain(domain):
 
