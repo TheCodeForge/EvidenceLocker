@@ -47,3 +47,11 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
             return True
 
         return False
+
+    @property
+    def signed_exhibit_count(self):
+        return len([x for x in self.exhibits if x.signed_utc])
+
+    @property
+    def draft_exhibit_count(self):
+        return len([x for x in self.exhibits if not x.signed_utc])

@@ -76,6 +76,6 @@ cleaner=bleach.Cleaner(
 
 def raw_to_html(text):
 
-    text=text.replace('\r','')
+    text=text.replace('\r','') #compensate for windows being silly
 
     return cleaner.clean(mistletoe.markdown(text))
