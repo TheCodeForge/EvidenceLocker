@@ -5,10 +5,9 @@
 {% block rightsidebar %}
 <div id="page-infocard" class="card border rounded d-none d-lg-block">
   <div class="card-title bg-primary rounded-top px-2 py-1">
-    <p class="fw-bold text-white m-0"><i class="fas fa-fw fa-user"></i> User Information</p>
+    <p class="fw-bold text-white m-0"><i class="fas fa-fw fa-user"></i> {{ target_user.username }}</p>
   </div>
   <div class="card-body">
-    <p><i class="fas fa-fw fa-user" data-toggle="tooltip" data-placement="bottom" title="Name"></i> <span class="text-small">{{ target_user.username }}</span></p>
     <p><i class="fas fa-fw fa-user-plus" data-toggle="tooltip" data-placement="bottom" title="Account created"></i> <span class="text-small">{{ target_user.created_string }}</span></p>
     <p><i class="fas fa-fw fa-signature" data-toggle="tooltip" data-placement="bottom" title="Signed Exhibits"></i> <span class="text-small">{{ target_user.signed_exhibit_count }}</span></p>
     <p><i class="fas fa-fw fa-pen" data-toggle="tooltip" data-placement="bottom" title="Draft Exhibits"></i> <span class="text-small">{{ target_user.draft_exhibit_count }}</span></p>
