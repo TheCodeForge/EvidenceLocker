@@ -40,21 +40,22 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <div class="mr-auto">
+          <div class="">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
               <li class="nav-item">
                 <a class="nav-link" href="/help/faq">FAQ</a>
               </li>
               {% if user %}
+              <li class="nav-item">
+                <a href="/create_exhibit">Create Exhibit</a>
+              </li>
               <li class="nav-item">
                 <form action="/logout" method="post">
                   <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
                   <input class="nav-link border-0 bg-transparent" type="submit" value="Log Out">
                 </form>
               </li>
+
               {% else %}
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="vicDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -77,7 +78,7 @@
               {% endif %}
             </ul>
           </div>
-          <div id="dark-mode-toggle" class="ml-auto">
+          <div id="dark-mode-toggle" class="ms-auto" role="button">
             <i class="fas fa-circle-half-stroke"></i>
           </div>
         </div>
