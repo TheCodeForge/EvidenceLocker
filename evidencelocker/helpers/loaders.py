@@ -8,7 +8,11 @@ def get_victim_by_username(name, graceful=False):
 	if not isinstance(name, str):
 		raise TypeError("Victim username must be str")
 
-	user = g.db.query(VictimUser).filter_by(username=name).first()
+    name = name.replace('\\', '')
+    name = name.replace('_', '\_')
+    name = name.replace('%', '')
+
+	user = g.db.query(VictimUser).filter(VictimUser.username.ilike(name)).first()
 
 	if not user and not graceful:
 		abort(404)
@@ -32,7 +36,11 @@ def get_police_by_email(email, graceful=False):
 	if not isinstance(email, str):
 		raise TypeError("Police email must be str")
 
-	user = g.db.query(PoliceUser).filter_by(email=email).first()
+    email = email.replace('\\', '')
+    email = email.replace('_', '\_')
+    email = email.replace('%', '')
+
+	user = g.db.query(PoliceUser).filter(PoliceUser.email.ilike(email)).first()
 
 	if not user and not graceful:
 		abort(404)
