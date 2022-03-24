@@ -32,18 +32,19 @@ def login_victim():
     if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")):
         return invalid_login_victim()
 
-    totp=pyotp.TOTP(user.otp_secret)
-    if not totp.verify(request.form.get("otp_code")):
+    if user.otp_secret:
+        totp=pyotp.TOTP(user.otp_secret)
+        if not totp.verify(request.form.get("otp_code")):
 
-        if request.form.get("otp_code")==user.otp_secret_reset_code:
-            user.otp_secret==None
-            g.db.add(user)
-            g.db.commit()
-            session['utype']='v'
-            session['uid']=user.id
-            return redirect('/set_otp')
+            if request.form.get("otp_code")==user.otp_secret_reset_code:
+                user.otp_secret==None
+                g.db.add(user)
+                g.db.commit()
+                session['utype']='v'
+                session['uid']=user.id
+                return redirect('/set_otp')
 
-        return invalid_login_victim()
+            return invalid_login_victim()
 
     #set cookie and continue to locker
     session["utype"]="v"
@@ -67,18 +68,19 @@ def login_police():
     if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")):
         return invalid_login_police()
 
-    totp=pyotp.TOTP(user.otp_secret)
-    if not totp.verify(request.form.get("otp_code")):
+    if user.otp_secret:
+        totp=pyotp.TOTP(user.otp_secret)
+        if not totp.verify(request.form.get("otp_code")):
 
-        if request.form.get("otp_code")==user.otp_secret_reset_code:
-            user.otp_secret==None
-            g.db.add(user)
-            g.db.commit()
-            session['utype']='v'
-            session['uid']=user.id
-            return redirect('/set_otp')
+            if request.form.get("otp_code")==user.otp_secret_reset_code:
+                user.otp_secret==None
+                g.db.add(user)
+                g.db.commit()
+                session['utype']='v'
+                session['uid']=user.id
+                return redirect('/set_otp')
 
-        return invalid_login_police()
+            return invalid_login_police()
 
     #set cookie and continue to lockers
     session["utype"]="p"
