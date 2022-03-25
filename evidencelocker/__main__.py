@@ -74,6 +74,8 @@ def before_request():
     
     g.time=int(time.time())
 
+    g.tor=request.headers.get("cf-ipcountry")=='T1'
+
     if "session_id" not in session:
         session["session_id"]=secrets.token_hex(16)
 
