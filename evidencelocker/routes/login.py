@@ -80,7 +80,7 @@ def login_police():
     user = get_police_by_email(request.form.get("email",""), graceful=True)
     if not user:
         return invalid_login_police("Invalid username, password, or two-factor code")
-        
+
     if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")):
         return invalid_login_police("Invalid username, password, or two-factor code")
 
@@ -226,7 +226,7 @@ def post_set_otp(user):
 @app.post("/signup")
 def post_signup_victim():
 
-    def invalid_signup_victim(error=None)
+    def invalid_signup_victim(error=None):
         return render_template(
             "signup_victim.html",
             token=logged_out_csrf_token(),
@@ -289,7 +289,7 @@ def post_signup_victim():
 @app.post("/signup_police")
 def post_signup_police():
 
-    def invalid_signup_police(error=None)
+    def invalid_signup_police(error=None):
         return render_template(
             "signup_police.html",
             token=logged_out_csrf_token(),
