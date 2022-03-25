@@ -124,7 +124,7 @@ def post_edit_exhibit_eid(user, eid):
 
     title = request.form.get("title")
 
-    body_raw = request.form.get("body")
+    body_raw = request.form.get("body").replace('\r', '')
 
     body_html = raw_to_html(body_raw)
 
