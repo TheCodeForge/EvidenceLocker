@@ -14,6 +14,8 @@ from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session, sessionmaker, scoped_session
 
+from werkzeug.middleware.proxy_fix import ProxyFix
+
 app=Flask(
     __name__,
     template_folder='./templates',
@@ -21,6 +23,8 @@ app=Flask(
     )
 
 app.url_map.strict_slashes=False
+
+app=ProxyFix(app, x_for=2)
 
 #===CONFIGS===
 app.config['DATABASE_URL']                  = environ.get("DATABASE_URL",'').replace("postgres://", "postgresql://")

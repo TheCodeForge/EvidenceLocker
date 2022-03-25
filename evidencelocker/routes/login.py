@@ -36,7 +36,7 @@ def login_victim():
         totp=pyotp.TOTP(user.otp_secret)
         if not totp.verify(request.form.get("otp_code")):
 
-            if request.form.get("otp_code")==user.otp_secret_reset_code:
+            if request.form.get("otp_code").replace(' ','')==user.otp_secret_reset_code:
                 user.otp_secret==None
                 g.db.add(user)
                 g.db.commit()
@@ -72,7 +72,7 @@ def login_police():
         totp=pyotp.TOTP(user.otp_secret)
         if not totp.verify(request.form.get("otp_code")):
 
-            if request.form.get("otp_code")==user.otp_secret_reset_code:
+            if request.form.get("otp_code").replace(' ','')==user.otp_secret_reset_code:
                 user.otp_secret==None
                 g.db.add(user)
                 g.db.commit()
