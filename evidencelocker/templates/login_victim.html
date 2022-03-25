@@ -19,17 +19,17 @@
         <input type="hidden" name="csrf_token" value="{{ token }}">
 
         <label for="username-register" class="mt-3">Username or email</label>
-        <input class="form-control" id="username-register" aria-describedby="usernameHelpRegister" type="text" name="username" pattern="[a-zA-Z0-9_]{5,50}" required>
+        <input class="form-control" id="username-register" type="text" name="username" pattern="[a-zA-Z0-9_]{5,50}" required>
         <small id="usernameHelpRegister"></small>
 
 
         <label for="password-register" class="mt-3">Password</label>
 
-        <input class="form-control" id="password-register" aria-describedby="passwordHelpReigster" type="password" name="password" required>
+        <input class="form-control" id="password-register" type="password" name="password" required>
 
-        <label for="password_confirm" class="mt-3">Two-factor Token</label>
+        <label for="password_confirm" class="mt-3">Two-factor Token</label> <span class="text-small">(or 25-character Two-Factor Recovery Code)</span>
 
-        <input class="form-control" id="otp_code" aria-describedby="passwordConfirmHelp" type="text" name="otp_code" placeholder="# # # # # #">
+        <input class="form-control" id="otp_code" type="text" name="otp_code" placeholder="# # # # # #">
 
         <button class="btn btn-primary login w-100 my-3" id="register_button">Sign in</button>
 
