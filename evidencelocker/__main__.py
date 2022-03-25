@@ -24,7 +24,7 @@ app=Flask(
 
 app.url_map.strict_slashes=False
 
-ProxyFix(app, x_for=2)
+ProxyFix(app, x_for=1)
 
 #===CONFIGS===
 app.config['DATABASE_URL']                  = environ.get("DATABASE_URL",'').replace("postgres://", "postgresql://")
