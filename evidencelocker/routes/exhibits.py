@@ -20,7 +20,7 @@ def get_create_exhibit(user):
 @logged_in_victim
 def post_create_exhibit(user):
 
-    title = request.form.get("title")
+    title = bleachify(request.form.get("title"))
 
     body_raw = request.form.get("body")
 
@@ -122,7 +122,7 @@ def post_edit_exhibit_eid(user, eid):
                 )
 
 
-    title = request.form.get("title")
+    title = bleachify(request.form.get("title"))
 
     body_raw = request.form.get("body").replace('\r', '')
 
@@ -138,7 +138,7 @@ def post_edit_exhibit_eid(user, eid):
     exhibit.signed_country = request.headers.get("cf-ipcountry") if signed else None
     exhibit.text_raw = body_raw
     exhibit.text_html = body_html
-    exhibit.title = request.form.get("title")
+    exhibit.title = title
 
     g.db.add(exhibit)
     g.db.commit()
