@@ -9,8 +9,8 @@
       <h1 class="h2">Create your Locker</h1>
       <p>Begin protecting yourself today.</p>
 
-      {% if request.args.get("error") %}
-      <p class="text-danger my-4">{{ request.args.get("error") }}</p>
+      {% if error %}
+      <p class="text-danger my-4">{{ error }}</p>
       {% endif %}
       <form action="/signup" method="post">
 
@@ -18,8 +18,8 @@
         <input type="hidden" name="csrf_token" value="{{ token }}">
 
         <label for="username-register" class="mt-3">Username</label>
-        <input class="form-control" id="username-register" aria-describedby="usernameHelpRegister" type="text" name="username" pattern="[a-zA-Z0-9_]{5,50}" required>
-        <small id="usernameHelpRegister"></small>
+        <input class="form-control" id="username-register" aria-describedby="usernameHelpRegister" type="text" name="username" pattern="[a-zA-Z0-9_]{5,25}" required>
+        <small id="usernameHelpRegister">5 to 25 characters. May use letters, numbers, and _</small>
 
         <label for="email-register" class="mt-3">Email Address</label>
         <small class="d-inline-block text-muted ml-1">(optional, but forgotten passwords cannot be recovered without an email address)</small>
@@ -28,8 +28,7 @@
         <label for="password-register" class="mt-3">Password</label>
 
         <input class="form-control" id="password-register" aria-describedby="passwordHelpReigster" type="password" name="password" required>
-        <small id="passwordHelpRegister" class="form-text font-weight-bold text-muted d-none mt-1">Minimum of 8 characters required.</small>
-        <small id="passwordHelpSuccess" class="form-text font-weight-bold text-success d-none mt-1">Your password meets the requirements.</small>
+        <small id="passwordHelpRegister">Minimum of 8 characters required.</small>
 
         <label for="password_confirm" class="mt-3">Confirm Password</label>
 

@@ -5,6 +5,7 @@ import random
 import time
 import werkzeug.security
 import requests
+import re
 
 from flask import *
 
@@ -16,21 +17,28 @@ from evidencelocker.helpers.mail import send_email
 
 from evidencelocker.__main__ import app
 
+valid_username_regex = re.compile("^[a-zA-Z0-9_]{5,25}$")
+valid_password_regex = re.compile("^.{8,100}$")
+
 @app.post("/login")
 def login_victim():
 
     #define the response for an invalid login attempt
     #Random sleep is to ensure timing analysis cannot be used to deduce which part of the login failed
-    def invalid_login_victim():
+    def invalid_login_victim(error=None):
         time.sleep(max(0, random.gauss(1.5, 0.33)))
-        return redirect("/login?invalid=1")
+        return render_template(
+            "login_victim.html",
+            token=logged_out_csrf_token(),
+            error=error
+            )
 
     user = get_victim_by_username(request.form.get("username"), graceful=True)
     if not user:
-        return invalid_login_victim()
+        return invalid_login_victim("Invalid username, password, or two-factor code")
 
     if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")):
-        return invalid_login_victim()
+        return invalid_login_victim("Invalid username, password, or two-factor code")
 
     if user.otp_secret:
         totp=pyotp.TOTP(user.otp_secret)
@@ -44,7 +52,7 @@ def login_victim():
                 session['uid']=user.id
                 return redirect('/set_otp')
 
-            return invalid_login_victim()
+            return invalid_login_victim("Invalid username, password, or two-factor code")
 
     #set cookie and continue to locker
     session["utype"]="v"
@@ -55,18 +63,26 @@ def login_victim():
 @app.post("/login_police")
 def login_police():
 
+    def invalid_login_police(error=None):
+        time.sleep(max(0, random.gauss(1.5, 0.33)))
+        return render_template(
+            "login_police.html",
+            token=logged_out_csrf_token(),
+            error=error
+            )
+
     #define the response for an invalid login attempt
     #Random sleep is to ensure timing analysis cannot be used to deduce which part of the login failed
     def invalid_login_police():
         time.sleep(max(0, random.gauss(1.5, 0.33)))
-        return redirect("/login_police?invalid=1")
+        return invalid_login_police("Invalid username, password, or two-factor code")
 
     user = get_police_by_email(request.form.get("email",""), graceful=True)
     if not user:
-        return invalid_login_police()
-
+        return invalid_login_police("Invalid username, password, or two-factor code")
+        
     if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")):
-        return invalid_login_police()
+        return invalid_login_police("Invalid username, password, or two-factor code")
 
     if user.otp_secret:
         totp=pyotp.TOTP(user.otp_secret)
@@ -80,7 +96,7 @@ def login_police():
                 session['uid']=user.id
                 return redirect('/set_otp')
 
-            return invalid_login_police()
+            return invalid_login_police("Invalid username, password, or two-factor code")
 
     #set cookie and continue to lockers
     session["utype"]="p"
@@ -209,18 +225,34 @@ def post_set_otp(user):
 
 @app.post("/signup")
 def post_signup_victim():
+
+    def invalid_signup_victim(error=None)
+        return render_template(
+            "signup_victim.html",
+            token=logged_out_csrf_token(),
+            hcaptcha = app.config["HCAPTCHA_SITEKEY"],
+            error=error
+            )
     
     username=request.form.get("username")
     existing_user=get_victim_by_username(username, graceful=True)
+
+    #basic checks
     if existing_user:
-        return redirect("/signup?error=Username%20already%20taken")
+        return invalid_signup_victim("Username already taken.")
         
     if request.form.get("password") != request.form.get("password_confirm"):
-        return redirect("/signup?error=Passwords%20do%20not%20match")
+        return invalid_signup_victim("Passwords do not match.")
 
     if request.form.get("terms_agree") != "true":
-        return redirect("/signup?error=You%20must%20agree%20to%20the%terms")
+        return invalid_signup_victim("You must agree to the terms of use.")
 
+    #user/pass regex checks
+    if not re.fullmatch(valid_username_regex, username):
+        return invalid_signup_victim("Invalid username.")
+
+    if not re.fullmatch(valid_password_regex, request.form.get("password")):
+        return invalid_signup_victim("Invalid password. Passwords must be at least 8 characters long.")
     
     #verify hcaptcha
     token = request.form.get("h-captcha-response")
@@ -235,7 +267,7 @@ def post_signup_victim():
     x = requests.post(url, data=data)
 
     if not x.json()["success"]:
-        return redirect("/signup?error=hCaptcha%20failed")
+        return invalid_signup_victim("hCaptcha verification failed. Please try again.")
     
     #create new vic user
     user = VictimUser(
@@ -256,17 +288,25 @@ def post_signup_victim():
 
 @app.post("/signup_police")
 def post_signup_police():
+
+    def invalid_signup_police(error=None)
+        return render_template(
+            "signup_police.html",
+            token=logged_out_csrf_token(),
+            hcaptcha = app.config["HCAPTCHA_SITEKEY"],
+            error=error
+            )
     
     email=request.form.get("email")
     existing_user=get_police_by_email(email, graceful=True)
     if existing_user:
-        return redirect("/signup_police?error=Email%20already%20in%20use")
+        return invalid_signup_police("Email address already in use.")
         
     if request.form.get("password") != request.form.get("password_confirm"):
-        return redirect("/signup_police?error=Passwords%20do%20not%20match")
+        return invalid_signup_police("Passwords do not match.")
 
     if request.form.get("terms_agree") != "true":
-        return redirect("/signup_police?error=You%20must%20agree%20to%20the%terms")
+        return invalid_signup_police("You must agree to the terms of use.")
 
     #see if existing agency
     domain=email.split('@')[1]
@@ -294,7 +334,7 @@ def post_signup_police():
     x = requests.post(url, data=data)
 
     if not x.json()["success"]:
-        return redirect("/signup_police?error=hCaptcha%20failed")
+        return invalid_signup_police("hCaptcha verification failed. Please try again.")
     
     #create new leo user
     user = PoliceUser(

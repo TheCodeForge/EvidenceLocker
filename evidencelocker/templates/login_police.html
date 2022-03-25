@@ -9,8 +9,8 @@
       <h1 class="h2">Law Enforcement Login</h1>
       <p>Welcome back.</p>
 
-      {% if request.args.get("invalid") %}
-      <p class="text-danger my-4">Incorrect username, password, or two-factor token.</p>
+      {% if error %}
+      <p class="text-danger my-4">{{ error }}</p>
       {% endif %}
       <form action="/login_police" method="post">
 

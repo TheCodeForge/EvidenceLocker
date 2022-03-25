@@ -9,8 +9,8 @@
       <h1 class="h2">Request Law Enforcement Account</h1>
       <p>Get access to evidence and suspects in your district.</p>
 
-      {% if request.args.get("error") %}
-      <p class="text-danger my-4">{{ request.args.get("error") }}</p>
+      {% if error %}
+      <p class="text-danger my-4">{{ error }}</p>
       {% endif %}
       <form action="/signup_police" method="post">
 
