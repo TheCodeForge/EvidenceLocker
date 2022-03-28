@@ -18,6 +18,9 @@
       <input type="hidden" name="formkey" value="{{ v.formkey }}">
       <div class="input-group mb-2">
         <select id="input-country" name="country_code" class="form-control rounded">
+          {% if not user.country_code %}
+          <option selected disabled>Select one</option>
+          {% endif %}
           {% for x in ( 0 | CC ) %}
           <option value="{{ x }}"{% if x==user.country_code %} selected{% endif %}>{{ x | CC }}</option>
           {% endfor %}
