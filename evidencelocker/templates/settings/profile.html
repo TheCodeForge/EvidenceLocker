@@ -5,7 +5,7 @@
 <form id="form-name" method="post">
   <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
   <div class="body d-lg-flex ">
-    <label for="input-name" class="w-25 fw-bold my-auto text-lg-end">Name</label>
+    <label for="input-name" class="w-25 fw-bold my-auto text-lg-end pe-3">Name</label>
     <div class="w-75">
       <div class="input-group mb-2">
         <input id="input-name" class="form-control rounded" id="bio-text" name="name" form="profile-bio" value="{{ user.name }}">
@@ -13,8 +13,8 @@
     </div>
   </div>
   <div class="body d-lg-flex mt-3">
-    <label for="input-country" class="w-25 fw-bold my-auto text-lg-end">Country</label>
-    <div class="w-100">
+    <label for="input-country" class="w-25 fw-bold my-auto text-lg-end pe-3">Country</label>
+    <div class="w-75">
       <select id="input-country" name="country_code" class="form-control rounded">
         {% if not user.country_code %}
         <option selected disabled>--- Select one ---</option>
