@@ -31,24 +31,30 @@ function post(url, callback, errortext) {
 //post form toast utility function
 function post_form_toast(form_id, successtext, errortext) {
   var xhr = new XMLHttpRequest();
+  url=$('#'+form_id).prop('action');
   xhr.open("POST", $('#'+form_id).prop('action'), true);
-  var form = new FormData(document.querySelector('#'+form_id))
+  var form = new FormData(document.querySelector('#'+form_id));
   xhr.withCredentials=true;
   xhr.onerror=function() { 
-      $('#toast-error .toast-text').text(error);
-      $('#toast-error').toast()
+      $('#toast-error .toast-text').text(errortext);
+      $('#toast-error').toast('show')
   };
   xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 300) {
       $('#toast-success .toast-text').text(successtext);
-      $('#toast-success').toast()
+      $('#toast-success').toast('show')
     } else {
       $('#toast-error .toast-text').text(error);
-      $('#toast-error').toast()
+      $('#toast-error').toast('show')
     }
   };
   xhr.send(form);
 }
+
+//attach post_form_toast to form "submit" buttons
+$('.toast-form-submit').click(function(){
+  post_form_toast($(this).data('form'), $(this).data('success'), $(this).data('error'));
+})
 
 //Dark mode toggle
 $("#dark-mode-toggle").click(function(){
