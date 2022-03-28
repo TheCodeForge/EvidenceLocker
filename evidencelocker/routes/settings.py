@@ -41,4 +41,6 @@ def post_settings_page(user, page):
     g.db.add(user)
     g.db.commit()
 
+    print(user.name, user.country)
+
     return redirect(request.path)
