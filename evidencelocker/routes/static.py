@@ -26,11 +26,11 @@ def help(user, pagename):
 
 @app.get("/assets/style/<stylefile>.css")
 def light_css(stylefile):
-	with open(safe_join("evidencelocker/assets/style/", stylefile)+'.scss') as stylesheet:
-		return Response(
-			sass.compile(string=stylesheet.read()),
-			mimetype="text/css"
-			)
+    with open(safe_join("evidencelocker/assets/style/", stylefile)+'.scss') as stylesheet:
+        return Response(
+            sass.compile(string=stylesheet.read()),
+            mimetype="text/css"
+            )
 
 @app.post("/toggle_darkmode")
 def post_toggle_darkmode():

@@ -2,6 +2,8 @@ from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload, deferred
 
 from .mixins import *
+
+from evidencelocker.helpers.countries import COUNTRY_CODES
 from evidencelocker.__main__ import Base
 
 class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
@@ -12,7 +14,7 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     username    =Column(String(64), unique=True)
     created_utc =Column(Integer)
     name        =Column(String(128))
-    country     =Column(String(2))
+    country_code=Column(String(2))
     created_country=Column(String(2))
     pw_hash     =deferred(Column(String(256)))
     otp_secret  =deferred(Column(String(32)))
@@ -55,3 +57,8 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     @property
     def draft_exhibit_count(self):
         return len([x for x in self.exhibits if not x.signed_utc])
+
+    @property
+    def country(self):
+        return COUNTRY_CODES[self.country_code]
+    

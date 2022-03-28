@@ -4,6 +4,7 @@ import base64
 
 from .hashes import *
 from flask import session
+from .countries import COUNTRY_CODES
 
 from evidencelocker.__main__ import app
 
@@ -40,3 +41,11 @@ def logged_out_token(x):
     return logged_out_csrf_token()
 
 
+@app.template_filter('CC')
+def country_code_filter(x):
+
+    if not x:
+        return COUNTRY_CODES
+
+    else:
+        return COUNTRY_CODES[x]
