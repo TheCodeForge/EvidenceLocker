@@ -1,0 +1,22 @@
+{% extends "settings/base.html" %}
+
+{% block pagecontent %}
+<h1 class="h4 text-center text-primary">Sharing Settings</h1>
+<div class="px-3 px-md-0">
+  <div class="d-grid gap-3">
+    <div class="pb-4 border-bottom">
+      <div class="body d-md-flex">
+        <label for="current-pw" class="w-25 fw-bold text-md-end pe-3">Allow Sharing</label>
+        <div class="w-100">
+          <form id="sharing-settings-form" method="post">
+            <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
+            <input type="hidden" name="function" value="toggle_sharing">
+            <input id="allow-sharing" id="allow" name="allow_sharing" class="toast-form-submit" data-form="sharing-settings-form"{% if user.allow_leo_sharing %} checked{% endif %}>
+            <label for="allow-sharing">Allow any law enforcement agency in my country ({{ user.country }}) to view my Locker.</label>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
