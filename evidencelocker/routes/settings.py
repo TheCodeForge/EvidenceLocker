@@ -25,12 +25,13 @@ def get_settings_page(user, page):
 
 @app.post("/settings/<page>")
 @logged_in_victim
+@validate_csrf_token
 def post_settings_page(user, page):
 
     if page=="profile":
 
-        user.name==request.form.get("name", user.name)
-        user.country_code==request.form.get("country_code", user.country_code)
+        user.name==request.values.get("name", user.name)
+        user.country_code==request.values.get("country_code", user.country_code)
 
     elif page=="security":
         pass
