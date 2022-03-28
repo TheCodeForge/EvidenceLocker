@@ -1,8 +1,8 @@
 {% extends "settings/base.html" %}
 
 {% block pagecontent %}
-<div class="d-grid gap-3">
-  <form id="profile-settings-form" method="post">
+<form id="profile-settings-form" method="post">
+  <div class="d-grid gap-3">
     <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
     <div class="body d-md-flex ">
       <label for="input-name" class="w-25 fw-bold my-auto text-md-end pe-3">Name</label>
@@ -23,7 +23,7 @@
         </select>
       </div>
     </div>
-  </form>
-  <a role="button" class="toast-form-submit btn btn-primary text-white w-50 text-center" data-form="profile-settings-form" data-success="Settings saved" data-error="Unable to save settings">Save</a>
-</div>
+  </div>
+</form>
+<a role="button" class="toast-form-submit btn btn-primary text-white w-50 text-center mt-3" data-form="profile-settings-form" data-success="Settings saved" data-error="Unable to save settings">Save</a>
 {% endblock %}
