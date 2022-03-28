@@ -1,8 +1,0 @@
-<div class="col border-1 rounded">
-  {% for entry in listing %}
-  <div class="row {% if not loop.first %}border-top{% endif %}">
-    {% block listentry %}
-    {% endblock %}
-  </div>
-  {% endfor %}
-</div>

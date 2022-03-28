@@ -1,12 +1,21 @@
-{% extends "listings/base.html" %}
-
-{% block listentry %}
-<div class="card border-0">
-	<div class="card-title"><h1 class="h3 text-primary"><a href="{{ entry.permalink }}">{{ entry.title }}</a></h1></div>
-	{% if entry.signed_utc %}
-    <p><i class="fas fa-fw fa-file-signature text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small">{{ entry.signed_string }}</span></p>
+<div class="col border rounded">
+  {% for e in listing %}
+    <div class="{% if not loop.first %}border-top{% endif %}">
+      <div class="card border-0">
+        <div class="card-title px-3 py-2"><h1 class="h4 text-primary"><a href="{{ e.permalink }}">{{ e.title }}</a></h1></div>
+        <div class="card-body py-0">
+          {% if e.signed_utc %}
+            <p><i class="fas fa-fw fa-file-signature text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
+          {% else %}
+            <p><i class="fas fa-fw fa-file-signature text-danger"></i> <span class="text-small">not signed</span></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
   {% else %}
-    <p><i class="fas fa-fw fa-file-signature text-danger"></i> <span class="text-small">not signed</span></p>
-  {% endif %}
+    <div class="text-center">No exhibits here yet.</div>
+    {% if target_user==user %}
+      <div class="text-center"><a href="/create_exhibit" class="btn btn-primary text-white" role="button">Create Exhibit</a></div>
+    {% endif %}
+  {% endfor %}
 </div>
-{% endblock %}
