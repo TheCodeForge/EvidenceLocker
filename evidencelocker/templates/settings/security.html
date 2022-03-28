@@ -1,0 +1,28 @@
+{% extends "settings/base.html" %}
+
+{% block pagecontent %}
+<h1 class="h4 text-center text-primary">Security Settings</h1>
+<div class="px-3 px-md-0">
+  <div class="d-grid gap-3">
+    <div class="body d-md-flex ">
+      <label for="current-pw" class="w-25 fw-bold my-auto text-md-end pe-3">Change Password</label>
+      <div class="w-100">
+        <form id="change-pw-form" method="post">
+          <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
+          <label for="current-pw" class="fw-bold mt-1">Current Password</label>
+          <input id="current-pw" class="form-control rounded" name="current_pw" type="password">
+          <label for="otp-input" class="fw-bold mt-1">Two-Factor Code</label>
+          <input id="otp-input" class="form-control rounded" name="otp_code" type="text">
+          <label for="new-pw" class="fw-bold mt-1">New Password</label>
+          <input id="new-pw" class="form-control rounded" name="new_pw" type="password">
+          <label for="confirm-pw" class="fw-bold mt-1">Confirm Password</label>
+          <input id="confirm-pw" class="form-control rounded" name="confirm_pw" type="password">
+        </form>
+        <div class="text-center">
+          <a role="button" class="toast-form-submit btn btn-primary text-white w-50 mt-3" data-form="change-pw-form">Change Password</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,5 +1,7 @@
 import time
 import secrets
+import werkzeug.security
+import pyotp
 
 from evidencelocker.decorators.lazy import lazy
 from evidencelocker.helpers.b36 import *
@@ -49,6 +51,23 @@ class user_mixin():
     def validate_csrf_token(self, token):
         return validate_hash(f"{session['session_id']}+{self.type_id}+{self.login_nonce}", token)
 
+    def validate_password(self, x):
+        return werkzeug.security.check_password_hash(self.pw_hash, x)
+
+    def validate_otp(self, x):
+
+        if not self.otp_secret:
+            return True
+            
+        totp=pyotp.TOTP(self.otp_secret)
+        if totp.verify(x):
+            return True
+        elif x.replace(' ','')==user.otp_secret_reset_code:
+            user.otp_secret==None
+            g.db.add(user)
+            g.db.commit()
+            return True
+        return False
 
     @property
     def otp_secret_reset_code(self):

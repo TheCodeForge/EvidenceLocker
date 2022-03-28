@@ -37,22 +37,11 @@ def login_victim():
     if not user:
         return invalid_login_victim("Invalid username, password, or two-factor code")
 
-    if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")):
+    if not user.validate_password(request.form.get("password")):
         return invalid_login_victim("Invalid username, password, or two-factor code")
 
-    if user.otp_secret:
-        totp=pyotp.TOTP(user.otp_secret)
-        if not totp.verify(request.form.get("otp_code")):
-
-            if request.form.get("otp_code").replace(' ','')==user.otp_secret_reset_code:
-                user.otp_secret==None
-                g.db.add(user)
-                g.db.commit()
-                session['utype']='v'
-                session['uid']=user.id
-                return redirect('/set_otp')
-
-            return invalid_login_victim("Invalid username, password, or two-factor code")
+    if not user.validate_otp(request.form.get("otp_code")):
+        return invalid_login_victim("Invalid username, password, or two-factor code")
 
     #set cookie and continue to locker
     session["utype"]="v"
@@ -81,22 +70,11 @@ def login_police():
     if not user:
         return invalid_login_police("Invalid username, password, or two-factor code")
 
-    if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")):
+    if not user.validate_password(request.form.get("password")):
         return invalid_login_police("Invalid username, password, or two-factor code")
 
-    if user.otp_secret:
-        totp=pyotp.TOTP(user.otp_secret)
-        if not totp.verify(request.form.get("otp_code")):
-
-            if request.form.get("otp_code").replace(' ','')==user.otp_secret_reset_code:
-                user.otp_secret==None
-                g.db.add(user)
-                g.db.commit()
-                session['utype']='v'
-                session['uid']=user.id
-                return redirect('/set_otp')
-
-            return invalid_login_police("Invalid username, password, or two-factor code")
+    if not user.validate_otp(request.form.get("otp_code")):
+        return invalid_login_police("Invalid username, password, or two-factor code")
 
     #set cookie and continue to lockers
     session["utype"]="p"

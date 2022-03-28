@@ -29,22 +29,23 @@ function post(url, callback, errortext) {
 }
 
 //post form toast utility function
-function post_form_toast(form_id, successtext, errortext) {
+function post_form_toast(form_id) {
   var xhr = new XMLHttpRequest();
   url=$('#'+form_id).prop('action');
   xhr.open("POST", $('#'+form_id).prop('action'), true);
   var form = new FormData(document.querySelector('#'+form_id));
   xhr.withCredentials=true;
   xhr.onerror=function() { 
-      $('#toast-error .toast-text').text(errortext);
+      $('#toast-error .toast-text').text("Something went wrong. Please try again later.");
       $('#toast-error').toast('show')
   };
   xhr.onload = function() {
+    data=JSON.parse(xhr.response);
     if (xhr.status >= 200 && xhr.status < 300) {
-      $('#toast-success .toast-text').text(successtext);
+      $('#toast-success .toast-text').text(data['message']);
       $('#toast-success').toast('show')
     } else {
-      $('#toast-error .toast-text').text(error);
+      $('#toast-error .toast-text').text(data['error']);
       $('#toast-error').toast('show')
     }
   };
@@ -53,7 +54,7 @@ function post_form_toast(form_id, successtext, errortext) {
 
 //attach post_form_toast to form "submit" buttons
 $('.toast-form-submit').click(function(){
-  post_form_toast($(this).data('form'), $(this).data('success'), $(this).data('error'));
+  post_form_toast($(this).data('form'));
 })
 
 //Dark mode toggle

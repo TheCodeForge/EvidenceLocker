@@ -35,7 +35,9 @@ def post_settings_page(user, page):
         user.country_code=request.form.get("country_code") or user.country_code
 
     elif page=="security":
-        pass
+        
+        if not user.validate_password(request.form.get("password")) or not user.validate_otp(request.form.get("otp_code")):
+            return jsonify({'error':'Invalid password or two-factor code.'})
 
     else:
         abort(404)
