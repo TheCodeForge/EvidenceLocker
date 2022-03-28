@@ -7,9 +7,7 @@
   <div class="body d-lg-flex ">
     <label for="input-name" class="w-25 fw-bold my-auto text-lg-end pe-3">Name</label>
     <div class="w-75">
-      <div class="input-group mb-2">
-        <input id="input-name" class="form-control rounded" id="bio-text" name="name" form="profile-bio" value="{{ user.name if user.name else '' }}">
-      </div>
+      <input id="input-name" class="form-control rounded" id="input-name" name="name" value="{{ user.name if user.name else '' }}">
     </div>
   </div>
   <div class="body d-lg-flex mt-3">
