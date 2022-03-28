@@ -2,6 +2,7 @@ from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload, deferred
 
 from .mixins import *
+from evidencelocker.helpers.countries import COUNTRY_CODES
 from evidencelocker.__main__ import Base
 
 class Agency(Base, b36ids, time_mixin):
@@ -12,7 +13,7 @@ class Agency(Base, b36ids, time_mixin):
 	name=Column(String(256), unique=True)
 	city=Column(String(128))
 	state=Column(String(128))
-	country=Column(String(2))
+	country_code=Column(String(2))
 	domain=Column(String(128), unique=True)
 
 	def __repr__(self):
@@ -25,3 +26,8 @@ class BadDomain(Base):
 
 	id=Column(Integer, primary_key=True)
 	domain=Column(String(128), unique=True)
+
+    @property
+    def country(self):
+        return COUNTRY_CODES[self.country_code]
+    
