@@ -6,7 +6,7 @@
   <div class="body d-lg-flex border-bottom">
     <label for="input-name" class="w-lg-25">Name</label>
     <div class="w-lg-100">
-      <input type="hidden" name="formkey" value="{{ v.formkey }}">
+      <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
       <div class="input-group mb-2">
         <input id="input-name" class="form-control rounded" id="bio-text" name="name" form="profile-bio" value="{{ user.name }}">
       </div>
