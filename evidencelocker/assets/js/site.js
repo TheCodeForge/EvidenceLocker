@@ -28,6 +28,25 @@ function post(url, callback, errortext) {
   xhr.send(form);
 }
 
+//post form toast utility function
+function post_form_toast(form_id, successtext, errortext) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", $('#'+form_id).prop('action'), true);
+  var form = new FormData(document.querySelector('#'+form_id))
+  xhr.withCredentials=true;
+  xhr.onerror=function() { alert(errortext); };
+  xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      $('#toast-success .toast-text').text(successtext);
+      $('#toast-success').show()
+    } else {
+      $('#toast-error .toast-text').text(error);
+      $('#toast-error').show()
+    }
+  };
+  xhr.send(form);
+}
+
 //Dark mode toggle
 $("#dark-mode-toggle").click(function(){
   post('/toggle_darkmode',
