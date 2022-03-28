@@ -33,6 +33,7 @@ def post_settings_page(user, page):
 
         user.name=request.form.get("name") or user.name
         user.country_code=request.form.get("country_code") or user.country_code
+        user.
 
     elif page=="security":
         pass
@@ -43,4 +44,4 @@ def post_settings_page(user, page):
     g.db.add(user)
     g.db.commit()
 
-    return redirect(request.path)
+    return '', 201

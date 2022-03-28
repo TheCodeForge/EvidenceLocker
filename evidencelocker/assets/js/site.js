@@ -34,14 +34,17 @@ function post_form_toast(form_id, successtext, errortext) {
   xhr.open("POST", $('#'+form_id).prop('action'), true);
   var form = new FormData(document.querySelector('#'+form_id))
   xhr.withCredentials=true;
-  xhr.onerror=function() { alert(errortext); };
+  xhr.onerror=function() { 
+      $('#toast-error .toast-text').text(error);
+      $('#toast-error').toast()
+  };
   xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 300) {
       $('#toast-success .toast-text').text(successtext);
-      $('#toast-success').show()
+      $('#toast-success').toast()
     } else {
       $('#toast-error .toast-text').text(error);
-      $('#toast-error').show()
+      $('#toast-error').toast()
     }
   };
   xhr.send(form);
