@@ -19,7 +19,7 @@ def get_settings(user):
 def get_settings_page(user, page):
 
     return render_template(
-        f"{safe_join("settings/", page)}.html",
+        f"{safe_join('settings/', page)}.html",
         user=user
         )
 
@@ -30,7 +30,7 @@ def post_settings_page(user, page):
     if page=="profile":
 
         user.name==request.form.get("name") or user.name
-        user.country==request.form.get("country") or user.country
+        user.country_code==request.form.get("country_code") or user.country_code
 
     elif page=="security":
         pass
