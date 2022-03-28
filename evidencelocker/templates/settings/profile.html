@@ -1,29 +1,32 @@
 {% extends "settings/base.html" %}
 
 {% block pagecontent %}
-<form id="profile-settings-form" method="post">
-  <div class="d-grid gap-3">
-    <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
-    <div class="body d-md-flex ">
-      <label for="input-name" class="w-25 fw-bold my-auto text-md-end pe-3">Name</label>
-      <div class="w-100">
-        <input id="input-name" class="form-control rounded" id="input-name" name="name" value="{{ user.name if user.name else '' }}">
+<h1 class="h3 text-center text-primary">Profile Settings</h1>
+<div class="px-3 px-md-0">
+  <form id="profile-settings-form" method="post">
+    <div class="d-grid gap-3">
+      <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
+      <div class="body d-md-flex ">
+        <label for="input-name" class="w-25 fw-bold my-auto text-md-end pe-3">Name</label>
+        <div class="w-100">
+          <input id="input-name" class="form-control rounded" id="input-name" name="name" value="{{ user.name if user.name else '' }}">
+        </div>
+      </div>
+      <div class="body d-md-flex">
+        <label for="input-country" class="w-25 fw-bold my-auto text-md-end pe-3">Country</label>
+        <div class="w-100">
+          <select id="input-country" name="country_code" class="form-control rounded" form="profile-settings-form">
+            {% if not user.country_code %}
+            <option selected disabled>--- Select one ---</option>
+            {% endif %}
+            {% for x in ( 0 | CC ) %}
+            <option value="{{ x }}"{% if x==user.country_code %} selected{% endif %}>{{ x | CC }}</option>
+            {% endfor %}
+          </select>
+        </div>
       </div>
     </div>
-    <div class="body d-md-flex">
-      <label for="input-country" class="w-25 fw-bold my-auto text-md-end pe-3">Country</label>
-      <div class="w-100">
-        <select id="input-country" name="country_code" class="form-control rounded" form="profile-settings-form">
-          {% if not user.country_code %}
-          <option selected disabled>--- Select one ---</option>
-          {% endif %}
-          {% for x in ( 0 | CC ) %}
-          <option value="{{ x }}"{% if x==user.country_code %} selected{% endif %}>{{ x | CC }}</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-  </div>
-</form>
-<a role="button" class="toast-form-submit btn btn-primary text-white w-50 text-center mt-3" data-form="profile-settings-form" data-success="Settings saved" data-error="Unable to save settings">Save</a>
+  </form>
+  <a role="button" class="toast-form-submit btn btn-primary text-white w-50 text-center mt-3" data-form="profile-settings-form" data-success="Settings saved" data-error="Unable to save settings">Save</a>
+</div>
 {% endblock %}
