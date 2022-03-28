@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="flex-row bg-white box-shadow-bottom sticky d-flex">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link{% if request.path=='/settings/profile' %} active{% endif %}" href="/settings/profile"><i class="fas fa-user"></i><span class="d-none d-md-inline"> Profile</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link{% if request.path=='/settings/security' %} active{% endif %}" href="/settings/security"><i class="fas fa-lock"></i><span class="d-none d-md-inline"> Security</span></a>
+    </li>
+  </ul>
+</div>
+<div class="row my-md-2 mx-lg-1">
+  <div class="col col-md-2 col-lg-3">
+    {% block leftsidebar %}
+    {% endblock %}
+  </div>
+  <div class="col col-12 col-md-8 col-lg-6">
+    {% block pagecontent %}
+    {% endblock %}
+  </div>
+  <div class="col col-md-2 col-lg-3">
+    {% block rightsidebar %}
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}
