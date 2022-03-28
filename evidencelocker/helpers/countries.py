@@ -7,7 +7,7 @@ COUNTRY_CODES = {
     'AL': 'Albania',
     'AM': 'Armenia',
     'AO': 'Angola',
-    'AQ': 'Antarctica',
+#   'AQ': 'Antarctica',
     'AR': 'Argentina',
     'AS': 'American Samoa',
     'AT': 'Austria',
@@ -248,5 +248,6 @@ COUNTRY_CODES = {
     'YT': 'Mayotte',
     'ZA': 'South Africa',
     'ZM': 'Zambia',
-    'ZW': 'Zimbabwe'
+    'ZW': 'Zimbabwe',
+    'T1': 'Tor Network'
     }

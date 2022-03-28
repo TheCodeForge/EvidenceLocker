@@ -20,7 +20,7 @@
             <option selected disabled>--- Select one ---</option>
             {% endif %}
             {% for x in ( 0 | CC ) %}
-            <option value="{{ x }}"{% if x==user.country_code %} selected{% endif %}>{{ x | CC }}</option>
+            <option value="{{ x }}"{% if x==user.country_code %} selected{% endif %}{% if x=='T1' %} disabled {% endif %}>{{ x | CC }}</option>
             {% endfor %}
           </select>
         </div>

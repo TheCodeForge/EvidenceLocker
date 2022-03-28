@@ -252,7 +252,8 @@ def post_signup_victim():
         username=username,
         pw_hash=werkzeug.security.generate_password_hash(request.form.get("password")),
         created_utc=g.time,
-        created_country=request.headers.get("cf-ipcountry")
+        created_country=request.headers.get("cf-ipcountry"),
+        country_code=request.headers.get("cf-ipcountry")
     )
 
     g.db.add(user)

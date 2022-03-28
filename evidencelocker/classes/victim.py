@@ -22,6 +22,7 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     banned_utc  =Column(Integer, default=None)
     ban_reason  =Column(String(128))
     login_nonce =Column(Integer, default=0)
+    allow_leo_sharing = Column(Boolean, default=False)
 
     def __repr__(self):
         return f'<VictimUser(id={self.id})>'
@@ -60,5 +61,5 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
 
     @property
     def country(self):
-        return COUNTRY_CODES[self.country_code]
+        return COUNTRY_CODES.get(self.country_code)
     
