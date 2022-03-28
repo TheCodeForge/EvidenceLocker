@@ -9,6 +9,7 @@
       <div class="w-100">
         <form id="change-pw-form" method="post">
           <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
+          <input type="hidden" name="function" value="pw_reset">
           <label for="current-pw" class="mt-1">Current Password</label>
           <input id="current-pw" class="form-control rounded" name="password" type="password">
           <label for="otp-input" class="mt-1">Two-Factor Code</label>
@@ -17,6 +18,22 @@
           <input id="new-pw" class="form-control rounded" name="new_pw" type="password">
           <label for="confirm-pw" class="mt-1">Confirm Password</label>
           <input id="confirm-pw" class="form-control rounded" name="confirm_pw" type="password">
+        </form>
+        <div class="text-center">
+          <a role="button" class="toast-form-submit btn btn-primary text-white w-50 mt-3" data-form="change-pw-form">Change Password</a>
+        </div>
+      </div>
+    </div>
+    <div class="body d-md-flex pb-4 border-bottom">
+      <label for="current-pw" class="w-25 fw-bold my-auto text-md-end pe-3">Reset Two-Factor</label>
+      <div class="w-100">
+        <form id="change-pw-form" method="post">
+          <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
+          <input type="hidden" name="function" value="otp_reset">
+          <label for="current-pw" class="mt-1">Password</label>
+          <input id="current-pw" class="form-control rounded" name="password" type="password">
+          <label for="otp-input" class="mt-1">Two-Factor Code</label> <span class="text-small">(or 25-character Two-Factor Recovery Code)</span>
+          <input id="otp-input" class="form-control rounded" name="otp_code" type="text" placeholder="# # # # # #">
         </form>
         <div class="text-center">
           <a role="button" class="toast-form-submit btn btn-primary text-white w-50 mt-3" data-form="change-pw-form">Change Password</a>
