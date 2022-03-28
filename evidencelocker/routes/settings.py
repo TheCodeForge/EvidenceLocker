@@ -4,6 +4,7 @@ import pyotp
 
 from evidencelocker.decorators.auth import *
 from evidencelocker.helpers.text import raw_to_html
+from evidencelocker.helpers.countries import COUNTRY_CODES
 
 from evidencelocker.__main__ import app
 
@@ -34,6 +35,8 @@ def post_settings_page(user, page):
         user.name=request.form.get("name") or user.name
 
         if request.form.get("country_code")!=user.country_code:
+            if request.form.get("country_code") not in COUNTRY_CODES:
+                return jsonify({"error":"Invalid country selection"}), 400
             user.allow_leo_sharing=False
             user.country_code=request.form.get("country_code") or user.country_code
 
