@@ -64,4 +64,4 @@ def post_settings_page(user, page):
     g.db.add(user)
     g.db.commit()
 
-    return '', 201
+    return jsonify({"message": "Settings updated"})
