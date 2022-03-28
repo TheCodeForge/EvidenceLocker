@@ -56,7 +56,7 @@ def post_settings_page(user, page):
     elif page=="sharing":
 
         if request.form.get("function")=="toggle_sharing":
-            user.allow_leo_sharing=bool(request.form.get("allow-sharing", False))
+            user.allow_leo_sharing=bool(request.form.get("allow_sharing", False))
 
     else:
         abort(404)
