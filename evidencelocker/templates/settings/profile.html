@@ -1,7 +1,6 @@
 {% extends "settings/base.html" %}
 
 {% block pagecontent %}
-<h1 class="text-primary fw-bold">Profile Settings</h1>
 <form id="profile-settings-form" method="post">
   <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
   <div class="d-grid gap-3">
