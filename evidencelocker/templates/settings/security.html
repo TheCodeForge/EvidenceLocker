@@ -5,7 +5,7 @@
 <div class="px-3 px-md-0">
   <div class="d-grid gap-3">
     <div class="body d-md-flex pb-4 border-bottom">
-      <label for="current-pw" class="w-25 fw-bold my-auto text-md-end pe-3">Change Password</label>
+      <label for="current-pw" class="w-25 fw-bold text-md-end pe-3">Change Password</label>
       <div class="w-100">
         <form id="change-pw-form" method="post">
           <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="body d-md-flex pb-4 border-bottom">
-      <label for="current-pw" class="w-25 fw-bold my-auto text-md-end pe-3">Reset Two-Factor</label>
+      <label for="current-pw" class="w-25 fw-bold text-md-end pe-3">Reset Two-Factor</label>
       <div class="w-100">
         <form id="change-pw-form" method="post">
           <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
@@ -36,7 +36,8 @@
           <input id="otp-input" class="form-control rounded" name="otp_code" type="text" placeholder="# # # # # #">
         </form>
         <div class="text-center">
-          <a role="button" class="toast-form-submit btn btn-primary text-white w-50 mt-3" data-form="change-pw-form">Change Password</a>
+          <p class="text-small text-center">After resetting your two-factor code, you will be prompted to set up a new two-factor code</p>
+          <a role="button" class="toast-form-submit btn btn-primary text-white w-50 mt-3" data-form="change-pw-form">Reset Two-Factor Code</a>
         </div>
       </div>
     </div>
