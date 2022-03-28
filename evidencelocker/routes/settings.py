@@ -30,6 +30,8 @@ def post_settings_page(user, page):
 
     if page=="profile":
 
+        print(request.values.get("name"), request.values.get("country_code"))
+
         user.name==request.values.get("name", user.name)
         user.country_code==request.values.get("country_code", user.country_code)
 
