@@ -5,13 +5,13 @@
   <form id="profile-settings-form" method="post">
     <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
     <div class="body d-md-flex ">
-      <label for="input-name" class="w-25 fw-bold my-auto text-lg-end pe-3">Name</label>
+      <label for="input-name" class="w-25 fw-bold my-auto text-md-end pe-3">Name</label>
       <div class="w-100">
         <input id="input-name" class="form-control rounded" id="input-name" name="name" value="{{ user.name if user.name else '' }}">
       </div>
     </div>
     <div class="body d-md-flex">
-      <label for="input-country" class="w-25 fw-bold my-auto text-lg-end pe-3">Country</label>
+      <label for="input-country" class="w-25 fw-bold my-auto text-md-end pe-3">Country</label>
       <div class="w-100">
         <select id="input-country" name="country_code" class="form-control rounded" form="profile-settings-form">
           {% if not user.country_code %}
