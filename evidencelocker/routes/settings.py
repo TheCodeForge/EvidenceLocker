@@ -29,8 +29,8 @@ def post_settings_page(user, page):
 
     if page=="profile":
 
-        user.name==request.form.get("name") or user.name
-        user.country_code==request.form.get("country_code") or user.country_code
+        user.name==request.form.get("name", user.name)
+        user.country_code==request.form.get("country_code", user.country_code)
 
     elif page=="security":
         pass
