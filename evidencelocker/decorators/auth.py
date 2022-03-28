@@ -20,7 +20,9 @@ def logged_in_victim(f):
         if user.banned_utc:
             return render_template('banned.html', user=user), 403
             
-        return f(user, *args, **kwargs)
+        resp = make_response(f(user, *args, **kwargs))
+        resp.headers['Cache-Control'] = "private"
+        return resp
     
     wrapper.__name__=f.__name__
     return wrapper
@@ -45,8 +47,10 @@ def logged_in_police(f):
 
         if user.banned_utc:
             return render_template('banned.html', user=user), 403
-            
-        return f(user, *args, **kwargs)
+        
+        resp = make_response(f(user, *args, **kwargs))
+        resp.headers['Cache-Control'] = "private"
+        return resp
     
     wrapper.__name__=f.__name__
     return wrapper
@@ -69,7 +73,9 @@ def logged_in_admin(f):
         if user.banned_utc:
             return render_template('banned.html', user=user), 403
 
-        return f(user, *args, **kwargs)
+        resp = make_response(f(user, *args, **kwargs))
+        resp.headers['Cache-Control'] = "private"
+        return resp
 
     wrapper.__name__=f.__name__
     return wrapper
@@ -102,7 +108,9 @@ def logged_in_any(f):
         if user.banned_utc:
             return render_template('banned.html', user=user), 403
 
-        return f(user, *args, **kwargs)
+        resp = make_response(f(user, *args, **kwargs))
+        resp.headers['Cache-Control'] = "private"
+        return resp
 
     wrapper.__name__=f.__name__
     return wrapper
@@ -132,7 +140,9 @@ def logged_in_desired(f):
         if user and user.banned_utc:
             return render_template('banned.html', user=user), 403
 
-        return f(user, *args, **kwargs)
+        resp = make_response(f(user, *args, **kwargs))
+        resp.headers['Cache-Control'] = "private" if user else "public"
+        return resp
 
     wrapper.__name__=f.__name__
     return wrapper
