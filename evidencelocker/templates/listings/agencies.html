@@ -1,0 +1,15 @@
+<div class="col border rounded">
+  {% for a in listing %}
+    <div class="{% if not loop.first %}border-top{% endif %}">
+      <div class="card border-0">
+        <div class="card-title px-3 py-2"><h1 class="h4 text-primary"><a href="{{ e.permalink }}">{{ a.name }}</a></h1></div>
+        <div class="card-body py-0">
+          <p><i class="fas fa-fw fa-city" data-toggle="tooltip" data-placement="bottom" title="City"></i> <span class="text-small">{{ a.city if a.city else '' }}{{ ', ' if a.city and a.state else '' }}{{ a.state if a.state else '' }}</span></p>
+          <p><i class="fas fa-fw fa-flag" data-toggle="tooltip" data-placement="bottom" title="Country"></i> <span class="text-small">{{ a.country }}</span></p>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="text-center">No agencies here yet.</div>
+  {% endfor %}
+</div>

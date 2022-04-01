@@ -12,7 +12,6 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     
     id          =Column(Integer, primary_key=True)
     username    =Column(String(64), unique=True)
-    created_utc =Column(Integer)
     name        =Column(String(128))
     country_code=Column(String(2))
     created_country=Column(String(2))
