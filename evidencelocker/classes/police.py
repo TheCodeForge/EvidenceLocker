@@ -19,6 +19,7 @@ class PoliceUser(Base, b36ids, time_mixin, user_mixin):
     ban_reason  =Column(String(128))
     last_verified_utc=Column(Integer, default=0)
     login_nonce =Column(Integer, default=0)
+    created_utc =Column(Integer)
 
     agency      =relationship("Agency")
 
