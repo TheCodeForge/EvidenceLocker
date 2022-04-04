@@ -30,4 +30,15 @@ class BadDomain(Base):
 
     id=Column(Integer, primary_key=True)
     domain=Column(String(128), unique=True)
-    
+
+class LockerShare(Base, time_mixin):
+
+    __tablename__="locker_shares"
+
+    id=Column(Integer, primary_key=True)
+    agency_id=Column(Integer, ForeignKey("agencies.id"))
+    victim_id=Column(Integer, ForeignKey("victim_users.id"))
+    created_utc=Column(Integer)
+
+    victim=relationship("VictimUser", lazy="joined")
+    agency=relationship("Agency")
