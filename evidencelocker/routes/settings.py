@@ -42,10 +42,12 @@ def post_settings_page(user, page):
 
     elif page=="security":
         
-        if not user.validate_password(request.form.get("password")) or not user.validate_otp(request.form.get("otp_code")):
-            return jsonify({'error':'Invalid password or two-factor code.'}), 401
+
 
         if request.form.get("function")=="pw_reset":
+
+            if not user.validate_password(request.form.get("password")) or not user.validate_otp(request.form.get("otp_code")):
+                return jsonify({'error':'Invalid password or two-factor code.'}), 401
 
             if request.form.get("new_pw") != request.form.get("confirm_pw"):
                 return jsonify({'error': "Passwords don't match"}), 400
@@ -53,6 +55,9 @@ def post_settings_page(user, page):
             user.pw_hash = werkzeug.security.generate_password_hash(request.form.get("password"))
 
         elif request.form.get("function")=="otp_reset":
+
+            if not user.validate_password(request.form.get("password")) or not user.validate_otp(request.form.get("otp_code"), allow_reset=True):
+                return jsonify({'error':'Invalid password or two-factor code.'}), 401
 
             user.otp_secret=None
             g.db.add(user)

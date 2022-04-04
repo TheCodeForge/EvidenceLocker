@@ -40,7 +40,7 @@ def login_victim():
     if not user.validate_password(request.form.get("password")):
         return invalid_login_victim("Invalid username, password, or two-factor code")
 
-    if not user.validate_otp(request.form.get("otp_code")):
+    if not user.validate_otp(request.form.get("otp_code"), allow_reset=True):
         return invalid_login_victim("Invalid username, password, or two-factor code")
 
     #set cookie and continue to locker
@@ -73,7 +73,7 @@ def login_police():
     if not user.validate_password(request.form.get("password")):
         return invalid_login_police("Invalid username, password, or two-factor code")
 
-    if not user.validate_otp(request.form.get("otp_code")):
+    if not user.validate_otp(request.form.get("otp_code"), allow_reset=True):
         return invalid_login_police("Invalid username, password, or two-factor code")
 
     #set cookie and continue to lockers

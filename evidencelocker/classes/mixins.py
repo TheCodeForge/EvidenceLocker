@@ -2,6 +2,7 @@ import time
 import secrets
 import werkzeug.security
 import pyotp
+from hmac import compare_digest
 
 from evidencelocker.decorators.lazy import lazy
 from evidencelocker.helpers.b36 import *
@@ -54,7 +55,7 @@ class user_mixin():
     def validate_password(self, x):
         return werkzeug.security.check_password_hash(self.pw_hash, x)
 
-    def validate_otp(self, x):
+    def validate_otp(self, x, allow_reset=False):
 
         if not self.otp_secret:
             return True
@@ -62,7 +63,7 @@ class user_mixin():
         totp=pyotp.TOTP(self.otp_secret)
         if totp.verify(x):
             return True
-        elif x.replace(' ','')==user.otp_secret_reset_code:
+        elif allow_reset and compare_digest(x.replace(' ','').upper(), user.otp_secret_reset_code):
             user.otp_secret==None
             g.db.add(user)
             g.db.commit()
