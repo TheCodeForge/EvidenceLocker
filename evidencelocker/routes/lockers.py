@@ -14,7 +14,7 @@ def get_locker_username(user, username):
 		abort(404)
 
 	if request.path.endswith('.json'):
-		return jsonify({"data":target_user.json})
+		return jsonify(target_user.json)
 
 	return render_template(
 		"victim_userpage.html",
