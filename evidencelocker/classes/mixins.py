@@ -78,7 +78,7 @@ class user_mixin():
 class json_mixin():
 
     @property
-    def json(self):
+    def json_core(self):
         
         data = {x: self.__dict__[x] for x in self.__dict__}
 
@@ -96,6 +96,11 @@ class json_mixin():
                 data.pop(entry)
 
         return data
+
+    @property
+    def json(self):
+        return self.json_core
+    
     
     @property
     def jsonlink(self):
