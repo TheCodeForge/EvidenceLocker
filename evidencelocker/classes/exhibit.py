@@ -41,11 +41,8 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
 
         elif user.type_id.startswith('p') and user.is_recently_verified and not user.is_banned:
 
-            #if police belongs to agency that Vic has shared to:
-            #    return True
-            #else:
-            #    return False
-            pass
+            if get_lockershare_by_exhibit_and_leo(self, user):
+                return True
 
         elif user.type_id.startswith('a') and not user.is_banned:
 
@@ -86,7 +83,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     def json(self):
         data = super().json
 
-        data["author"]=self.author.json
+        data["author"]=self.author.json_core
 
         return data
     

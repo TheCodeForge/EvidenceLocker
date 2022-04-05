@@ -63,3 +63,11 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     def country(self):
         return COUNTRY_CODES.get(self.country_code)
     
+    @property
+    def json(self):
+        data = super().json
+
+        data["exhibits"]=[x.json_core for x in self.exhibits]
+
+        return data
+    

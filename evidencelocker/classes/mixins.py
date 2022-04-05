@@ -82,11 +82,17 @@ class json_mixin():
         
         data = {x: self.__dict__[x] for x in self.__dict__}
 
+        disallowed_values=[
+            'login_nonce',
+            'otp_secret',
+            'pw_hash'
+        ]
+
         for entry in [x for x in data.keys()]:
             if type(data[entry]) not in [str, int, type(None)]:
                 data.pop(entry)
 
-            if entry in ["otp_secret", "pw_hash"]:
+            if entry in disallowed_values:
                 data.pop(entry)
 
         return data

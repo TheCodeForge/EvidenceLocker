@@ -134,3 +134,21 @@ def get_bad_domain(domain):
     domains = sorted(domains, key=lambda x: len(x.domain), reverse=True)
 
     return domains[0]
+
+def get_lockershare_by_agency(victim, agency):
+
+    lockershare=g.db.query(LockerShare).filter_by(victim_id=victim.id, agency_id=agency.id).first()
+
+    return lockershare
+
+def get_lockershare_by_leo(victim, leo):
+
+    lockershare=g.db.query(LockerShare).filter_by(victim_id=victim.id, agency_id=leo.agency_id).first()
+
+    return lockershare
+
+def get_lockershare_by_exhibit_and_leo(exhibit, leo):
+
+    lockershare=g.db.query(LockerShare).filter_by(victim_id=exhibit.author_id, agency_id=leo.agency_id).first()
+
+    return lockershare

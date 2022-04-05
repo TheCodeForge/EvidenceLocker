@@ -31,6 +31,9 @@ class BadDomain(Base):
     id=Column(Integer, primary_key=True)
     domain=Column(String(128), unique=True)
 
+    def __repr__(self):
+        return f'<BadDomain(domain={self.domain})>'
+
 class LockerShare(Base, time_mixin):
 
     __tablename__="locker_shares"
