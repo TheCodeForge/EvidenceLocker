@@ -95,6 +95,9 @@ class json_mixin():
             if entry in disallowed_values:
                 data.pop(entry)
 
+        if "id" in data:
+            data["id"]=self.b36id
+
         return data
 
     @property
