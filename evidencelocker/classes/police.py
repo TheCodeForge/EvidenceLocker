@@ -1,5 +1,5 @@
 from sqlalchemy import *
-from sqlalchemy.orm import relationship, lazyload, deferred, foreign
+from sqlalchemy.orm import relationship, lazyload, deferred, foreign, remote
 from sqlalchemy.ext.associationproxy import association_proxy
 import time
 
@@ -24,7 +24,11 @@ class PoliceUser(Base, b36ids, time_mixin, user_mixin):
 
     agency      =relationship("Agency")
 
-    share_records = relationship("LockerShare", primaryjoin = foreign(PoliceUser.agency_id)=="LockerShare.agency_id")
+    share_records = relationship(
+        "LockerShare", 
+        primaryjoin = "PoliceUser.agency_id==LockerShare.agency_id",
+        foreign_keys = agency_id
+        )
     victims = association_proxy("share_records", "victim")
 
     def __repr__(self):
