@@ -1,6 +1,7 @@
 import qrcode
 import io
 import base64
+import pprint
 
 from .hashes import *
 from .countries import COUNTRY_CODES
@@ -56,3 +57,8 @@ def country_code_filter(x):
 def agency_count_filter(x):
 
     return g.db.query(Agency).filter_by(country_code=x).count()
+
+@app.template_filter('pprint')
+def pprint_filter(x):
+
+    return pprint.pformat(x)
