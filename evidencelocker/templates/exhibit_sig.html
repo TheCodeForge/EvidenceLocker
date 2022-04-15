@@ -8,7 +8,7 @@
   <div class="card-title"><h1 class="h3 text-primary px-3 py-2"><a href="{{ e.permalink }}">{{ e.title }}</a></h1></div>
   <div class="card-body">
     <div>
-    <p>Signatures are based on the SHA-256 hash of <code>json.dumps(data, indent=4).encode('utf-8')</code> where <code>data</code> is the following Python dictionary representation of the exhibit:</p>
+    <p>Signatures are based on the SHA-256 hash of <code>json.dumps(data, sort_keys=True).encode('utf-8')</code> where <code>data</code> is the following Python dictionary representation of the exhibit:</p>
     </div>
     <pre>{{ e.json_for_sig | pprint }}</pre>
   </div>
