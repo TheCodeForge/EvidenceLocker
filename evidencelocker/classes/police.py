@@ -1,5 +1,6 @@
 from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload, deferred
+from sqlalchemy.ext.associationproxy import association_proxy
 import time
 
 from .mixins import *
@@ -22,6 +23,9 @@ class PoliceUser(Base, b36ids, time_mixin, user_mixin):
     created_utc =Column(Integer)
 
     agency      =relationship("Agency")
+
+    share_records = relationship("LockerShare")
+    victims = association_proxy("share_records", "victim")
 
     def __repr__(self):
         return f'<PoliceUser(id={self.id})>'

@@ -1,5 +1,6 @@
 from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload, deferred
+from sqlalchemy.ext.associationproxy import association_proxy
 
 from .mixins import *
 
@@ -23,6 +24,9 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     ban_reason  =Column(String(128))
     login_nonce =Column(Integer, default=0)
     allow_leo_sharing = Column(Boolean, default=False)
+
+    share_records = relationship("LockerShare")
+    agencies = association+proxy('share_records', 'agency')
 
     def __repr__(self):
         return f'<VictimUser(id={self.id})>'
