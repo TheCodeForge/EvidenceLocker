@@ -30,7 +30,7 @@
     <div class="mt-4 border-top pt-4">
     {% if e.signed_utc %}
       <p>I swear, under penalty of perjury, that to the best of my current knowledge, the foregoing statement is true.</p>
-      <p><i class="fas fa-fw fa-file-signature text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
+      <p><i class="fas fa-fw fa-file-signature text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small"><a href="{{ e.sig_permalink }}" target="_blank">{{ e.signed_string }}</a></span></p>
     {% else %}
       <p><i class="fas fa-fw fa-file-signature text-danger"></i> Not signed</p>
     {% endif %}
