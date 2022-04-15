@@ -113,7 +113,7 @@ def post_edit_exhibit_eid(user, eid):
     signed = request.form.get("oath_perjury", False)
 
     if signed:
-        if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")) or not pyotp.TOTP(user.otp_secret).verify(request.form.get("otp_code")):
+        if not user.verify_password(request.form.get("password")) or user.verify_otp(request.form.get("otp_code")):
             return render_template(
                 "create_exhibit.html",
                 user=user,
