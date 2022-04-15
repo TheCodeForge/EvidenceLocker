@@ -94,6 +94,9 @@ def get_locker_username_exhibit_eid_anything_signature(user, username, eid, anyt
     if request.path != exhibit.sig_permalink:
         return redirect(exhibit.sig_permalink)
 
+    if not exhibit.signed_utc:
+        return redirect(exhibit.permalink)
+
     return render_template(
         "exhibit_sig.html",
         e=exhibit,
