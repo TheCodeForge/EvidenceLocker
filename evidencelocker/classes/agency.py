@@ -15,7 +15,7 @@ class Agency(Base, b36ids, time_mixin):
     name=Column(String(256), unique=True)
     city=Column(String(128))
     state=Column(String(128))
-    country_code=Column(String(2))
+    country_code=Column(String(2), index=True)
     domain=Column(String(128), unique=True)
 
     share_records = relationship("LockerShare")

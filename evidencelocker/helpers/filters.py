@@ -3,8 +3,10 @@ import io
 import base64
 
 from .hashes import *
-from flask import session
 from .countries import COUNTRY_CODES
+from evidencelocker.classes import *
+
+from flask import session, g
 
 from evidencelocker.__main__ import app
 
@@ -49,3 +51,8 @@ def country_code_filter(x):
 
     else:
         return COUNTRY_CODES[x]
+
+@app.template_filter("agency_count")
+def agency_count_filter(x):
+
+    return g.db.query(Agency).filter_by(country_code=x).count()

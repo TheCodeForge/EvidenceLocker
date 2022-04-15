@@ -16,7 +16,7 @@
             <label class="text-muted"><input type="checkbox" disabled> Allow any law enforcement agency in my country to view my Locker.</label>
             {% else %}
             <label for="allow-sharing">
-              <input id="allow-sharing" type="checkbox" name="allow_sharing" class="toast-form-submit" data-form="sharing-settings-form"{% if user.allow_leo_sharing %} checked{% endif %}> Allow any law enforcement agency in my country ({{ user.country }}) to view my Locker.</label>
+              <input id="allow-sharing" type="checkbox" name="allow_sharing" class="toast-form-submit" data-form="sharing-settings-form"{% if user.allow_leo_sharing %} checked{% endif %}> Allow any law enforcement agency in my country ({{ user.country }}) to view my Locker. ({{ user.country_code | agency_count }} agencies)</label>
             {% endif %}
           </form>
         </div>
