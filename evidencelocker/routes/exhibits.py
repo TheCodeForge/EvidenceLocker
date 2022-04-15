@@ -79,6 +79,27 @@ def get_locker_username_exhibit_eid_anything(user, username, eid, anything):
         user=user
         )
 
+@app.get("/locker/<username>/exhibit/<eid>/<anything>/signature")
+@logged_in_any
+def get_locker_username_exhibit_eid_anything_signature(user, username, eid, anything):
+
+    exhibit = get_exhibit_by_id(eid)
+
+    if not exhibit.can_be_read_by_user(user):
+        abort(404)
+
+    if username != exhibit.author.username:
+        abort(404)
+
+    if request.path != exhibit.sig_permalink:
+        return redirect(exhibit.sig_permalink)
+
+    return render_template(
+        "exhibit_sig.html",
+        e=exhibit,
+        user=user
+        )
+
 @app.get("/edit_exhibit/<eid>")
 @logged_in_victim
 def get_edit_exhibit_eid(user, eid):
@@ -113,7 +134,7 @@ def post_edit_exhibit_eid(user, eid):
     signed = request.form.get("oath_perjury", False)
 
     if signed:
-        if not user.verify_password(request.form.get("password")) or user.verify_otp(request.form.get("otp_code")):
+        if not user.validate_password(request.form.get("password")) or user.validate_otp(request.form.get("otp_code")):
             return render_template(
                 "create_exhibit.html",
                 user=user,
@@ -139,6 +160,8 @@ def post_edit_exhibit_eid(user, eid):
     exhibit.text_raw = body_raw
     exhibit.text_html = body_html
     exhibit.title = title
+
+    exhibit.signed_sha256 = exhibit.live_sha256 if signed else None
 
     g.db.add(exhibit)
     g.db.commit()

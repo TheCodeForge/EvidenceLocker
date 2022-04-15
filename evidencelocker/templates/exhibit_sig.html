@@ -1,0 +1,25 @@
+{% extends "base_centered.html" %}
+
+{% block title %}TEL - Signature for {{ e.title }}{% endblock %}
+
+
+{% block pagecontent %}
+<div id="exhibit-{{ e.b36id }}" class="card border rounded">
+  <div class="card-title"><h1 class="h3 text-primary px-3 py-2">{{ e.title }}</h1></div>
+  <div class="card-body">
+    <div>
+    <p>Signatures are based on the SHA-256 hash of the following JSON representation of the exhibit, with line returns and indents removed:</p>
+    </div>
+    <div class="mt-4 border-top pt-4">
+    <pre>
+      {{ e.json_for_sig | tojson(indent=4) }}
+    </pre>
+    </div>
+  </div>
+
+  <div class="card-footer d-lg-none">
+    <p>SHA-256 captured at time of signing: <code>{{ e.signed_sha256 }}</code></p>
+    <p>SHA-256 computed right now: <code>{{ e.live_sha256 }}</code></p>
+  </div>
+</div>
+{% endblock %}

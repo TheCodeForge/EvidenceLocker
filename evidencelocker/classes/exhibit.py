@@ -1,3 +1,5 @@
+import hashlib
+import json
 from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload
 import re
@@ -27,6 +29,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     created_country=Column(String(2))
     edited_country=Column(String(2))
     signed_country=Column(String(2))
+    signing_sha256 = Column(256)
 
     author = relationship("VictimUser", lazy="joined", backref="exhibits")
 
@@ -71,6 +74,12 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
 
     @property
     @lazy
+    def sig_permalink(self):
+        return f"{self.permalink}/signature"
+    
+
+    @property
+    @lazy
     def signed_string(self):
         return time.strftime("%d %B %Y at %H:%M:%S", time.gmtime(self.signed_utc)) if self.signed_utc else None
 
@@ -86,4 +95,20 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
         data["author"]=self.author.json_core
 
         return data
+
+    @property
+    def json_for_sig(self):
+        data=self.json_core
+        data.pop('signing_sha256')
+    
+    
+    @property
+    def live_sha256(self):
+
+        return hashlib.new('sha256', json.dumps(self.json_for_sig, sort_keys=True), usedforsecurity=True).hexdigest()
+
+
+
+
+
     
