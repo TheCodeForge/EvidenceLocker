@@ -29,7 +29,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     created_country=Column(String(2))
     edited_country=Column(String(2))
     signed_country=Column(String(2))
-    signing_sha256 = Column(256)
+    signing_sha256 = Column(String(256))
 
     author = relationship("VictimUser", lazy="joined", backref="exhibits")
 
