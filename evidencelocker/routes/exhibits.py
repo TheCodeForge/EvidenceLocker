@@ -164,9 +164,6 @@ def post_edit_exhibit_eid(user, eid):
     exhibit.text_html = body_html
     exhibit.title = title
 
-    g.db.add(exhibit)
-    g.db.flush()
-
     exhibit.signing_sha256 = exhibit.live_sha256 if signed else None
 
     g.db.add(exhibit)
