@@ -105,7 +105,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     @property
     def live_sha256(self):
 
-        return hashlib.new('sha256', json.dumps(self.json_for_sig, sort_keys=True), usedforsecurity=True).hexdigest()
+        return hashlib.new('sha256', json.dumps(self.json_for_sig, indent=4, sort_keys=True).encode('utf-16'), usedforsecurity=True).hexdigest()
 
 
 

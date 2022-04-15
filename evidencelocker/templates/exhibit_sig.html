@@ -8,7 +8,7 @@
   <div class="card-title"><h1 class="h3 text-primary px-3 py-2">{{ e.title }}</h1></div>
   <div class="card-body">
     <div>
-    <p>Signatures are based on the SHA-256 hash of the following JSON representation of the exhibit, with line returns and indents removed:</p>
+    <p>Signatures are based on the SHA-256 hash of <code>json.dumps(data, indent=4).encode('utf-16')</code> where <code>data</code> is the following Python dictionary representation of the exhibit:</p>
     </div>
     <div class="mt-4 border-top pt-4">
     <pre>
