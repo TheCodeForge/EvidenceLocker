@@ -1,5 +1,5 @@
 from sqlalchemy import *
-from sqlalchemy.orm import relationship, lazyload, deferred, foreign, remote
+from sqlalchemy.orm import relationship, lazyload, deferred
 from sqlalchemy.ext.associationproxy import association_proxy
 import time
 
