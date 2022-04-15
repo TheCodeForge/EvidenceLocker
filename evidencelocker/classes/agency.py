@@ -27,6 +27,25 @@ class Agency(Base, b36ids, time_mixin):
     def country(self):
         return COUNTRY_CODES[self.country_code]
 
+    @property
+    @lazy
+    def permalink(self):
+
+        output = self.name.lower()
+
+        output = re.sub('&\w{2,3};', '', output)
+
+        output = [re.sub('\W', '', word) for word in output.split()]
+        output = [x for x in output if x][0:6]
+
+        output = '-'.join(output)
+
+        if not output:
+            output = '-'
+
+        return f"/agency/{self.b36id}/{output}"
+    
+
 
 class BadDomain(Base):
 
