@@ -16,7 +16,7 @@
   <div class="card-footer">
     <p>SHA-256 captured at time of signing: <code>{{ e.signed_sha256 }}</code></p>
     <p>SHA-256 computed right now: <code>{{ e.live_sha256 }}</code></p>
-    <p>{% if e.signed_sha256 == e.live_sha256 %}<i class="text-success fas fa-check"></i>{% else %}<i class="text-danger fas fa-x"></i>{% endif %}</p>
+    <p>{% if e.signed_sha256 == e.live_sha256 %}<i class="text-success fas fa-check"></i> This exhibit has not been altered since it was signed.{% else %}<i class="text-danger fas fa-x"></i>{% endif %}</p>
   </div>
 </div>
 {% endblock %}
