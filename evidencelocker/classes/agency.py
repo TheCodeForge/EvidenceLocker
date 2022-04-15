@@ -17,6 +17,7 @@ class Agency(Base, b36ids, time_mixin):
     country_code=Column(String(2))
     domain=Column(String(128), unique=True)
 
+    share_records = relationship("LockerShare")
     victims = association_proxy("share_records", "victim")
 
     def __repr__(self):
@@ -46,5 +47,5 @@ class LockerShare(Base, time_mixin):
     victim_id=Column(Integer, ForeignKey("victim_users.id"))
     created_utc=Column(Integer)
 
-    victim=relationship("VictimUser", lazy="joined", back_populates="share_records")
-    agency=relationship("Agency", back_populates="share_records")
+    victim=relationship("VictimUser", lazy="joined")
+    agency=relationship("Agency")

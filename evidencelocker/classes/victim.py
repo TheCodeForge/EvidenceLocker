@@ -25,6 +25,7 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     login_nonce =Column(Integer, default=0)
     allow_leo_sharing = Column(Boolean, default=False)
 
+    share_records = relationship("LockerShare")
     agencies = association_proxy('share_records', 'agency')
 
     def __repr__(self):
