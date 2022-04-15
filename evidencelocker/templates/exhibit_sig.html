@@ -5,7 +5,7 @@
 
 {% block pagecontent %}
 <div id="exhibit-{{ e.b36id }}" class="card border rounded">
-  <div class="card-title"><h1 class="h3 text-primary px-3 py-2">{{ e.title }}</h1></div>
+  <div class="card-title"><h1 class="h3 text-primary px-3 py-2"><a href="{{ e.permalink }}">{{ e.title }}</a></h1></div>
   <div class="card-body">
     <div>
     <p>Signatures are based on the SHA-256 hash of <code>json.dumps(data, indent=4).encode('utf-8')</code> where <code>data</code> is the following Python dictionary representation of the exhibit:</p>
