@@ -3,7 +3,7 @@ import mistletoe
 import pyotp
 
 from evidencelocker.decorators.auth import *
-from evidencelocker.helpers.text import raw_to_html
+from evidencelocker.helpers.text import raw_to_html, bleachify
 
 from evidencelocker.__main__ import app
 
