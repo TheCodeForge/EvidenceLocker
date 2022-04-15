@@ -10,9 +10,7 @@
     <div>
     <p>Signatures are based on the SHA-256 hash of <code>json.dumps(data, indent=4).encode('utf-16')</code> where <code>data</code> is the following Python dictionary representation of the exhibit:</p>
     </div>
-    <pre>
-      {{ e.json_for_sig | tojson(indent=4) }}
-    </pre>
+    <pre>{{ e.json_for_sig | tojson(indent=4) }}</pre>
   </div>
 
   <div class="card-footer">
