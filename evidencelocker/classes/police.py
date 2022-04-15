@@ -24,7 +24,7 @@ class PoliceUser(Base, b36ids, time_mixin, user_mixin):
 
     agency      =relationship("Agency")
 
-    share_records = relationship("LockerShare")
+    share_records = relationship("LockerShare", primaryjoin = "PoliceUser.agency_id==LockerShare.agency_id")
     victims = association_proxy("share_records", "victim")
 
     def __repr__(self):
