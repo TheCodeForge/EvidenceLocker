@@ -27,7 +27,8 @@ class PoliceUser(Base, b36ids, time_mixin, user_mixin):
     share_records = relationship(
         "LockerShare", 
         primaryjoin = "PoliceUser.agency_id==LockerShare.agency_id",
-        foreign_keys = agency_id
+        foreign_keys = agency_id,
+        viewonly=True
         )
     victims = association_proxy("share_records", "victim")
 
