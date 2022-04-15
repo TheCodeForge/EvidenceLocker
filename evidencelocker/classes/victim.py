@@ -26,7 +26,7 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     allow_leo_sharing = Column(Boolean, default=False)
 
     share_records = relationship("LockerShare")
-    agencies = association+proxy('share_records', 'agency')
+    agencies = association_proxy('share_records', 'agency')
 
     def __repr__(self):
         return f'<VictimUser(id={self.id})>'
