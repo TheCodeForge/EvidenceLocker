@@ -29,7 +29,7 @@ def post_create_exhibit(user):
     signed = request.form.get("oath_perjury", False)
 
     if signed:
-        if not werkzeug.security.check_password_hash(user.pw_hash, request.form.get("password")) or not pyotp.TOTP(user.otp_secret).verify(request.form.get("otp_code")):
+        if not user.validate_password(request.form.get("password")) or not user.validate_otp(request.form.get("otp_code")):
             return render_template(
                 "create_exhibit.html",
                 user=user,
