@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block pagecontent %}
-  {% with listing=target_user.exhibit_listing %}
+  {% with listing=target_user.exhibits %}
     {% include "listings/entries.html" %}
   {% endwith %}
 {% endblock %}
