@@ -50,6 +50,7 @@ def post_create_exhibit(user):
         created_ip  = request.remote_addr,
         signed_ip = request.remote_addr if signed else None
         )
+    exhibit.signing_sha256 = exhibit.live_sha256 if signed else None
     g.db.add(exhibit)
     g.db.commit()
     return redirect(exhibit.permalink)
