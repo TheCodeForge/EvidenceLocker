@@ -8,14 +8,14 @@
   <div class="card-title"><h1 class="h3 text-primary px-3 py-2"><a href="{{ e.permalink }}">{{ e.title }}</a></h1></div>
   <div class="card-body">
     <div>
-    <p>Signatures are based on the SHA-256 hash of <code>json.dumps(data, sort_keys=True).encode('utf-8')</code> where <code>data</code> is the following Python dictionary representation of this exhibit:</p>
+    <p>File integrity over time is verified with SHA-256 hashes, calculated using <code>hashlib.new('sha256', json.dumps(data, sort_keys=True).encode('utf-8')).hexdigest()</code>, where <code>data</code> is the following Python dictionary representation of this exhibit:</p>
     </div>
     <pre>{{ e.json_for_sig | pprint }}</pre>
   </div>
 
   <div class="card-footer">
-    <p>SHA-256 captured at time of signing ({{ e.signed_string }}): <code>{{ e.signing_sha256 }}</code></p>
-    <p>SHA-256 computed right now: <code>{{ e.live_sha256 }}</code></p>
+    <p>SHA-256 captured at time of signing ({{ e.signed_string }}):<br><code>{{ e.signing_sha256 }}</code></p>
+    <p>SHA-256 computed right now:<br><code>{{ e.live_sha256 }}</code></p>
     <p>{% if e.sig_valid %}<i class="text-success fas fa-file-circle-check"></i> This exhibit has not been altered since it was signed.{% else %}<i class="text-danger fas fa-file-circle-exclamation"></i> This exhibit may have been altered since it was signed.{% endif %}</p>
   </div>
 </div>
