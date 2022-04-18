@@ -43,19 +43,19 @@ def post_create_exhibit(user):
         text_html=body_html,
         title=title,
         created_utc=g.time,
-        signed_utc=g.time if signed else 0,
         author_id=user.id,
         created_country = request.headers.get("cf-ipcountry"),
-        signed_country  = request.headers.get("cf-ipcountry") if signed else None,
-        created_ip  = request.remote_addr,
-        signed_ip = request.remote_addr if signed else None
+        created_ip  = request.remote_addr
         )
 
     if signed:
+        exhibit.signed_ip = request.remote_addr
+        exhibit.signed_country  = request.headers.get("cf-ipcountry")
+        exhibit.signed_utc=g.time
         g.db.add(exhibit)
-        g.db.flush()
+        g.db.commit()
         exhibit.signing_sha256 = exhibit.live_sha256
-        
+
     g.db.add(exhibit)
     g.db.commit()
     return redirect(exhibit.permalink)
