@@ -109,10 +109,10 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
         return hashlib.new('sha256', json.dumps(self.json_for_sig, sort_keys=True).encode('utf-8'), usedforsecurity=True).hexdigest()
 
 
-@property
-@lazy
-def sig_valid(self):
-    return self.signing_sha256==self.live_sha256
+    @property
+    @lazy
+    def sig_valid(self):
+        return self.signing_sha256==self.live_sha256
 
 
 
