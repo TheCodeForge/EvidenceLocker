@@ -75,3 +75,9 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
 
         return data
     
+    @property
+    @lazy
+    def exhibit_listing(self):
+
+        return self.exhibits.order_by(id.desc()).all()
+    
