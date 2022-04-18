@@ -55,7 +55,7 @@ def post_create_exhibit(user):
         exhibit.signed_utc=g.time
         g.db.add(exhibit)
         g.db.commit()
-        pprint(exhibit.json_for_sig)
+        g.db.refresh(exhibit)
         exhibit.signing_sha256 = exhibit.live_sha256
 
     g.db.add(exhibit)
