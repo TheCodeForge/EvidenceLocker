@@ -28,6 +28,8 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     share_records = relationship("LockerShare")
     agencies = association_proxy('share_records', 'agency')
 
+    exhibits = relationship("Exhibit", order_by="Exhibit.id.desc()")
+
     def __repr__(self):
         return f'<VictimUser(id={self.id})>'
     
@@ -74,10 +76,4 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
         data["exhibits"]=[x.json_core for x in self.exhibits]
 
         return data
-    
-    @property
-    @lazy
-    def exhibit_listing(self):
-
-        return self.exhibits.order_by(id.desc()).all()
     
