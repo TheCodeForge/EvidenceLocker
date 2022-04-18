@@ -1,6 +1,7 @@
 import bleach
 import mistletoe
 import pyotp
+from pprint import pprint
 
 from evidencelocker.decorators.auth import *
 from evidencelocker.helpers.text import raw_to_html, bleachify
@@ -54,6 +55,7 @@ def post_create_exhibit(user):
         exhibit.signed_utc=g.time
         g.db.add(exhibit)
         g.db.commit()
+        pprint(exhibit.json_for_sig)
         exhibit.signing_sha256 = exhibit.live_sha256
 
     g.db.add(exhibit)
