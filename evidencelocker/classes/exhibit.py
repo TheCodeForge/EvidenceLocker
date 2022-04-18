@@ -99,7 +99,8 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     @property
     def json_for_sig(self):
         data=self.json_core
-        data.pop('signing_sha256')
+        if 'signing_sha256' in data:
+            data.pop('signing_sha256')
         return data
     
     @property
