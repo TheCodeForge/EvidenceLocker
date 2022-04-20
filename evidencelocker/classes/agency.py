@@ -17,6 +17,7 @@ class Agency(Base, b36ids, time_mixin):
     state=Column(String(128))
     country_code=Column(String(2), index=True)
     domain=Column(String(128), unique=True)
+    site=Column(String(128))
 
     share_records = relationship("LockerShare", back_populates="agency")
     victims = association_proxy("share_records", "victim")
@@ -45,6 +46,13 @@ class Agency(Base, b36ids, time_mixin):
             output = '-'
 
         return f"/agency/{self.b36id}/{output}"
+
+    @property
+    @lazy
+    def website(self):
+        return f"https://{self.site}"
+
+    
     
 
 
