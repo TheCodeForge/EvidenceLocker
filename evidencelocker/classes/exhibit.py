@@ -31,7 +31,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     signed_country=Column(String(2))
     signing_sha256 = Column(String(512))
 
-    author = relationship("VictimUser", lazy="joined")
+    author = relationship("VictimUser", lazy="joined", back_populates="exhibits")
 
     def __repr__(self):
         return f'<Exhibit(id={self.id})>'

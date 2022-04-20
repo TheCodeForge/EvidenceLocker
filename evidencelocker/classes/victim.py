@@ -25,10 +25,10 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     login_nonce =Column(Integer, default=0)
     allow_leo_sharing = Column(Boolean, default=False)
 
-    share_records = relationship("LockerShare")
+    share_records = relationship("LockerShare", back_populates="victim")
     agencies = association_proxy('share_records', 'agency')
 
-    exhibits = relationship("Exhibit", order_by="Exhibit.id.desc()")
+    exhibits = relationship("Exhibit", order_by="Exhibit.id.desc()", back_populates="author")
 
     def __repr__(self):
         return f'<VictimUser(id={self.id})>'
