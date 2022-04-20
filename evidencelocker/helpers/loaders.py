@@ -85,6 +85,18 @@ def get_exhibit_by_id(id, graceful=False):
 
     return exhibit
 
+def get_agency_by_id(id, graceful=False):
+
+    if isinstance(id, str):
+        id=base36decode(id)
+
+    agency = g.db.query(Agency).filter_by(id=id).first()
+
+    if not agency and not graceful:
+        abort(404)
+
+    return agency
+
 def get_agency_by_domain(domain):
 
     # parse domain into all possible subdomains
