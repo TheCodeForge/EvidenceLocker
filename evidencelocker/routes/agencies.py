@@ -16,6 +16,9 @@ def agency_aid_anything(user, aid, anything):
 
 	agency = get_agency_by_id(aid)
 
+	if request.path != agency.permalink:
+		return redirect(agency.permalink)
+
 	return render_template(
 		"agency.html",
 		a=agency,
