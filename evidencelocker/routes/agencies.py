@@ -23,3 +23,29 @@ def agency_aid_anything(user, aid, anything):
 		"agency.html",
 		a=agency,
 		user=user)
+
+@app.post("/agency/<aid>/<anything>")
+@logged_in_victim
+@validate_csrf_token
+def post_agency_aid_anything(user, aid, anything):
+
+	#create sharing record
+
+	agency = get_agency_by_id(aid)
+
+	existing_record = get_lockershare_by_agency(victim, agency)
+
+	if existing_record:
+		abort(409)
+
+	share_record = LockerShare(
+		agency_id=agency.id,
+		victim_id=user.id,
+		created_utc=g.time
+		)
+
+	g.db.add(share_record)
+
+	g.db.commit()
+
+	return redirect(agency.permalink)

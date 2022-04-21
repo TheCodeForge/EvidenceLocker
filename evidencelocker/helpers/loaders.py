@@ -149,7 +149,14 @@ def get_bad_domain(domain):
 
 def get_lockershare_by_agency(victim, agency):
 
-    lockershare=g.db.query(LockerShare).filter_by(victim_id=victim.id, agency_id=agency.id).first()
+    if isinstance(agency, int):
+        a_id = agency
+    elif isinstance(agency, str):
+        a_id = base36decode(agency)
+    else:
+        a_id = agency.id
+
+    lockershare=g.db.query(LockerShare).filter_by(victim_id=victim.id, agency_id=a_id).first()
 
     return lockershare
 
