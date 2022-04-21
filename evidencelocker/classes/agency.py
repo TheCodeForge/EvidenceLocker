@@ -52,9 +52,6 @@ class Agency(Base, b36ids, time_mixin):
     def website(self):
         return f"https://{self.site}"
 
-    
-    
-
 
 class BadDomain(Base):
 
@@ -65,6 +62,7 @@ class BadDomain(Base):
 
     def __repr__(self):
         return f'<BadDomain(domain={self.domain})>'
+
 
 class LockerShare(Base, time_mixin):
 
