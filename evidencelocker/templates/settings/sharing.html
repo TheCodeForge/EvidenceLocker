@@ -24,7 +24,7 @@
     </div>
     <div class="pb-4">
       <div class="body d-md-flex">
-        <label for="input-country" class="w-25 fw-bold my-auto text-md-end pe-3">Find Agencies</label>
+        <label for="input-country" class="w-25 fw-bold text-md-end pe-3">Find Agencies</label>
         <div class="w-100">
           <form action="/search_agencies" method="get">
             <select id="input-country" name="cc" class="form-control rounded" form="profile-settings-form">
@@ -32,7 +32,7 @@
               <option value="{{ x }}"{% if x==user.country_code %} selected{% endif %}>{{ x | CC }}</option>
               {% endfor %}
             </select>
-            <input type="submit" value="Find Agencies" class="btn btn-primary text-white">
+            <input type="submit" value="Find Agencies" class="btn btn-primary text-white" class="mt-2">
           </form>
         </div>
       </div>
