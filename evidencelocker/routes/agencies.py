@@ -58,7 +58,7 @@ def post_agency_aid_anything(user, aid, anything):
 @logged_in_desired
 def get_agency_country_cc(user, cc):
 
-	agencies = g.db.query(Agency).filter_by(country_code=cc).order_by(Agency.name.asc()).all()
+	agencies = g.db.query(Agency).filter_by(country_code=cc.upper()).order_by(Agency.name.asc()).all()
 
 	return render_template(
 		"search_agencies.html",
