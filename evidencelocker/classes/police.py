@@ -21,6 +21,7 @@ class PoliceUser(Base, b36ids, time_mixin, user_mixin):
     last_verified_utc=Column(Integer, default=0)
     login_nonce =Column(Integer, default=0)
     created_utc =Column(Integer)
+    last_otp_code = Column(String(6))
 
     agency      =relationship("Agency")
 

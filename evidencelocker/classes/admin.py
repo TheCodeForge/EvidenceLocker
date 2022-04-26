@@ -16,6 +16,7 @@ class AdminUser(Base, b36ids, time_mixin, user_mixin):
     email       =Column(String(256), unique=True)
     banned_utc  =Column(Integer, default=0)
     login_nonce =Column(Integer, default=0)
+    last_otp_code = deferred(Column(String(6)))
 
     def __repr__(self):
         return f'<AdminUser(username="{self.username}")>'
