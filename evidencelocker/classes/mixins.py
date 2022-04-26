@@ -65,13 +65,13 @@ class user_mixin():
             
         totp=pyotp.TOTP(self.otp_secret)
         if totp.verify(x):
-            user.last_otp_code=x
-            g.db.add(user)
+            self.last_otp_code=x
+            g.db.add(self)
             g.db.commit()
             return True
         elif allow_reset and compare_digest(x.replace(' ','').upper(), self.otp_secret_reset_code):
-            user.otp_secret==None
-            user.last_otp_code=None
+            self.otp_secret==None
+            self.last_otp_code=None
             g.db.add(self)
             g.db.commit()
             return True
