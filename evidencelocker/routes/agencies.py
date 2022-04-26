@@ -37,7 +37,7 @@ def post_agency_aid_anything(user, aid, anything):
 
 	agency = get_agency_by_id(aid)
 
-	existing_record = get_lockershare_by_agency(victim, agency)
+	existing_record = get_lockershare_by_agency(user, agency)
 
 	if existing_record:
 		abort(409)
