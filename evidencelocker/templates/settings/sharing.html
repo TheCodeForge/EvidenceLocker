@@ -27,7 +27,7 @@
         <label for="input-country" class="w-25 fw-bold text-md-end pe-3">Find Agencies</label>
         <div class="w-100">
           <form action="/search_agencies" method="get">
-            <select id="input-country" name="cc" class="form-control rounded" form="profile-settings-form">
+            <select id="input-country" name="cc" class="form-control rounded">
               {% for x in ( 0 | CC ) if x!="T1" or x==user.country_code%}
               <option value="{{ x }}"{% if x==user.country_code %} selected{% endif %}>{{ x | CC }}</option>
               {% endfor %}
