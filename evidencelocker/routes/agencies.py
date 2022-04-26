@@ -54,11 +54,26 @@ def post_agency_aid_anything(user, aid, anything):
 
 	return redirect(agency.permalink)
 
-@app.get("/agencies/country/<cc>")
+@app.get("/search_agencies")
 @logged_in_desired
-def get_agency_country_cc(user, cc):
+def get_agency_country_cc(user):
 
-	agencies = g.db.query(Agency).filter_by(country_code=cc.upper()).order_by(Agency.name.asc()).all()
+	cc=request.args.get("cc", None)
+	name=request.args.get("name", None)
+
+	agencies = g.db.query(Agency)
+
+	if cc:
+		agencies=agencies.filter_by(country_code=cc.upper())
+
+	if name:
+		words=name.split()
+        words=[Agency.name.ilike('%'+x+'%') for x in words]
+        words=tuple(words)
+        agencies=agencies.filter(*words)
+
+
+	agencies=agencies.order_by(Agency.name.asc()).all()
 
 	return render_template(
 		"search_agencies.html",
