@@ -13,6 +13,10 @@
   <div class="col col-md-2 col-lg-3">
     {% block rightsidebar %}
     {% endblock %}
+    {% if user and user.type_id.startswith('a') %}
+      {% block adminpanel %}
+      {% endblock %}
+    {% endif %}
   </div>
 </div>
 {% endblock %}
