@@ -30,7 +30,7 @@ def post_login_admin():
     def invalid_login_admin(error=None):
         time.sleep(max(0, random.gauss(1.5, 0.33)))
         return render_template(
-            "login_victim.html",
+            "login_admin.html",
             token=logged_out_csrf_token(),
             error=error
             )
