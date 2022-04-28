@@ -2,6 +2,7 @@ import bleach
 import mistletoe
 import pyotp
 from pprint import pprint
+import random
 
 from evidencelocker.decorators.auth import *
 from evidencelocker.helpers.hashes import *
