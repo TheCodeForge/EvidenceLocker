@@ -73,6 +73,15 @@ def get_admin_by_id(id, graceful=False):
 
     return user
 
+def get_admin_by_username(name, graceful=False):
+
+    user = g.db.query(AdminUser).filter_by(username=name).first()
+
+    if not user and not graceful:
+        abort(404)
+
+    return user
+
 def get_exhibit_by_id(id, graceful=False):
 
     if isinstance(id, str):
