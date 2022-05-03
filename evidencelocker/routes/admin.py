@@ -70,11 +70,18 @@ def locker_username_ban_x(user, username):
 	g.db.commit()
 	return redirect(target_user.permalink)
 
+@app.get("/agency")
+@logged_in_admin
+def get_agency(user):
+    return render_template(
+        "edit_agency.html",
+        user=user
+        )
 
 @app.post("/agency")
 @logged_in_admin
 @validate_csrf_token
-def post_agency(self):
+def post_agency(user):
 
     agency=Agency(
         name=           bleachify(request.form.get("name")),
