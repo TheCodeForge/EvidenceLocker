@@ -51,23 +51,41 @@ def post_login_admin():
 
     return redirect("/")
 
-app.post("/locker/<username>/ban/<x>")
+app.post("/locker/<username>/ban")
+app.post("/locker/<username>/unban")
 @logged_in_admin
 @validate_csrf_token
-def locker_username_ban_x(user, username, x):
+def locker_username_ban_x(user, username):
 
 	target_user=get_victim_by_username(username)
 
-	if x=="1":
+	if request.path.endswith("/ban"):
 		target_user.banned_utc=g.time
 		target_user.ban_reason = bleachify(request.form.get("ban_reason",""))
 
-	elif x=="0":
+	elif request.path.endswith("/unban"):
 		target_user.banned_utc=0
-
-	else:
-		abort(404)
 
 	g.db.add(target_user)
 	g.db.commit()
 	return redirect(target_user.permalink)
+
+
+@app.post("/agency")
+@logged_in_admin
+@validate_csrf_token
+def post_agency(self):
+
+    agency=Agency(
+        name=           bleachify(request.form.get("name")),
+        city=           bleachify(request.form.get("city")),
+        state=          bleachify(request.form.get("state")),
+        country_code=   request.form.get("cc"),
+        domain=         bleachify(request.form.get("domain")),
+        site=           bleachify(request.form.get("site"))
+        )
+
+    g.db.add(agency)
+    g.db.commit()
+    return redirect(agency.permalink)
+
