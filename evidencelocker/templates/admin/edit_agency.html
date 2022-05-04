@@ -33,7 +33,7 @@
         <input class="form-control" id="input-state" type="text" name="state" value="{{ a.state if a else '' }}" required>
 
         <label for="input-country" class="mt-3 fw-bold">Country</label>
-        <select id="input-country" name="c" class="form-control rounded" required>
+        <select id="input-country" name="cc" class="form-control rounded" required>
 
           {% if not a or (a and not a.country_code) %}
           <option selected disabled>--- Select one ---</option>
