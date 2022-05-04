@@ -11,7 +11,7 @@ from evidencelocker.__main__ import app
 
 @app.get("/agency/<aid>/<anything>")
 @logged_in_desired
-def agency_aid_anything(user, aid, anything):
+def agency_aid_anything(user, aid, anything=None):
 
 
     agency = get_agency_by_id(aid)

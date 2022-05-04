@@ -71,10 +71,15 @@ def locker_username_ban_x(user, username):
 	return redirect(target_user.permalink)
 
 @app.get("/agency")
+@app.get("/agency/<aid>/<anything>/edit")
 @logged_in_admin
-def get_agency(user):
+def get_agency(user, aid=None, anything=None):
+
+    agency= get_agency_by_id(aid) if aid else None
+
     return render_template(
         "admin/edit_agency.html",
+        a=agency,
         user=user
         )
 
