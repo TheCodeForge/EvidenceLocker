@@ -104,7 +104,7 @@ def post_agency(user):
 @app.patch("/agency/<aid>/<anything>")
 @logged_in_admin
 @validate_csrf_token
-def post_agency(user, aid, anything):
+def post_agency_aid_anything(user, aid, anything):
 
     a=get_agency_by_id(aid)
 
