@@ -74,7 +74,7 @@ def locker_username_ban_x(user, username):
 @logged_in_admin
 def get_agency(user):
     return render_template(
-        "edit_agency.html",
+        "admin/edit_agency.html",
         user=user
         )
 
