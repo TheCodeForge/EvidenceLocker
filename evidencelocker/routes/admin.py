@@ -51,8 +51,8 @@ def post_login_admin():
 
     return redirect("/")
 
-app.post("/locker/<username>/ban")
-app.post("/locker/<username>/unban")
+@app.post("/locker/<username>/ban")
+@app.post("/locker/<username>/unban")
 @logged_in_admin
 @validate_csrf_token
 def locker_username_ban_x(user, username):
