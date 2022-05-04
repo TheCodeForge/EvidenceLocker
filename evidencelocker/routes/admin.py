@@ -101,7 +101,7 @@ def post_agency(user):
     g.db.commit()
     return redirect(agency.permalink)
 
-@app.patch("/agency/<aid>/<anything>")
+@app.post("/agency/<aid>/<anything>")
 @logged_in_admin
 @validate_csrf_token
 def post_agency_aid_anything(user, aid, anything):
