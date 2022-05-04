@@ -19,21 +19,22 @@
       {% if request.args.get("error") %}
       <p class="text-danger my-4">{{ request.args.get("error") }}</p>
       {% endif %}
-      <form id="agency-create-form" action="{{ request.path }}" method="post" class="m-1">
+      <form id="agency-create-form" action="{{ a.permalink if a else '/agency' }}" method="post" class="m-1">
 
         <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
 
         <label for="input-name" class="mt-3 fw-bold">Name</label>
-        <input class="form-control" id="input-name" type="text" name="name" value="{{ a.name if a else name }}" required>
+        <input class="form-control" id="input-name" type="text" name="name" value="{{ a.name if a else '' }}" required>
 
         <label for="input-city" class="mt-3 fw-bold">City</label>
-        <input class="form-control" id="input-city" type="text" name="city" value="{{ a.city if a else city }}" required>
+        <input class="form-control" id="input-city" type="text" name="city" value="{{ a.city if a else '' }}" required>
 
         <label for="input-state" class="mt-3 fw-bold">State/Province</label>
-        <input class="form-control" id="input-state" type="text" name="state" value="{{ a.state if a else state }}" required>
+        <input class="form-control" id="input-state" type="text" name="state" value="{{ a.state if a else '' }}" required>
 
         <label for="input-country" class="mt-3 fw-bold">Country</label>
-        <select id="input-country" name="c" class="form-control rounded" form="profile-settings-form" required>
+        <select id="input-country" name="c" class="form-control rounded" required>
+
           {% if not a or (a and not a.country_code) %}
           <option selected disabled>--- Select one ---</option>
           {% endif %}
@@ -41,6 +42,13 @@
           <option value="{{ x }}"{% if a and x==a.country_code %} selected{% endif %}>{{ x | CC }}</option>
           {% endfor %}
         </select>
+        
+
+        <label for="input-domain" class="mt-3 fw-bold">Domain</label>
+        <input class="form-control" id="input-domain" type="text" name="domain" value="{{ a.domain if a else '' }}" required>
+
+        <label for="input-site" class="mt-3 fw-bold">Site</label>
+        <input class="form-control" id="input-site" type="text" name="site" value="{{ a.site if a else '' }}" required>
 
         <input id="savebutton" class="btn btn-primary text-white w-100 my-3" value="Save" type="submit"></input>
 

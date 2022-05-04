@@ -101,3 +101,21 @@ def post_agency(user):
     g.db.commit()
     return redirect(agency.permalink)
 
+@app.patch("/agency/<aid>/<anything>")
+@logged_in_admin
+@validate_csrf_token
+def post_agency(user, aid, anything):
+
+    a=get_agency_by_id(aid)
+
+    a.name=           bleachify(request.form.get("name")),
+    a.city=           bleachify(request.form.get("city")),
+    a.state=          bleachify(request.form.get("state")),
+    a.country_code=   request.form.get("cc"),
+    a.domain=         bleachify(request.form.get("domain")),
+    a.site=           bleachify(request.form.get("site"))
+
+    g.db.add(a)
+    g.db.commit()
+    return redirect(agency.permalink)
+

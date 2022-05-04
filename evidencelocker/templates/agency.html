@@ -12,7 +12,7 @@
   </div>
   <div class="card-footer">
     {% if not shared %}
-    <form method="post">
+    <form method="post" action="{{ request.path }}/share">
       <p class="h4">Share Locker</p>
       <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
 

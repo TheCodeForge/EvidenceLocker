@@ -28,7 +28,7 @@ def agency_aid_anything(user, aid, anything=None):
         shared = bool(share)
         )
 
-@app.post("/agency/<aid>/<anything>")
+@app.post("/agency/<aid>/<anything>/share")
 @logged_in_victim
 @validate_csrf_token
 def post_agency_aid_anything(user, aid, anything):
