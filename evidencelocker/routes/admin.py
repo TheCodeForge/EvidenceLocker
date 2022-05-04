@@ -117,5 +117,5 @@ def post_agency_aid_anything(user, aid, anything):
 
     g.db.add(a)
     g.db.commit()
-    return redirect(agency.permalink)
+    return redirect(a.permalink)
 
