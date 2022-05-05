@@ -10,6 +10,9 @@ def home(user):
     if user and user.type_id.startswith('v'):
         return redirect(user.permalink)
 
+    elif user and user.type_id.startswith('p'):
+        return redirect("/locker")
+
     return render_template(
         "home.html",
         user=user
