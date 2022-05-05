@@ -5,24 +5,30 @@
 
 {% set faq= {
   "What should I put in my Locker?":'''
-    <p>You should use your Locker to store photos, video, audio, text descriptions, or other evidence of an abusive incident, and you should do this as soon as possible after the incident occurs.</p>
-    <p>You should <i>not</i> use your locker to store evidence obtained illegally - it could be used against you. Do not store unrelated content in your locker.</p>
-    <p>Do not use your Locker to store photo/video evidence of underage sexual abuse. That counts as child pornography, and The Evidence Locker is not licensed to possess it. Submit it to the <a href="https://www.missingkids.org/" target="_blank">National Center for Missing and Exploited Children</a> instead.</p>
+    You should use your Locker to store photos, video, audio, text descriptions, or other evidence of an abusive incident, and you should do this as soon as possible after the incident occurs.
+
+    You should *not* use your locker to store evidence obtained illegally - it could be used against you. Do not store unrelated content in your locker.
+
+    Do not use your Locker to store photo/video evidence of underage sexual abuse. That counts as child pornography, and The Evidence Locker is not licensed to possess it. Submit it to the [National Center for Missing and Exploited Children](https://www.missingkids.org/) instead.
     ''',
-  "How do I edit or delete the contents of my Locker?":'Content saved to your Locker is potential evidence in a case against your abuser. Therefore, once you have signed a Locker entry, you cannot edit or delete it. Unsigned entries may still be edited by clicking the "Edit" button on the entry\'s page.',
-  'With whom will my locker be shared?':'''
-    <p>Your locker may be shared with:</p>
-      <ul>
-        <li>Specific law enforcement agencies that you select</li>
-        <li>Any law enforcement agency in your home country who requests it, if you select that option AND the country is not in our <a href="/help/restrictedcountries" target="_blank">List of Restricted Countries</a></li>
-        <li>Any law enforcement agency in your home country with a warrant, if that country is not in our <a href="/help/restrictedcountries" target="_blank">List of Restricted Countries</a></li>
-        <li>Any law enforcement agency in your home country with a warrant that has been domesticated in the United States of America</li>
-      </ul>
-    <p>Additionally, we may look at your Locker for the purpose of ensuring compliance with the terms of use.</p>
+  "How do I edit or delete the contents of my Locker?":'''
+    Content saved to your Locker is potential evidence in a case against your abuser. Therefore, once you have signed a Locker entry, you cannot edit or delete it. Unsigned entries may still be edited by clicking the "Edit" button on the entry\'s page.''',
+  "With whom will my locker be shared?":'''
+    Your locker may be shared with:
+    
+    * Specific law enforcement agencies that you select
+    * Any law enforcement agency in your home country who requests it, if you select that option AND the country is not in our [List of Restricted Countries](/help/restrictedcountries)
+    * Any law enforcement agency in your home country with a warrant, if that country is not in our [List of Restricted Countries](/help/restrictedcountries)
+    * Any law enforcement agency in your home country with a warrant that has been domesticated in the United States of America
+    
+    Additionally, we may look at your Locker for the purpose of ensuring compliance with the terms of use.
     ''',
-  "I've shared my Locker with law enforcement. Now what?":"The Evidence Locker cannot initiate legal action on your behalf. You will need to do that yourself. Provide the responding officer, detective, or other law enforcement agent with the link to your Locker.",
-  "Can you help review my Locker contents to make sure I have a good case?":"No. The Evidence Locker does not provide legal advice or legal services of any kind. We are merely a specialized data storage and sharing service.",
-  "Why is two-factor authentication required?":"Two-factor authentication provides an extra type of account security beyond simply remembering a password, helping prevent accounts from being stolen, hacked, or shared. Our users store highly sensitive information with us, so we require all Evidence Locker users - including both victims and law enforcement - to use two-factor authentication."
+  "I've shared my Locker with law enforcement. Now what?":"""
+    The Evidence Locker cannot initiate legal action on your behalf. You will need to do that yourself. Provide the responding officer, detective, or other law enforcement agent with the link to your Locker.""",
+  "Can you help review my Locker contents to make sure I have a good case?":"""
+    No. The Evidence Locker does not provide legal advice or legal services of any kind. We are merely a specialized data storage and sharing service.""",
+  "Why is two-factor authentication required?":"""
+    Two-factor authentication provides an extra type of account security beyond simply remembering a password, helping prevent accounts from being stolen, hacked, or shared. Our users store highly sensitive information with us, so we require all Evidence Locker users - including both victims and law enforcement - to use two-factor authentication."""
   }
 %}
 
@@ -35,14 +41,16 @@
 
     {% for x in faq %}
     <div class="accordion-item">
-      <h2 class="accordion-header" id="heading-{{ loop.index }}">
-        <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ loop.index }}" aria-expanded="true" aria-controls="collapse-{{ loop.index }}">
+      <h2 class="accordion-header" id="heading-{{ loop.index0 }}">
+        <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ loop.index0 }}" aria-expanded="true" aria-controls="collapse-{{ loop.index0 }}">
           {{ x }}
         </button>
       </h2>
-      <div id="collapse-{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ loop.index }}" data-bs-parent="#faqaccordion">
+      <div id="collapse-{{ loop.index0 }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ loop.index0 }}" data-bs-parent="#faqaccordion">
         <div class="accordion-body">
-          {{ faq[x] | safe }}
+          {% filter markdown %}
+            {{ faq[x] }}
+          {% endfilter %}
         </div>
       </div>
     </div>
