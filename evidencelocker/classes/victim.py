@@ -53,8 +53,14 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
         elif other.type_id.startswith("a"):
             return True
 
-        elif False: #replace with logic to identify police sharing:
-            return True
+        elif other.type_id.startswith("p"):
+            if self.allow_leo_sharing and other.agency.country_code==self.country_code:
+                return True
+
+            elif other.agency_id in [x.agency_id for x in self.share_records]:
+                return True
+
+            return False
 
         return False
 
