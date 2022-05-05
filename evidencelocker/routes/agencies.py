@@ -19,13 +19,11 @@ def agency_aid_anything(user, aid, anything=None):
     if request.path != agency.permalink:
         return redirect(agency.permalink)
 
-    share = get_lockershare_by_agency(user, agency)
-
     return render_template(
         "agency.html",
         a=agency,
         user=user,
-        shared = bool(share)
+        shared = get_lockershare_by_agency(user, agency) if user and user.type_id.startswith('v') else None
         )
 
 @app.post("/agency/<aid>/<anything>/share")
