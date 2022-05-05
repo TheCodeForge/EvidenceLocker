@@ -93,7 +93,7 @@ def get_locker_username_exhibit_eid_anything_signature(user, username, eid, anyt
 
     exhibit = get_exhibit_by_id(eid)
 
-    if not exhibit.can_be_read_by_user(user):
+    if not exhibit.author.can_be_viewed_by_user(user):
         abort(404)
 
     if username != exhibit.author.username:
