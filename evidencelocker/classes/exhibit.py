@@ -35,23 +35,6 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
 
     def __repr__(self):
         return f'<Exhibit(id={self.id})>'
-    
-    def can_be_read_by_user(self, user):
-
-        if user.type_id.startswith('v') and user==self.author and not user.is_banned:
-
-            return True
-
-        elif user.type_id.startswith('p') and user.is_recently_verified and not user.is_banned:
-
-            if get_lockershare_by_exhibit_and_leo(self, user):
-                return True
-
-        elif user.type_id.startswith('a') and not user.is_banned:
-
-            return True
-
-        return False
 
 
     @property
