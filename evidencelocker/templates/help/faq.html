@@ -1,11 +1,37 @@
 {% extends "base_centered.html" %}
 
 {% block pagecontent %}
+
+
+{% set faq= {
+  "What should I put in my Locker?":"<p>You should use your Locker to store photos, video, audio, text descriptions, or other evidence of an abusive incident, and you should do this as soon as possible after the incident occurs.</p><p>You should <i>not</i> use your locker to store evidence obtained illegally - it could be used against you. Do not store unrelated content in your locker.</p><p>Do not use your Locker to store photo/video evidence of underage sexual abuse. That counts as child pornography, and The Evidence Locker is not licensed to possess it. Submit it to the <a href="https://www.missingkids.org/" target="_blank">National Center for Missing and Exploited Children</a> instead.</p>"
+  }
+
+  %}
+
+
 <div class="card m-0 border-0">
   <div class="card-body">
     <h1 class="card-title text-primary fw-bold">FAQ</h1>
   </div>
   <div class="accordion" id="faqaccordion">
+
+    {% for x in faq %}
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="heading-{{ loop.index }}">
+        <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ loop.index }}" aria-expanded="true" aria-controls="collapse-{{ loop.index }}">
+          {{ x }}
+        </button>
+      </h2>
+      <div id="collapse-{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ loop.index }}" data-bs-parent="#faqaccordion">
+        <div class="accordion-body">
+          {{ faq[x] | safe }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+    <!---
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingOne">
         <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -86,6 +112,7 @@
           Two-factor authentication provides an extra type of account security beyond simply remembering a password, helping prevent accounts from being stolen, hacked, or shared. Our users store highly sensitive information with us, so we require all Evidence Locker users - including both victims and law enforcement - to use two-factor authentication.
         </div>
       </div>
+      --->
     </div>
   </div>
 </div>
