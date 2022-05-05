@@ -30,7 +30,7 @@ def get_lockers_leo(user):
     victims = g.db.query(VictimUser).filter(
         or_(
             and_(
-                VictimUser.country_code==user.country_code,
+                VictimUser.country_code==user.agency.country_code,
                 VictimUser.allow_leo_sharing==True
                 ),
             VictimUser.id.in_(
