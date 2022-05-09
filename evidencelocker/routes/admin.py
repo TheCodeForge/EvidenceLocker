@@ -88,6 +88,8 @@ def get_agency(user, aid=None, anything=None):
 @validate_csrf_token
 def post_agency(user):
 
+    #create agency
+
     agency=Agency(
         name=           bleachify(request.form.get("name")),
         city=           bleachify(request.form.get("city")),
@@ -99,12 +101,26 @@ def post_agency(user):
 
     g.db.add(agency)
     g.db.commit()
+
+    #apply agency link to appropriate LEO accounts
+    #search by email domain
+
+    users = g.db.query(PoliceUser).filter(PoliceUser.domain.ilike(f"%@{agency.domain}")).all()
+    for user in users:
+        user.agency_id=agency.id
+        g.db.add(user)
+
+    g.db.commit()
+
+
     return redirect(agency.permalink)
 
 @app.post("/agency/<aid>/<anything>")
 @logged_in_admin
 @validate_csrf_token
 def post_agency_aid_anything(user, aid, anything):
+
+    #edit agency
 
     a=get_agency_by_id(aid)
 
@@ -117,5 +133,6 @@ def post_agency_aid_anything(user, aid, anything):
 
     g.db.add(a)
     g.db.commit()
+
     return redirect(a.permalink)
 
