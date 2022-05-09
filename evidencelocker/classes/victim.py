@@ -44,6 +44,12 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     
     def can_be_viewed_by_user(self, other):
 
+        if not other:
+            return False
+
+        if other.is_banned:
+            return False
+
         if other is self:
             return True
 
@@ -54,6 +60,10 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
             return True
 
         elif other.type_id.startswith("p"):
+
+            if not other.is_recently_verified:
+                return False
+                
             if self.allow_leo_sharing and other.agency.country_code==self.country_code:
                 return True
 
