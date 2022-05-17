@@ -7,7 +7,7 @@ from .mixins import *
 from evidencelocker.helpers.countries import COUNTRY_CODES
 from evidencelocker.__main__ import Base
 
-class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
+class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin, country_mixin):
 
     __tablename__="victim_users"
     
@@ -81,10 +81,6 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin):
     @property
     def draft_exhibit_count(self):
         return len([x for x in self.exhibits if not x.signed_utc])
-
-    @property
-    def country(self):
-        return COUNTRY_CODES.get(self.country_code)
     
     @property
     def json(self):

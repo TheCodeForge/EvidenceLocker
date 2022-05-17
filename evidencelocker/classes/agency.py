@@ -7,7 +7,7 @@ from .mixins import *
 from evidencelocker.helpers.countries import COUNTRY_CODES
 from evidencelocker.__main__ import Base
 
-class Agency(Base, b36ids, time_mixin):
+class Agency(Base, b36ids, time_mixin, country_mixin):
 
     __tablename__="agencies"
 
@@ -24,10 +24,6 @@ class Agency(Base, b36ids, time_mixin):
 
     def __repr__(self):
         return f'<Agency(id={self.id})>'
-
-    @property
-    def country(self):
-        return COUNTRY_CODES[self.country_code]
 
     @property
     @lazy

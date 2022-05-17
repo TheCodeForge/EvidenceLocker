@@ -116,3 +116,9 @@ class json_mixin():
     def jsonlink(self):
         return f"{self.permalink}.json"
     
+
+class country_mixin():
+
+    @property
+    def country(self):
+        return COUNTRY_CODES.get(self.country_code.upper())
