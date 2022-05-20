@@ -25,7 +25,7 @@ def login_victim():
 
     #define the response for an invalid login attempt
     #Random sleep is to ensure timing analysis cannot be used to deduce which part of the login failed
-    def invalid_login_victim(error=None):
+    def invalid_login_victim(error):
         time.sleep(max(0, random.gauss(1.5, 0.33)))
         return render_template(
             "login_victim.html",
@@ -52,7 +52,7 @@ def login_victim():
 @app.post("/login_police")
 def login_police():
 
-    def invalid_login_police(error=None):
+    def invalid_login_police(error):
         time.sleep(max(0, random.gauss(1.5, 0.33)))
         return render_template(
             "login_police.html",
