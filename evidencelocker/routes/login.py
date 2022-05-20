@@ -60,12 +60,6 @@ def login_police():
             error=e
             )
 
-    #define the response for an invalid login attempt
-    #Random sleep is to ensure timing analysis cannot be used to deduce which part of the login failed
-    def invalid_login_police():
-        time.sleep(max(0, random.gauss(1.5, 0.33)))
-        return invalid_login_police("Invalid username, password, or two-factor code")
-
     user = get_police_by_email(request.form.get("email",""), graceful=True)
     if not user:
         return invalid_login_police("Invalid username, password, or two-factor code")
