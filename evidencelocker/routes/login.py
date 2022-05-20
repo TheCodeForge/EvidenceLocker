@@ -25,12 +25,12 @@ def login_victim():
 
     #define the response for an invalid login attempt
     #Random sleep is to ensure timing analysis cannot be used to deduce which part of the login failed
-    def invalid_login_victim(error):
+    def invalid_login_victim(e):
         time.sleep(max(0, random.gauss(1.5, 0.33)))
         return render_template(
             "login_victim.html",
             token=logged_out_csrf_token(),
-            error=error
+            error=e
             )
 
     user = get_victim_by_username(request.form.get("username"), graceful=True)
@@ -52,12 +52,12 @@ def login_victim():
 @app.post("/login_police")
 def login_police():
 
-    def invalid_login_police(error):
+    def invalid_login_police(e):
         time.sleep(max(0, random.gauss(1.5, 0.33)))
         return render_template(
             "login_police.html",
             token=logged_out_csrf_token(),
-            error=error
+            error=e
             )
 
     #define the response for an invalid login attempt
