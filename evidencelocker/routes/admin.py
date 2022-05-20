@@ -128,7 +128,6 @@ def post_agency_aid_anything(user, aid, anything):
     a.city=           bleachify(request.form.get("city")),
     a.state=          bleachify(request.form.get("state")),
     a.country_code=   bleachify(request.form.get("cc")),
-    a.domain=         bleachify(request.form.get("domain")),
     a.site=           bleachify(request.form.get("site"))
 
     g.db.add(a)
