@@ -150,7 +150,7 @@ def users_police_unverified(user):
 
 @app.get("/police/<pid>")
 @logged_in_admin
-def get_police_pid_admin(user):
+def get_police_pid_admin(user, pid):
 
     police=get_police_by_id(pid)
 
