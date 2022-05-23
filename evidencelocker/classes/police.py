@@ -36,6 +36,10 @@ class PoliceUser(Base, b36ids, time_mixin, user_mixin):
     def __repr__(self):
         return f'<PoliceUser(id={self.id})>'
 
+    @property
+    def permalink(self):
+        return f"/police/{self.b36id}"
+    
     
     @property
     def type_id(self):

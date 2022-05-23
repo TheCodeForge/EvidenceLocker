@@ -2,9 +2,8 @@
   {% for p in listing %}
     <div class="{% if not loop.first %}border-top{% endif %}">
       <div class="card border-0">
-        <div class="card-title px-3 py-2"><h1 class="h4 text-primary">{{ p.name }}</h1></div>
+        <div class="card-title px-3 py-2"><a href="{{ p.permalink }}"><h1 class="h4 text-primary">{{ p.email }}</h1></a></div>
         <div class="card-body py-0">
-          <p><i class="fas fa-email fa-fw"></i> {{ p.email }}</p>
         </div>
       </div>
     </div>
