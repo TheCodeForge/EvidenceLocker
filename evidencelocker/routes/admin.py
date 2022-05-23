@@ -155,6 +155,21 @@ def users_police_unverified(user):
         listing=listing
         )
 
+@app.get("/users/victims")
+@logged_in_admin
+def users_police_unverified(user):
+
+    page=max(1, int(request.args.get("page",1)))
+
+    listing = g.db.query(VictimUser).filter_by(banned_utc=0).offset(100*(page-1)).limit(100).all()
+
+    return render_template(
+        "admin/victims.html",
+        user=user,
+        listing=listing
+        )
+
+
 @app.get("/police/<pid>")
 @logged_in_admin
 def get_police_pid_admin(user, pid):
