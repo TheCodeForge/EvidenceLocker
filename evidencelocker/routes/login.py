@@ -221,7 +221,7 @@ def post_signup_victim():
 
     #user/pass regex checks
     if not re.fullmatch(valid_username_regex, username):
-        return invalid_signup_victim("Invalid username.")
+        return invalid_signup_victim("Invalid username. Username must be 5-25 characters, using letters, numbers, or _")
 
     if not re.fullmatch(valid_password_regex, request.form.get("password")):
         return invalid_signup_victim("Invalid password. Passwords must be at least 8 characters long.")
@@ -316,7 +316,7 @@ def post_signup_police():
         created_utc=g.time,
         agency_id=agency_id,
         banned_utc=g.time if banned_domain else 0,
-        ban_reason="You are not affiliated with a law enforcement agency" if banned_domain else None
+        ban_reason="You are not affiliated with a law enforcement agency." if banned_domain else None
     )
 
     g.db.add(user)

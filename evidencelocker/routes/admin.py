@@ -112,7 +112,7 @@ def post_agency(user):
     #apply agency link to appropriate LEO accounts
     #search by email domain
 
-    users = g.db.query(PoliceUser).filter(PoliceUser.domain.ilike(f"%@{agency.domain}")).all()
+    users = g.db.query(PoliceUser).filter(PoliceUser.email.ilike(f"%@{agency.domain}")).all()
     for user in users:
         user.agency_id=agency.id
         g.db.add(user)
@@ -214,3 +214,26 @@ def police_pid_ban_unban(user, pid):
     g.db.add(target_user)
     g.db.commit()
     return redirect(target_user.permalink)
+
+@app.post("/police/<pid>/reject")
+@logged_in_admin
+@validate_csrf_token
+def ban_domain(user, pid):
+
+    target_user=get_police_by_id(pid)
+
+    domain=target_user.email.split("@")[1]
+
+    users = g.db.query(PoliceUser).filter(PoliceUser.email.ilike(f"%@{agency.domain}")).all()
+    for user in users:
+        user.banned_utc=g.time
+        user.ban_reason="You are not affiliated with a law enforcement agency."
+        g.db.add(user)
+
+    bd=BadDomain(domain=domain)
+
+    g.db.add(bd)
+    g.db.commit()
+
+    return redirect("target_user.permalink")
+

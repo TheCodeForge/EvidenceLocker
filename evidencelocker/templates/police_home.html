@@ -14,18 +14,26 @@
   <div class="card-body">
     <p><i class="fas fa-envelope fa-fw"></i> {{ target_user.email }}</p>
     <p><i class="fas fa-building fa-fw"></i> {{ target_user.agency.name if target_user.agency else "None" }}</p>
-    {% if not target_user.banned_utc %}
-      <form action="{{ target_user.permalink }}/ban">
-        <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
-        <label for="input_ban_reason" class="fw-bold">Ban Reason</label>
-        <input type="text" name="ban_reason" class="form-control">
-        <input type="submit" value="Ban User" class="btn btn-danger text-white mt-2">
-      </form>
+    {% if target_user.agency %}
+      {% if not target_user.banned_utc %}
+        <form action="{{ target_user.permalink }}/ban">
+          <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
+          <label for="input_ban_reason" class="fw-bold">Ban Reason</label>
+          <input type="text" name="ban_reason" class="form-control">
+          <input type="submit" value="Ban User" class="btn btn-danger text-white mt-2">
+        </form>
+      {% else %}
+        <form action="{{ target_user.permalink }}/unban">
+          <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
+          <input type="submit" value="Unban User" class="btn btn-success text-white">
+        </form>
+      {% endif %}
     {% else %}
-      <form action="{{ target_user.permalink }}/unban">
+      <form action="{{ target_user.permalink }}/reject">
         <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
-        <input type="submit" value="Unban User" class="btn btn-success text-white">
+        <input type="submit" value="Reject Domain" class="btn btn-danger text-white mt-2">
       </form>
+      <a href="/agency?domain={{ target_user.email.split('@')[1] }}" class="btn btn-success text-white mt-2">Accept Domain</a>
     {% endif %}
   </div>
 </div>

@@ -45,7 +45,7 @@
         
 
         <label for="input-domain" class="mt-3 fw-bold">Domain</label>
-        <input class="form-control" id="input-domain" type="text" name="domain" value="{{ a.domain if a else '' }}" {{'disabled' if a else 'required' }}>
+        <input class="form-control" id="input-domain" type="text" name="domain" value="{{ a.domain if a else request.args.get('domain','') }}" {{'disabled' if a else 'required' }}>
 
         <label for="input-site" class="mt-3 fw-bold">Site</label>
         <input class="form-control" id="input-site" type="text" name="site" value="{{ a.site if a else '' }}" required>
