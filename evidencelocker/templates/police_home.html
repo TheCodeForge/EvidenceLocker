@@ -13,7 +13,7 @@
   </div>
   <div class="card-body">
     <p><i class="fas fa-envelope fa-fw"></i> {{ target_user.email }}</p>
-    <p><i class="fas fa-building fa-fw"></i> {% if target-user.agency %}<a href="{{target_user.agency.permalink">{{ target_user.agency.name }}</a></p>{% else %}None{% endif %}
+    <p><i class="fas fa-building fa-fw"></i> {% if target_user.agency %}<a href="{{target_user.agency.permalink">{{ target_user.agency.name }}</a></p>{% else %}None{% endif %}
     {% if target_user.agency %}
       {% if not target_user.banned_utc %}
         <form action="{{ target_user.permalink }}/ban" method="post">
