@@ -49,7 +49,7 @@
       <div id="collapse-{{ loop.index0 }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ loop.index0 }}" data-bs-parent="#faqaccordion">
         <div class="accordion-body">
           {% filter markdown %}
-            {{ faq[x] }}
+            {{ faq[x].replace('    ','') }}
           {% endfilter %}
         </div>
       </div>
