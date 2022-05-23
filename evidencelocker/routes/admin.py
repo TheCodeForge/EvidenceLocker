@@ -238,4 +238,4 @@ def reject_domain(user, pid):
     g.db.add(bd)
     g.db.commit()
 
-    return redirect("target_user.permalink")
+    return redirect(target_user.permalink)
