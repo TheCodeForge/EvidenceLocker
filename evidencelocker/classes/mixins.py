@@ -6,6 +6,7 @@ from hmac import compare_digest
 
 from evidencelocker.decorators.lazy import lazy
 from evidencelocker.helpers.b36 import *
+from evidencelocker.helpers.countries import COUNTRY_CODES
 from evidencelocker.helpers.hashes import *
 
 from flask import *
