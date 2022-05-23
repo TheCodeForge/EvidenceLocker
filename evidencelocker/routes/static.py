@@ -13,6 +13,9 @@ def home(user):
     elif user and user.type_id.startswith('p'):
         return redirect("/locker")
 
+    elif user and user.type_id.startswith('a'):
+        return redirect("/admin_dashboard")
+
     return render_template(
         "home.html",
         user=user

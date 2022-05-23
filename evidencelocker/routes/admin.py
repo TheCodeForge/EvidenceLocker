@@ -10,6 +10,13 @@ from evidencelocker.helpers.text import raw_to_html, bleachify
 
 from evidencelocker.__main__ import app
 
+@app.get("/admin_dashboard")
+@logged_in_admin
+def admin_dashboard(user):
+    return render_template(
+        "admin/home.html",
+        user=user)
+
 @app.get("/login_admin")
 @logged_in_desired
 def get_login_admin(user):
