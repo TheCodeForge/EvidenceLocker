@@ -164,12 +164,13 @@ def get_police_pid_admin(user, pid):
                 g.db.query(LockerShare.victim_id).filter(LockerShare.agency_id==police.agency_id).subquery()
                 )
             )
-        ).all()
+        ).all() if police.agency else []
 
     return render_template(
         "police_home.html",
         user=user,
-        listing=victims
+        listing=victims,
+        target_user=police
         )
 
 @app.post("/police/<pid>/ban")
