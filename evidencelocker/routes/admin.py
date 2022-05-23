@@ -218,13 +218,16 @@ def police_pid_ban_unban(user, pid):
 @app.post("/police/<pid>/reject")
 @logged_in_admin
 @validate_csrf_token
-def ban_domain(user, pid):
+def reject_domain(user, pid):
 
     target_user=get_police_by_id(pid)
 
+    if target_user.agency_id:
+        abort(400)
+
     domain=target_user.email.split("@")[1]
 
-    users = g.db.query(PoliceUser).filter(PoliceUser.email.ilike(f"%@{agency.domain}")).all()
+    users = g.db.query(PoliceUser).filter(PoliceUser.email.ilike(f"%@{domain}")).all()
     for user in users:
         user.banned_utc=g.time
         user.ban_reason="You are not affiliated with a law enforcement agency."
@@ -236,4 +239,3 @@ def ban_domain(user, pid):
     g.db.commit()
 
     return redirect("target_user.permalink")
-
