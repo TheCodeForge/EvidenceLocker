@@ -166,7 +166,8 @@ def users_victims(user):
     return render_template(
         "admin/victims.html",
         user=user,
-        listing=listing
+        listing=listing,
+        page=page
         )
 
 
