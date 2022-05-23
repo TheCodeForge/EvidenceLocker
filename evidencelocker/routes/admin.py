@@ -134,3 +134,16 @@ def post_agency_aid_anything(user, aid, anything):
     g.db.commit()
 
     return redirect(a.permalink)
+
+
+@app.get("/users/police/unverified")
+@logged_in_admin
+def users_police_unverified(user):
+
+    listing = g.db.query(PoliceUser).filter_by(agency_id=None).all()
+
+    return render_template(
+        "admin/police.html",
+        user=user,
+        listing=listing
+        )
