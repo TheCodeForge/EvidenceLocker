@@ -157,7 +157,7 @@ def users_police_unverified(user):
 
 @app.get("/users/victims")
 @logged_in_admin
-def users_police_unverified(user):
+def users_victims(user):
 
     page=max(1, int(request.args.get("page",1)))
 
