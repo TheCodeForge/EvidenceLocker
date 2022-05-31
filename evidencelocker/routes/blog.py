@@ -27,7 +27,8 @@ def get_blogs(user):
     return render_template(
         "blogs.html",
         user=user,
-        listing=blogs
+        listing=blogs,
+        page=page
         )
 
 
