@@ -4,7 +4,7 @@ from evidencelocker.helpers.loaders import *
 
 from evidencelocker.__main__ import app
 
-@app.get("/blog/<bid>/<anything>")
+@app.get("/news/<bid>/<anything>")
 @logged_in_desired
 def get_blog_bid_anything(user, bid, anything):
 
@@ -16,7 +16,7 @@ def get_blog_bid_anything(user, bid, anything):
         b=blog
         )
 
-@app.get("/blog")
+@app.get("/news")
 @logged_in_desired
 def get_blogs(user):
 

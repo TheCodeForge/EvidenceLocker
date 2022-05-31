@@ -34,4 +34,4 @@ class BlogPost(Base, b36ids, time_mixin):
         if not output:
             output = '-'
 
-        return f"/blog/{self.b36id}/{output}"
+        return f"/news/{self.b36id}/{output}"
