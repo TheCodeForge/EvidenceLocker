@@ -11,9 +11,8 @@
   </div>
 </div>
 <div class="card m-0 border-0">
+  <h2 class="card-title text-muted text-center fw-bold my-3">How it works</h2>
   <div class="card-body">
-    <h2 class="card-title text-muted text-center fw-bold my-3">How it works</h2>
-
     <div class="d-md-flex justify-content-center">
       <div class="col card border-0 m-0">
         <div class="card-title text-center">
@@ -40,6 +39,14 @@
         </div>
       </div>
     </div></i>
+  </div>
+</div>
+<div class="card m-0 border-0">
+  <div class="card-title">News</div>
+  <div class="card-body">
+    {% with listing=blogs %}
+    {% include "listings/blog.html" %}
+    {% endwith %}
   </div>
 </div>
 <div class="card m-0 border-0">
