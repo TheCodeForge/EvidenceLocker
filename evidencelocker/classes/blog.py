@@ -4,7 +4,9 @@ from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload
 from evidencelocker.__main__ import Base
 
-class Blog(Base, b36ids, time_mixin):
+class BlogEntry(Base, b36ids, time_mixin):
+
+    __tablename__="blogs"
 
     id          =Column(Integer, primary_key=True)
     text_raw    =Column(String(8192))
