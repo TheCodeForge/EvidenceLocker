@@ -13,7 +13,7 @@ class BlogPost(Base, b36ids, time_mixin):
     text_raw    =Column(String(8192))
     text_html   =Column(String(16384))
     created_utc =Column(Integer)
-    author_id   =Column(Integer)
+    author_id   =Column(Integer, ForeignKey("admin_users.id"))
     title       =Column(String(512))
 
     author = relationship("AdminUser", lazy="joined", back_populates="blogposts")
