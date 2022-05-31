@@ -16,7 +16,7 @@ class BlogPost(Base, b36ids, time_mixin):
     author_id   =Column(Integer, ForeignKey("admin_users.id"))
     title       =Column(String(512))
 
-    author = relationship("AdminUser", lazy="joined", back_populates="blogposts")
+    author = relationship("AdminUser", lazy="joined")
 
 
     @property
