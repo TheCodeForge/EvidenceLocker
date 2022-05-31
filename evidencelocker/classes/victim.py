@@ -4,7 +4,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 
 from .mixins import *
 
-from evidencelocker.helpers.countries import COUNTRY_CODES
+from evidencelocker.helpers.countries import COUNTRY_CODES, RESTRICTED_COUNTRIES
 from evidencelocker.__main__ import Base
 
 class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin, country_mixin):
@@ -64,7 +64,7 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin, country_mixin
             if not other.is_recently_verified:
                 return False
                 
-            if self.allow_leo_sharing and other.agency.country_code==self.country_code:
+            if self.allow_leo_sharing and other.agency.country_code==self.country_code and self.country_code not in RESTRICTED_COUNTRIES:
                 return True
 
             elif other.agency_id in [x.agency_id for x in self.share_records]:

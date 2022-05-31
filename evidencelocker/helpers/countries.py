@@ -251,3 +251,13 @@ COUNTRY_CODES = {
     'ZW': 'Zimbabwe',
     'T1': 'Tor Network'
     }
+
+RESTRICTED_COUNTRIES=[
+    'AF', # Afghanistan
+    'CN', # China
+    'IR', # Iran
+    'IQ', # Iraq
+    'KP', # North Korea
+    'RU', # Russia
+    'SA', # Saudi Arabia
+]

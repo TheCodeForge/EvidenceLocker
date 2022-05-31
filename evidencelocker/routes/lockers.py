@@ -1,5 +1,6 @@
 from evidencelocker.decorators.auth import *
 from evidencelocker.helpers.text import raw_to_html
+from evidencelocker.helpers.countries import RESTRICTED_COUNTRIES
 
 from evidencelocker.classes import *
 from evidencelocker.__main__ import app
@@ -27,17 +28,26 @@ def get_locker_username(user, username):
 @logged_in_police
 def get_lockers_leo(user):
 
-    victims = g.db.query(VictimUser).filter(
-        or_(
-            and_(
-                VictimUser.country_code==user.agency.country_code,
-                VictimUser.allow_leo_sharing==True
-                ),
+    if user.agency.country_code in RESTRICTED_COUNTRIES:
+        victims = g.db.query(VictimUser).filter(
             VictimUser.id.in_(
-                g.db.query(LockerShare.victim_id).filter(LockerShare.agency_id==user.agency_id).subquery()
+                    g.db.query(LockerShare.victim_id).filter(LockerShare.agency_id==user.agency_id).subquery()
                 )
-            )
-        ).all()
+            ).all()
+
+    else:
+
+        victims = g.db.query(VictimUser).filter(
+            or_(
+                and_(
+                    VictimUser.country_code==user.agency.country_code,
+                    VictimUser.allow_leo_sharing==True
+                    ),
+                VictimUser.id.in_(
+                    g.db.query(LockerShare.victim_id).filter(LockerShare.agency_id==user.agency_id).subquery()
+                    )
+                )
+            ).all()
 
     return render_template(
         "police_home.html",
