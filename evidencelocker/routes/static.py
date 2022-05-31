@@ -13,8 +13,8 @@ def home(user):
     elif user and user.type_id.startswith('p'):
         return redirect("/locker")
 
-    elif user and user.type_id.startswith('a'):
-        return redirect("/admin_dashboard")
+    #elif user and user.type_id.startswith('a'):
+    #    return redirect("/admin_dashboard")
 
     blogs=g.db.query(BlogPost).order_by(BlogPost.id.desc()).limit(3)
 
