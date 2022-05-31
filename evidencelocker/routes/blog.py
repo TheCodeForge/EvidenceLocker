@@ -58,7 +58,7 @@ def get_blog_edit_bid(user, bid):
         b=blog
         )
 
-@app.post("/edit_blog/<bid>"):
+@app.post("/edit_blog/<bid>")
 @logged_in_admin
 @validate_csrf_token
 def post_edit_blog_bid(user, bid):
