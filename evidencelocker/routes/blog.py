@@ -11,10 +11,26 @@ def get_blog_bid_anything(user, bid, anything):
     blog = get_blog_by_id(bid)
 
     return render_template(
-        "blog.html",
+        "blog_page.html",
         user=user,
         b=blog
         )
+
+@app.get("/blog")
+@logged_in_desired
+def get_blogs(user):
+
+    page=max(0, int(request.args.get("page", 1)))
+
+    blogs=g.db.query(BlogPost).order_by(BlogPost.id.desc()).offset(25*(page-1)).limit(25).all()
+
+    return render_template(
+        "blogs.html",
+        user=user,
+        listing=blogs
+        )
+
+
 
 @app.get("/create_blog")
 @logged_in_admin
