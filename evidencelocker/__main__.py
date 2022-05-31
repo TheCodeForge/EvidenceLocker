@@ -40,6 +40,7 @@ app.config["PERMANENT_SESSION_LIFETIME"]    = 60 * 60
 app.config["SESSION_REFRESH_EACH_REQUEST"]  = True
 app.config['SECRET_KEY']                    = environ.get("SECRET_KEY")
 app.config['SERVER_NAME']                   = environ.get("SERVER_NAME")
+app.config['FORCE_HTTPS']                   = bool(int(environ.get("FORCE_HTTPS", 1)))
 
 #===SQLALCHEMY===
 _engine=create_engine(
@@ -67,6 +68,9 @@ Markdown(app)
 
 @app.before_request
 def before_request():
+
+    if app.config["FORCE_HTTPS"] and request.scheme=="http":
+        return redirect(f"https://{app.config['SERVER_NAME']}{request.path}")
 
     session.permanent=True
 
