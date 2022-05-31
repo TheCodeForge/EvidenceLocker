@@ -28,3 +28,8 @@ class AdminUser(Base, b36ids, time_mixin, user_mixin):
     @property
     def is_banned(self):
         return bool(self.banned_utc)
+
+    @property
+    def name(self):
+        return self.username
+    
