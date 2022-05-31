@@ -18,21 +18,21 @@
         <input type="hidden" name="csrf_token" value="{{ token }}">
 
         <label for="username-register" class="mt-3">Username</label>
-        <input class="form-control" id="username-register" aria-describedby="usernameHelpRegister" type="text" name="username" pattern="[a-zA-Z0-9_]{5,25}" required>
-        <small id="usernameHelpRegister">5 to 25 characters. May use letters, numbers, and _</small>
+        <input class="form-control" id="username-register" type="text" name="username" pattern="[a-zA-Z0-9_]{5,25}" required>
+        <p class="text-small text-muted">5 to 25 characters. May use letters, numbers, and _</p>
 
         <label for="email-register" class="mt-3">Email Address</label>
-        <small class="d-inline-block text-muted ml-1">(optional, but forgotten passwords cannot be recovered without an email address)</small>
-        <input class="form-control" id="email-register" aria-describedby="emailHelpRegister" type="text" name="email">
+        <p class="d-inline-block text-small text-muted ml-1">(optional, but forgotten passwords cannot be recovered without an email address)</p>
+        <input class="form-control" id="email-register" type="text" name="email">
 
         <label for="password-register" class="mt-3">Password</label>
 
-        <input class="form-control" id="password-register" aria-describedby="passwordHelpReigster" type="password" name="password" required>
-        <small id="passwordHelpRegister">Minimum of 8 characters required.</small>
+        <input class="form-control" id="password-register" type="password" name="password" required>
+        <p class="text-small text-muted">Minimum of 8 characters required.</p>
 
         <label for="password_confirm" class="mt-3">Confirm Password</label>
 
-        <input class="form-control" id="password_confirm" aria-describedby="passwordConfirmHelp" type="password" name="password_confirm" required>
+        <input class="form-control" id="password_confirm" type="password" name="password_confirm" required>
 
         <div class="custom-control custom-checkbox mt-4">
           <input type="checkbox" class="custom-control-input" id="termsCheck" name="terms_agree" value="true" required>
