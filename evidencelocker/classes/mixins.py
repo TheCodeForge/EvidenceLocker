@@ -31,6 +31,11 @@ class time_mixin():
         return time.strftime("%Y-%m-%dT%H:%M:%S+00:00", time.gmtime(self.created_utc))
 
     @property
+    @lazy
+    def created_date(self):
+        return time.strftime("%d %B %Y", time.gmtime(self.created_utc))
+    
+    @property
     def age(self):
         return int(time.time()) - self.created_utc
 

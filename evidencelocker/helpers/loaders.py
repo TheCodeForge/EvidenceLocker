@@ -180,3 +180,15 @@ def get_lockershare_by_exhibit_and_leo(exhibit, leo):
     lockershare=g.db.query(LockerShare).filter_by(victim_id=exhibit.author_id, agency_id=leo.agency_id).first()
 
     return lockershare
+
+def get_blog_by_id(id):
+
+    if isinstance(id, str):
+        id=base36decode(id)
+
+    blog = g.db.query(BlogPost).filter_by(id=id).first()
+
+    if not blog:
+        abort(404)
+
+    return blog
