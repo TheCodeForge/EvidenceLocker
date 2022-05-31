@@ -16,8 +16,16 @@ def get_blog_bid_anything(user, bid, anything):
         b=blog
         )
 
-@app.post("/blog")
+@app.get("/create_blog")
 @logged_in_admin
+def get_create_blog(user):
+    return render_template(
+        "admin/edit_blog.html",
+        user=user)
+
+@app.post("/create_blog")
+@logged_in_admin
+@validate_csrf_token
 def post_blog_admin(user):
 
     title = bleachify(request.form.get("title"))
@@ -33,3 +41,34 @@ def post_blog_admin(user):
         created_utc=g.time,
         author_id=user.id
         )
+
+    g.db.add(blog)
+    g.db.commit()
+    return redirect(blog.permalink)
+
+@app.get("/edit_blog/<bid>")
+@logged_in_admin
+def get_blog_edit_bid(user, bid):
+
+    blog = get_blog_by_id(bid)
+
+    return render_template(
+        "admin/edit_blog.html",
+        user=user,
+        b=blog
+        )
+
+@app.post("/edit_blog/<bid>"):
+@logged_in_admin
+@validate_csrf_token
+def post_edit_blog_bid(user, bid):
+
+    blog = get_blog_by_id(bid)
+
+    blog.title = bleachify(request.form.get("title"))
+    blog.text_raw = request.form.get("body")
+    blog.text_html = raw_to_html(blog.text_raw)
+
+    g.db.add(blog)
+    g.db.commit()
+    return redirect(blog.permalink)
