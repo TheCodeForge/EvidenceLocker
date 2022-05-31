@@ -42,11 +42,15 @@
   </div>
 </div>
 <div class="card m-0 border-0">
-  <div class="card-title">News</div>
-  <div class="card-body">
-    {% with listing=blogs %}
-    {% include "listings/blog.html" %}
-    {% endwith %}
+  <div class="card-title text-muted text-center fw-bold my-3">News</div>
+  <div class="card-body row">
+    <div class="col col-md-2 col-lg-3"></div>
+    <div class="col col-12 col-md-8 col-lg-6">
+      {% with listing=blogs %}
+      {% include "listings/blog.html" %}
+      {% endwith %}
+    </div>
+    <div class="col col-md-2 col-lg-3"></div>
   </div>
 </div>
 <div class="card m-0 border-0">
