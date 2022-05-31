@@ -69,6 +69,8 @@ Markdown(app)
 @app.before_request
 def before_request():
 
+    g.time=int(time.time())
+
     if app.config["FORCE_HTTPS"] and request.scheme=="http":
         return redirect(f"https://{app.config['SERVER_NAME']}{request.path}")
 
@@ -76,8 +78,6 @@ def before_request():
 
     g.db=db_session()
     
-    g.time=int(time.time())
-
     g.tor=request.headers.get("cf-ipcountry")=='T1'
 
     if "session_id" not in session:
