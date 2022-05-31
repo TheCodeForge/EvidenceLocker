@@ -5,7 +5,7 @@ from sqlalchemy import *
 from sqlalchemy.orm import relationship, lazyload
 from evidencelocker.__main__ import Base
 
-class BlogEntry(Base, b36ids, time_mixin):
+class BlogPost(Base, b36ids, time_mixin):
 
     __tablename__="blogs"
 
