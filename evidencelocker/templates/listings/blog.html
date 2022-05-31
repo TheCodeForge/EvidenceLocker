@@ -1,6 +1,6 @@
 <div class="col border rounded">
   {% for b in listing %}
-    <div class="{% if not loop.first %}border-top{% endif %}">
+    <div id="blog-entry-{{ b.b36id }}" class="{% if not loop.first %}border-top{% endif %}">
       <div class="card border-0">
         <div class="card-title px-3 py-2"><h1 class="h4 text-primary"><a href="{{ p.permalink }}">{{ p.title }}</a></h1></div>
         <div class="card-body py-0">
