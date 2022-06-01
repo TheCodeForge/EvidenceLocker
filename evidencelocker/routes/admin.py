@@ -161,7 +161,7 @@ def users_victims(user):
 
     page=max(1, int(request.args.get("page",1)))
 
-    listing = g.db.query(VictimUser).filter_by(banned_utc=0).offset(100*(page-1)).limit(100).all()
+    listing = g.db.query(VictimUser).filter_by(banned_utc=0).order_by(VictimUser.id.desc()).offset(100*(page-1)).limit(100).all()
 
     return render_template(
         "admin/victims.html",
