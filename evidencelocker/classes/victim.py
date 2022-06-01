@@ -20,7 +20,7 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin, country_mixin
     pw_hash     =deferred(Column(String(256)))
     otp_secret  =deferred(Column(String(32)))
     email       =Column(String(256), unique=True)
-    banned_utc  =Column(Integer, default=None)
+    banned_utc  =Column(Integer, default=0)
     ban_reason  =Column(String(128))
     login_nonce =Column(Integer, default=0)
     allow_leo_sharing = Column(Boolean, default=False)
