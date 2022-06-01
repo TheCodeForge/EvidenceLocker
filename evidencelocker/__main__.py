@@ -101,5 +101,7 @@ def after_request(resp):
 
     if request.path.startswith("/assets/"):
         resp.headers["Cache-Control"]="public, max-age=604800"
+    else:
+        resp.headers["Cache-Control"]="private"
 
     return resp
