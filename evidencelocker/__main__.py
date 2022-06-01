@@ -87,6 +87,9 @@ def before_request():
 @app.after_request
 def after_request(resp):
 
+    #session teardown
+    g.db.remove()
+
     #script nonce
     nonce=generate_hash(f"{session.get('session_id')}+{g.time}")
     
