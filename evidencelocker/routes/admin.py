@@ -147,7 +147,7 @@ def post_agency_aid_anything(user, aid, anything):
 @logged_in_admin
 def users_police_unverified(user):
 
-    listing = g.db.query(PoliceUser).filter_by(agency_id=None).all()
+    listing = g.db.query(PoliceUser).filter_by(agency_id=None, banned_utc=0).all()
 
     return render_template(
         "admin/police.html",
