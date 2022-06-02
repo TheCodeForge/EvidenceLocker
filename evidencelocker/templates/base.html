@@ -51,6 +51,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="/create_exhibit">Create Exhibit</a>
               </li>
+              {% elif user.type_id.startswith('a') %}
+              <li class="nav-item">
+                <a class="nav-link" href="/admin_dashboard">Admin Dashboard</a>
+              </li>
               {% endif %}
               <li class="nav-item">
                 <form action="/logout" method="post">
