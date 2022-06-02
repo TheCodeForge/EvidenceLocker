@@ -8,7 +8,7 @@
           {% if e.sig_valid %}
             <i class="fas fa-fw fa-signature-lock text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed; signature validated"></i> <span class="text-small"><a href="{{ e.sig_permalink }}" target="_blank">{{ e.signed_string }}</a></span>
           {% elif e.signed_utc %}
-            <i class="fas fa-fw fa-sigature-slash text-danger" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed; unable to validate signature"></i> <span class="text-small"><a href="{{ e.sig_permalink }}" target="_blank">{{ e.signed_string }}</a></span>
+            <i class="fas fa-fw fa-signature-slash text-danger" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed; unable to validate signature"></i> <span class="text-small"><a href="{{ e.sig_permalink }}" target="_blank">{{ e.signed_string }}</a></span>
           {% else %}
             <i class="fas fa-fw fa-signature text-danger"></i> <span class="text-small">not signed</span>
           {% endif %}
