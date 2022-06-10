@@ -6,11 +6,13 @@ from .b36 import *
 from flask import g, session
 from os import environ
 
+from evidencelocker.__main__ import app
+
 def generate_hash(string):
 
     msg = bytes(string, "utf-16")
 
-    return hmac.new(key=bytes(environ.get("SECRET_KEY"), "utf-16"),
+    return hmac.new(key=bytes(app.config["SECRET_KEY"], "utf-16"),
                     msg=msg,
                     digestmod='md5'
                     ).hexdigest()
