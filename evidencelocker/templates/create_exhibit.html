@@ -38,7 +38,7 @@
         </div>
 
         <label for="input-body" class="mt-3 fw-bold">Text</label>
-        <textarea id="input-body" form="exhibit-create-form" name="body" class="form-control w-100" rows=5>{{ e.text_raw if e else body }}</textarea>
+        <textarea id="input-body" form="exhibit-create-form" name="body" class="form-control w-100" rows="5" placeholder="If you're attaching an image, make sure you describe it and why it's important.">{{ e.text_raw if e else body }}</textarea>
 
         <div class="custom-control custom-checkbox mt-4 d-flex">
           <input type="checkbox" class="custom-control-input m-1" id="oathcheck" name="oath_perjury" value="true">
