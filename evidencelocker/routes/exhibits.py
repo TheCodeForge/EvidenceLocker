@@ -5,6 +5,7 @@ from pprint import pprint
 
 from evidencelocker.decorators.auth import *
 from evidencelocker.helpers.text import raw_to_html, bleachify
+from evidencelocker.helpers.aws import s3_upload_file, s3_download_file
 
 from evidencelocker.__main__ import app
 
@@ -49,6 +50,18 @@ def post_create_exhibit(user):
         created_ip  = request.remote_addr
         )
 
+
+
+    g.db.add(exhibit)
+    g.db.flush()
+    g.db.refresh(exhibit)
+
+    if "file" in request.files:
+        file=request.files["file"]
+        if file.filename:
+            s3_upload_file(f"{exhibit.b36id}.png", file)
+
+
     if signed:
         exhibit.signed_ip = request.remote_addr
         exhibit.signed_country  = request.headers.get("cf-ipcountry")
@@ -58,7 +71,6 @@ def post_create_exhibit(user):
         g.db.refresh(exhibit)
         exhibit.signing_sha256 = exhibit.live_sha256
 
-    g.db.add(exhibit)
     g.db.commit()
     return redirect(exhibit.permalink)
 
@@ -178,3 +190,19 @@ def post_edit_exhibit_eid(user, eid):
     g.db.commit()
 
     return redirect(exhibit.permalink)
+
+
+@app.get("/exhibit_image/<eid>.png")
+@logged_in_any
+def get_exhibit_image_eid_png(user, eid):
+
+    exhibit = get_exhibit_by_id(eid)
+
+    if not exhibit.author.can_be_viewed_by_user(user):
+        abort(404)
+
+    b=s3_download_image(f"{eid}.png")
+
+    resp=make_response(b)
+    b.headers["ContentType"]="image/png"
+    return resp

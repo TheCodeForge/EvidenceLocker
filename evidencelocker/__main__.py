@@ -43,6 +43,10 @@ app.config['SERVER_NAME']                   = environ.get("SERVER_NAME")
 app.config['FORCE_HTTPS']                   = bool(int(environ.get("FORCE_HTTPS", 1)))
 app.config['SESSION_COOKIE_SECURE']         = True
 
+app.config["S3_BUCKET_NAME"]                = environ.get("S3_BUCKET_NAME")
+app.config["AWS_ACCESS_KEY_ID"]             = environ.get("AWS_ACCESS_KEY_ID")
+app.config["AWS_SECRET_ACCESS_KEY"]         = environ.get("AWS_SECRET_ACCESS_KEY")
+
 #===SQLALCHEMY===
 _engine=create_engine(
     app.config['DATABASE_URL'],
