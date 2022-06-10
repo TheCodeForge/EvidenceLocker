@@ -30,6 +30,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     edited_country=Column(String(2))
     signed_country=Column(String(2))
     signing_sha256 = Column(String(512))
+    image_sha256 = Column(String(512), default=None)
 
     author = relationship("VictimUser", lazy="joined", back_populates="exhibits")
 
