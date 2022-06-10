@@ -8,8 +8,8 @@
 
 # EvidenceLocker
 
-Evidence Locker will be a free tool for victims of domestic, sexual, financial or other abuse to document their experiences and preserve their evidence for law enforcement.
+Evidence Locker is a free tool for victims of domestic, sexual, financial or other abuse to document their experiences and preserve their evidence for law enforcement.
 
-Content uploaded to your Evidence Locker is private, and may not be changed or deleted once it has been saved. Use your Locker to document evidence of your abuse, so that you don't have to rely on your memory later on - or have your memory questioned by your abuser in court.
+Content uploaded to your Evidence Locker is private, and may not be changed or deleted once it has been saved and signed. Use your Locker to document evidence of your abuse, so that you don't have to rely on your memory later on - or have your memory questioned by your abuser in court.
 
 When you are ready to go to the police, you can share your Locker with your police department.

@@ -6,7 +6,7 @@
 {% filter markdown %}
 #### Admin Home
 
-* [Unverified Police Registrations](/users/police/unverified)
+* {% if police_count%}<span class="fw-bold text-danger">[{{police_count}}] </span>{% endif %}[Unverified Police Registrations](/users/police/unverified)
 * [Victim Accounts](/users/victims)
 * [Write Blog](/create_blog)
 
