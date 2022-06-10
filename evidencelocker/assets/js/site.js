@@ -70,3 +70,17 @@ $("#dark-mode-toggle").click(function(){
       }
     })
 })
+
+
+//Image attach preview
+
+$('#file-upload').on('change', function(e){
+  f=document.getElementById('file-upload');
+  $('#filename-show').text($('#file-upload')[0].files[0].name);
+
+  var fileReader = new FileReader();
+  fileReader.readAsDataURL(f.files[0]);
+  fileReader.addEventListener("load", function () {
+    $('#image-preview').attr('src', this.result);
+  });  
+})
