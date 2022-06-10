@@ -59,7 +59,11 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     @lazy
     def sig_permalink(self):
         return f"{self.permalink}/signature"
-    
+
+    @property
+    @lazy
+    def pic_permalink(self):
+        return f"/exhibit_image/{self.b36id}.png"
 
     @property
     @lazy
