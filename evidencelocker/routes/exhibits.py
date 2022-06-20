@@ -204,5 +204,5 @@ def get_exhibit_image_eid_png(user, eid):
     b=s3_download_file(f"{eid}.png")
 
     resp=make_response(b)
-    b.headers["ContentType"]="image/png"
+    b.headers["Content-Type"]="image/png"
     return resp
