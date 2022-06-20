@@ -201,7 +201,7 @@ def get_exhibit_image_eid_png(user, eid):
     if not exhibit.author.can_be_viewed_by_user(user):
         abort(404)
 
-    b=s3_download_image(f"{eid}.png")
+    b=s3_download_file(f"{eid}.png")
 
     resp=make_response(b)
     b.headers["ContentType"]="image/png"
