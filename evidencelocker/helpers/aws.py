@@ -35,7 +35,7 @@ def s3_download_file(name):
 	with b as f:
 		S3.download_fileobj(
 			app.config["S3_BUCKET_NAME"],
-			tempname,
+			name,
 			b
 			)
 
