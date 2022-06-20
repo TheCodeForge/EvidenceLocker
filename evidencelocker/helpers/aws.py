@@ -38,6 +38,5 @@ def s3_download_file(name):
 			name,
 			b
 			)
-
-	return b
+		return b
 
