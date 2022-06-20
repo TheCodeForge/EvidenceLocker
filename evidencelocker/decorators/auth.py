@@ -42,7 +42,7 @@ def logged_in_police(f):
             abort(403)
 
         #24hr automatic timeout for police
-        if g.time - session.get("last_request",0) > 86400 #60*60*24:
+        if g.time - session.get("last_request",0) > 86400: #60*60*24
             abort(401)
             
         user = get_police_by_id(session.get("uid"))
