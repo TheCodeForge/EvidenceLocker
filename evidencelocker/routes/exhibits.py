@@ -2,6 +2,7 @@ import bleach
 import mistletoe
 import pyotp
 from pprint import pprint
+from io import BytesIO
 
 from evidencelocker.decorators.auth import *
 from evidencelocker.helpers.text import raw_to_html, bleachify
@@ -201,9 +202,9 @@ def get_exhibit_image_eid_png(user, eid):
     if not exhibit.author.can_be_viewed_by_user(user):
         abort(404)
 
-    b=s3_download_file(f"{eid}.png")
+    b=BytesIO(s3_download_file(f"{eid}.png"))
 
     return send_file(
-        b.read(),
+        b,
         mimetype="image/png"
         )

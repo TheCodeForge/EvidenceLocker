@@ -37,5 +37,5 @@ def s3_download_file(name):
 			name,
 			f
 			)
-		return f
-
+		f.seek(0)
+		return f.read()
