@@ -13,12 +13,8 @@ S3 = boto3.client(
 
 def s3_upload_file(name, file):
 
-	tempname=name.replace("/","_")
-
-	file.save(tempname)
-
-	S3.upload_file(
-		name,
+	S3.upload_fileobj(
+		file,
 		Bucket=app.config["S3_BUCKET_NAME"],
 		Key=name,
 		ExtraArgs={
