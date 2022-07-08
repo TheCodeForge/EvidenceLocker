@@ -220,13 +220,16 @@ def post_edit_exhibit_eid(user, eid):
     return redirect(exhibit.permalink)
 
 
-@app.get("/exhibit_image/<eid>.png")
+@app.get("/exhibit_image/<eid>/<digits>.png")
 @logged_in_any
-def get_exhibit_image_eid_png(user, eid):
+def get_exhibit_image_eid_png(user, eid, digits):
 
     exhibit = get_exhibit_by_id(eid)
 
     if not exhibit.author.can_be_viewed_by_user(user):
+        abort(404)
+
+    if exhibit.image_sha256[-6:] != digits:
         abort(404)
 
     return send_file(
