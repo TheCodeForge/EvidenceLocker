@@ -84,14 +84,14 @@ $('#file-upload').on('change', function(e){
     $('#image-preview').attr('src', this.result);
   });  
 
-  $("#image_action").value("replace");
+  $("#image_action").attr("value", "replace");
   $("#image-delete-button").removeClass("d-none")
 })
 
 //Image delete preview
 $("#image-delete-button").click(function(){
   $("#image-delete-button").addClass("d-none");
-  $("#image_action").value("delete");
+  $("#image_action").attr("value", "delete");
   $("#image-preview").attr("src",'');
   $("#filename-show").text("Select Image")
 })
