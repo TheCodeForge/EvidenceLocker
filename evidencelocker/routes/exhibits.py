@@ -52,7 +52,6 @@ def post_create_exhibit(user):
         )
 
 
-
     g.db.add(exhibit)
     g.db.flush()
     g.db.refresh(exhibit)
@@ -60,13 +59,8 @@ def post_create_exhibit(user):
     #handle attached file
     if "file" in request.files:
         file=request.files["file"]
-
-
         exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
         s3_upload_file(exhibit.pic_permalink, file)
-
-
-
 
 
     if signed:
@@ -180,6 +174,8 @@ def post_edit_exhibit_eid(user, eid):
 
         file=request.files["file"]
         exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
+
+        print(exhibit.image_sha256, exhibit.pic_permalink)
         s3_upload_file(exhibit.pic_permalink, file)
 
     elif image_action=="delete":
