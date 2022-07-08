@@ -57,10 +57,15 @@ def post_create_exhibit(user):
     g.db.flush()
     g.db.refresh(exhibit)
 
+    #handle attached file
     if "file" in request.files:
         file=request.files["file"]
         if file.filename:
             s3_upload_file(f"{exhibit.b36id}.png", file)
+
+        exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
+
+
 
 
     if signed:
@@ -202,9 +207,9 @@ def get_exhibit_image_eid_png(user, eid):
     if not exhibit.author.can_be_viewed_by_user(user):
         abort(404)
 
-    b=BytesIO(s3_download_file(f"{eid}.png"))
+    #b=BytesIO(s3_download_file(f"{eid}.png"))
 
     return send_file(
-        b,
+        s3_download_file(f"{eid}.png"),
         mimetype="image/png"
         )
