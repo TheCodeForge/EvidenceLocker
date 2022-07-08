@@ -40,3 +40,10 @@ def s3_download_file(name):
 		)
 	b.seek(0)
 	return b
+
+def s3_delete_file(name):
+
+	S3.delete_object(
+	    Bucket=app.config["S3_BUCKET_NAME"],
+	    Key=name
+	)

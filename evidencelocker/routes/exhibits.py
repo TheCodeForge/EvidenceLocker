@@ -6,7 +6,7 @@ from io import BytesIO
 
 from evidencelocker.decorators.auth import *
 from evidencelocker.helpers.text import raw_to_html, bleachify
-from evidencelocker.helpers.aws import s3_upload_file, s3_download_file
+from evidencelocker.helpers.aws import s3_upload_file, s3_download_file, s3_delete_file
 
 from evidencelocker.__main__ import app
 
@@ -60,10 +60,11 @@ def post_create_exhibit(user):
     #handle attached file
     if "file" in request.files:
         file=request.files["file"]
-        if file.filename:
-            s3_upload_file(f"{exhibit.b36id}.png", file)
+
 
         exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
+        s3_upload_file(exhibit.pic_permalink, file)
+
 
 
 
@@ -160,6 +161,33 @@ def post_edit_exhibit_eid(user, eid):
         abort(403)
 
 
+
+
+
+    title = bleachify(request.form.get("title"))
+
+    body_raw = request.form.get("body").replace('\r', '')
+
+    body_html = raw_to_html(body_raw)
+
+
+    #process edits to attached image
+    image_action=request.form.get("image_action")
+    
+    if image_action=="replace":
+        if "file" in request.files:
+            file=request.files["file"]
+
+            s3_delete_file(exhibit.pic_permalink)
+
+            exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
+
+            s3_upload_file(exhibit.pic_permalink, file)
+
+    elif image_action=="delete":
+        s3_delete_file(exhibit.pic_permalink)
+
+
     signed = request.form.get("oath_perjury", False)
 
     if signed:
@@ -171,14 +199,7 @@ def post_edit_exhibit_eid(user, eid):
                 e=exhibit
                 )
 
-
-    title = bleachify(request.form.get("title"))
-
-    body_raw = request.form.get("body").replace('\r', '')
-
-    body_html = raw_to_html(body_raw)
-
-    edited = (body_raw != exhibit.text_raw or title != exhibit.title)
+    edited = (body_raw != exhibit.text_raw) or (title != exhibit.title) or (image_action != None)
 
     exhibit.edited_utc = g.time if edited else exhibit.edited_utc
     exhibit.edited_ip = request.remote_addr if edited else exhibit.edited_ip
@@ -207,9 +228,7 @@ def get_exhibit_image_eid_png(user, eid):
     if not exhibit.author.can_be_viewed_by_user(user):
         abort(404)
 
-    #b=BytesIO(s3_download_file(f"{eid}.png"))
-
     return send_file(
-        s3_download_file(f"{eid}.png"),
+        s3_download_file(exhibit.pic_permalink),
         mimetype="image/png"
         )

@@ -64,7 +64,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     @property
     @lazy
     def pic_permalink(self):
-        return f"/exhibit_image/{self.b36id}.png"
+        return f"/exhibit_image/{self.b36id}/{self.image_sha256[-6:]}.png"
 
     @property
     @lazy
