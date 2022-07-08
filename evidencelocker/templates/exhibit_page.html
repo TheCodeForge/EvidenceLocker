@@ -26,8 +26,8 @@
   <div class="card-body">
 
     {% if e.image_sha256 %}
-    <a id="img-toggle-button" class="btn btn-muted"><i id="img-toggle-icon" class="far fa-image"></i></a>
-    <img id="img-toggle-display" src="{{ e.pic_permalink }}" class="mw-100 d-none">
+    <a id="img-toggle-button" class="btn mb-3 border text-dark border-dark"><i id="img-toggle-icon" class="far fa-fw fa-image"></i></a>
+    <img id="img-toggle-display" src="{{ e.pic_permalink }}" class="mw-100 d-none mb-3">
     {% endif %}
     <div>
     {{ e.text_html | safe }}
