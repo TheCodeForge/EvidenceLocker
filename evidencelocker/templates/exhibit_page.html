@@ -24,6 +24,9 @@
 <div id="exhibit-{{ e.b36id }}" class="card border rounded">
   <div class="card-title"><h1 class="h3 text-primary px-3 py-2">{{ e.title }}</h1></div>
   <div class="card-body">
+    {% if e.image_sha256 %}
+    <img src="{{ e.pic_permalink }}">
+    {% endif %}
     <div>
     {{ e.text_html | safe }}
     </div>
