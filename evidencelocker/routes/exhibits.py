@@ -175,14 +175,12 @@ def post_edit_exhibit_eid(user, eid):
     image_action=request.form.get("image_action")
     
     if image_action=="replace":
-        if "file" in request.files:
-            file=request.files["file"]
-
+        if exhibit.image_sha256:
             s3_delete_file(exhibit.pic_permalink)
 
-            exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
-
-            s3_upload_file(exhibit.pic_permalink, file)
+        file=request.files["file"]
+        exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
+        s3_upload_file(exhibit.pic_permalink, file)
 
     elif image_action=="delete":
         s3_delete_file(exhibit.pic_permalink)
