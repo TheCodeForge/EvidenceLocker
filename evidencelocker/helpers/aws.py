@@ -1,5 +1,6 @@
 import boto3
 
+from os import remove
 from io import BytesIO
 from evidencelocker.__main__ import app
 
@@ -12,8 +13,12 @@ S3 = boto3.client(
 
 def s3_upload_file(name, file):
 
-	S3.upload_fileobj(
-		file,
+	tempname=name.replace("/","_")
+
+	file.save(tempname)
+
+	S3.upload_file(
+		tempname,
 		Bucket=app.config["S3_BUCKET_NAME"],
 		Key=name,
 		ExtraArgs={
@@ -21,6 +26,8 @@ def s3_upload_file(name, file):
 			"StorageClass":"INTELLIGENT_TIERING"
 			}
 		)
+
+	remove(tempname)
 
 def s3_download_file(name):
 
