@@ -1,6 +1,5 @@
 import boto3
 
-from os import remove
 from io import BytesIO
 from evidencelocker.__main__ import app
 
@@ -22,8 +21,6 @@ def s3_upload_file(name, file):
 			"StorageClass":"INTELLIGENT_TIERING"
 			}
 		)
-
-	remove(tempname)
 
 def s3_download_file(name):
 
