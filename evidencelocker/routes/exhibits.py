@@ -174,6 +174,7 @@ def post_edit_exhibit_eid(user, eid):
 
         file=request.files["file"]
         exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
+        file.seek(0)
 
         print(exhibit.image_sha256, exhibit.pic_permalink)
         s3_upload_file(exhibit.pic_permalink, file)
