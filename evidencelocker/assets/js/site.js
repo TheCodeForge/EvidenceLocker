@@ -84,3 +84,10 @@ $('#file-upload').on('change', function(e){
     $('#image-preview').attr('src', this.result);
   });  
 })
+
+//Image display toggle
+$("#img-toggle-button").click(function(){
+  $("#img-toggle-icon").toggleClass("fa-image");
+  $("#img-toggle-icon").toggleClass("fa-image-slash");
+  $("#img-toggle-display").toggleClass("d-none")
+})
