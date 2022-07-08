@@ -62,6 +62,7 @@ def post_create_exhibit(user):
         exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
         file.seek(0)
         s3_upload_file(exhibit.pic_permalink, file)
+        g.db.add(exhibit)
 
 
     if signed:
