@@ -35,7 +35,7 @@
             <div id="filename-show">{{ "Change Image" if e and e.image_sha256 else "Select Image" }}</div>
             <input id="file-upload" type="file" name="file" accept="image/*" hidden>
           </label>
-          <label id="image-delete-button" class="btn btn-danger ms-2{{ '' if e.image_sha256 else ' d-none' }}"><i class="fas fa-trash-can"></i></label>
+          <label id="image-delete-button" class="btn btn-danger ms-2{{ '' if e and e.image_sha256 else ' d-none' }}"><i class="fas fa-trash-can"></i></label>
         </div>
 
         <input id="image_action" type="hidden" name="image_action" value="none">
