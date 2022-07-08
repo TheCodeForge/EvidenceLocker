@@ -32,7 +32,7 @@
           <label for="attach-image" class="mt-3 fw-bold">Image Upload</label>
           <img id="image-preview" class="mw-100 d-block" src="{{ e.pic_permalink if e and e.image_sha256 else '' }}">
           <label class="btn btn-secondary m-0" for="file-upload">
-            <div id="filename-show">{{ "Change Image" if e.image_sha256 else "Select Image" }}</div>
+            <div id="filename-show">{{ "Change Image" if e and e.image_sha256 else "Select Image" }}</div>
             <input id="file-upload" type="file" name="file" accept="image/*" hidden>
           </label>
           <label id="image-delete-button" class="btn btn-danger ms-2{{ '' if e.image_sha256 else ' d-none' }}"><i class="fas fa-trash-can"></i></label>
