@@ -31,11 +31,12 @@ def s3_upload_file(name, file):
 
 def s3_download_file(name):
 
-	with BytesIO() as f:
-		S3.download_fileobj(
-			app.config["S3_BUCKET_NAME"],
-			name,
-			f
-			)
-		f.seek(0)
-		return f
+	b=BytesIO()
+
+	S3.download_fileobj(
+		app.config["S3_BUCKET_NAME"],
+		name,
+		b
+		)
+	b.seek(0)
+	return b
