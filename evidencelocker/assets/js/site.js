@@ -76,13 +76,24 @@ $("#dark-mode-toggle").click(function(){
 
 $('#file-upload').on('change', function(e){
   f=document.getElementById('file-upload');
-  $('#filename-show').text($('#file-upload')[0].files[0].name);
+  $('#filename-show').text("Change Image");
 
   var fileReader = new FileReader();
   fileReader.readAsDataURL(f.files[0]);
   fileReader.addEventListener("load", function () {
     $('#image-preview').attr('src', this.result);
   });  
+
+  $("#image_action").value("replace");
+  $("#image-delete-button").removeClass("d-none")
+})
+
+//Image delete preview
+$("#image-delete-button").click(function(){
+  $("#image-delete-button").addClass("d-none");
+  $("#image_action").value("delete");
+  $("#image-preview").attr("src",'');
+  $("#filename-show").text("Select Image")
 })
 
 //Image display toggle
