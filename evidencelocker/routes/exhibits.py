@@ -186,6 +186,7 @@ def post_edit_exhibit_eid(user, eid):
 
     elif image_action=="delete":
         s3_delete_file(exhibit.pic_permalink)
+        exhibit.image_sha256=None
 
 
     signed = request.form.get("oath_perjury", False)
