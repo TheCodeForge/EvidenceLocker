@@ -91,7 +91,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
         
         #get fresh image hash
         if data["image_sha256"]:
-            data["image_sha256"]=hashlib.sha256(s3_download_file(exhibit.pic_permalink).read()).hexdigest()
+            data["image_sha256"]=hashlib.sha256(s3_download_file(self.pic_permalink).read()).hexdigest()
         else:
             data.pop("image_sha256")
 
