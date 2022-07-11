@@ -92,8 +92,12 @@ def before_request():
 def after_request(resp):
 
     #session teardown
-    g.db.close()
+    try:
+        g.db.close()
+    except AttributeError:
+        pass
 
+    
     #set response timer
     session["last_request"]=g.time
 
