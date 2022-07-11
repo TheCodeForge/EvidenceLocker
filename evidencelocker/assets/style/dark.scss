@@ -7,6 +7,18 @@ $black:       #ffffff;
 $white:       #000000;
 $body-color:  #d4d9dd;
 
+
+//invert gray scale
+$gray-900: #f8f9fa !default;
+$gray-800: #e9ecef !default;
+$gray-700: #dee2e6 !default;
+$gray-600: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-400: #6c757d !default;
+$gray-300: #495057 !default;
+$gray-200: #343a40 !default;
+$gray-100: #212529 !default;
+
 //invert tint and shade
 
 @function tint($color, $percentage) {
