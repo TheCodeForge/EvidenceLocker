@@ -30,6 +30,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     edited_country=Column(String(2))
     signed_country=Column(String(2))
     signing_sha256 = Column(String(512))
+    image_sha256 = Column(String(512), default=None)
 
     author = relationship("VictimUser", lazy="joined", back_populates="exhibits")
 
@@ -59,7 +60,10 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     @lazy
     def sig_permalink(self):
         return f"{self.permalink}/signature"
-    
+
+    @property
+    def pic_permalink(self):
+        return f"/exhibit_image/{self.b36id}/{self.image_sha256[-6:]}.png"
 
     @property
     @lazy

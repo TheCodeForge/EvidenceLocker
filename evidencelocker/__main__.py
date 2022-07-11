@@ -38,10 +38,14 @@ app.config["HCAPTCHA_SITEKEY"]              = environ.get("HCAPTCHA_SITEKEY")
 app.config["MAILGUN_KEY"]                   = environ.get("MAILGUN_KEY")
 app.config["PERMANENT_SESSION_LIFETIME"]    = 60 * 60 * 24 * 30
 app.config["SESSION_REFRESH_EACH_REQUEST"]  = True
-app.config['SECRET_KEY']                    = environ.get("SECRET_KEY")
+app.config['SECRET_KEY']                    = environ.get("SECRET_KEY", secrets.token_hex(128))
 app.config['SERVER_NAME']                   = environ.get("SERVER_NAME")
 app.config['FORCE_HTTPS']                   = bool(int(environ.get("FORCE_HTTPS", 1)))
 app.config['SESSION_COOKIE_SECURE']         = True
+
+app.config["S3_BUCKET_NAME"]                = environ.get("S3_BUCKET_NAME")
+app.config["AWS_ACCESS_KEY_ID"]             = environ.get("AWS_ACCESS_KEY_ID")
+app.config["AWS_SECRET_ACCESS_KEY"]         = environ.get("AWS_SECRET_ACCESS_KEY")
 
 #===SQLALCHEMY===
 _engine=create_engine(
