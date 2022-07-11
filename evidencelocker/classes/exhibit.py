@@ -114,7 +114,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     def live_sha256_with_fresh_image_hash(self):
 
         data=self.json_for_sig
-        if data["image_sha256"]:
+        if data.get("image_sha256"):
             data["image_sha256"]=self.fresh_image_hash
 
         return hashlib.new('sha256', json.dumps(self.json_for_sig, sort_keys=True).encode('utf-8'), usedforsecurity=True).hexdigest()
