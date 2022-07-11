@@ -6,7 +6,7 @@ import re
 import werkzeug.security
 
 from .mixins import *
-from evidencelocker.helpers.aws import s3_download_file
+# from evidencelocker.helpers.aws import s3_download_file
 
 from evidencelocker.decorators.lazy import lazy
 from evidencelocker.__main__ import Base
@@ -94,12 +94,12 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
 
         return data
 
-    @property
-    def fresh_image_hash(self):
-        if not self.image_sha256:
-            return None
+    # @property
+    # def fresh_image_hash(self):
+    #     if not self.image_sha256:
+    #         return None
 
-        return hashlib.sha256(s3_download_file(self.pic_permalink).read()).hexdigest()
+    #     return hashlib.sha256(s3_download_file(self.pic_permalink).read()).hexdigest()
     
     
     @property
