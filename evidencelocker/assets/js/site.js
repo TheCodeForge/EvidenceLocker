@@ -70,3 +70,35 @@ $("#dark-mode-toggle").click(function(){
       }
     })
 })
+
+
+//Image attach preview
+
+$('#file-upload').on('change', function(e){
+  f=document.getElementById('file-upload');
+  $('#filename-show').text("Change Image");
+
+  var fileReader = new FileReader();
+  fileReader.readAsDataURL(f.files[0]);
+  fileReader.addEventListener("load", function () {
+    $('#image-preview').attr('src', this.result);
+  });  
+
+  $("#image_action").attr("value", "replace");
+  $("#image-delete-button").removeClass("d-none")
+})
+
+//Image delete preview
+$("#image-delete-button").click(function(){
+  $("#image-delete-button").addClass("d-none");
+  $("#image_action").attr("value", "delete");
+  $("#image-preview").attr("src",'');
+  $("#filename-show").text("Select Image")
+})
+
+//Image display toggle
+$("#img-toggle-button").click(function(){
+  $("#img-toggle-icon").toggleClass("fa-image");
+  $("#img-toggle-icon").toggleClass("fa-image-slash");
+  $("#img-toggle-display").toggleClass("d-none")
+})
