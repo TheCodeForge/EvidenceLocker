@@ -173,26 +173,17 @@ def post_edit_exhibit_eid(user, eid):
     if image_action=="replace":
         if exhibit.image_sha256:
             s3_delete_file(exhibit.pic_permalink)
-            exhibit.image_sha256=None
-            g.db.add(exhibit)
-            g.db.flush()
 
         file=request.files["file"]
         exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
-        g.db.add(exhibit)
-        g.db.flush()
-        
         file.seek(0)
 
         #print(exhibit.image_sha256, exhibit.pic_permalink)
         s3_upload_file(exhibit.pic_permalink, file)
 
-
     elif image_action=="delete":
         s3_delete_file(exhibit.pic_permalink)
         exhibit.image_sha256=None
-        g.db.add(exhibit)
-        g.db.flush()
 
 
     signed = request.form.get("oath_perjury", False)
