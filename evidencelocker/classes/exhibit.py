@@ -87,6 +87,13 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     def json_for_sig(self):
         data=self.json_core
         data.pop('signing_sha256')
+        
+        #get fresh image hash
+        if data["image_sha256"]:
+            data["image_sha256"]=hashlib.sha256(s3_download_file(exhibit.pic_permalink).read()).hexdigest()
+        else:
+            data.pop("image_sha256")
+
         return data
     
     @property
