@@ -6,6 +6,7 @@ import re
 import werkzeug.security
 
 from .mixins import *
+from evidencelocker.helpers.aws import s3_download_file
 
 from evidencelocker.decorators.lazy import lazy
 from evidencelocker.__main__ import Base
