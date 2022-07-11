@@ -6,7 +6,7 @@ import re
 import werkzeug.security
 
 from .mixins import *
-# from evidencelocker.helpers.aws import s3_download_file
+from evidencelocker.helpers.aws import s3_download_file
 
 from evidencelocker.decorators.lazy import lazy
 from evidencelocker.__main__ import Base
@@ -94,12 +94,13 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
 
         return data
 
-    # @property
-    # def fresh_image_hash(self):
-    #     if not self.image_sha256:
-    #         return None
+    @property
+    @lazy
+    def fresh_image_hash(self):
+        if not self.image_sha256:
+            return None
 
-    #     return hashlib.sha256(s3_download_file(self.pic_permalink).read()).hexdigest()
+        return hashlib.sha256(s3_download_file(self.pic_permalink).read()).hexdigest()
     
     
     @property
@@ -108,12 +109,26 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
 
         return hashlib.new('sha256', json.dumps(self.json_for_sig, sort_keys=True).encode('utf-8'), usedforsecurity=True).hexdigest()
 
+    @property
+    @lazy
+    def live_sha256_with_fresh_image_hash(self):
+
+        data=self.json_for_sig
+        if data["image_sha256"]:
+            data["image_sha256"]=self.fresh_image_hash
+
+        return hashlib.new('sha256', json.dumps(self.json_for_sig, sort_keys=True).encode('utf-8'), usedforsecurity=True).hexdigest()
 
     @property
     @lazy
     def sig_valid(self):
         return self.signing_sha256==self.live_sha256
 
+
+    @property
+    @lazy
+    def sig_valid_with_fresh_image(self):
+        return self.signing_sha256==self.live_sha256
 
 
 
