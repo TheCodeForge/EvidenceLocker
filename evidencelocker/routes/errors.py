@@ -15,6 +15,10 @@ def error_401(e):
 def error_401(e):
 	return render_template("errors/404.html"), 404
 
+@app.errorhandler(500)
+def error_401(e):
+	return render_template("errors/500.html"), 500
+
 @app.errorhandler(TemplateNotFound)
 def error_templatenotfound(e):
 	return render_template("errors/404.html"), 404
