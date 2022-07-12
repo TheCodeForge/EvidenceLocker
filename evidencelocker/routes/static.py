@@ -1,5 +1,6 @@
 import sass
 from flask import *
+from werkzeug.utils import safe_join
 
 from evidencelocker.decorators.auth import *
 from evidencelocker.__main__ import app
