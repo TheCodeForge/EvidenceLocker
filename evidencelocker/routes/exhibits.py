@@ -151,7 +151,8 @@ def get_locker_username_all_signed_exhibits(user, username):
         )
 
 @app.get("/locker/<username>/exhibit_verification")
-def get_locker_username_exhibit_verification(username):
+@logged_in_desired
+def get_locker_username_exhibit_verification(user, username):
 
     target_user=get_victim_by_username(username)
 
