@@ -41,7 +41,7 @@
   {% if verification_link %}
   <p>The following is a public link for this page with this exact set of exhibits:</p>
 
-  <img class="mw-100 mx-auto" src="{{ verification_link | full_link | qrcode_img_data }}">
+  <img class="mw-100 mx-auto avoid-pagebreak" src="{{ verification_link | full_link | qrcode_img_data }}">
   <p class="text-small justify-content-center">{{ verification_link | full_link }}</p>
   {% endif %}
 </div>
