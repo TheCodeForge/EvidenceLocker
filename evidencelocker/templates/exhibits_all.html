@@ -11,7 +11,7 @@
   <div class="card-body">
 
     {% if e.image_sha256 %}
-    <img id="img-toggle-display" src="{{ e.pic_permalink }}" class="mw-100 mb-3">
+    <img id="img-toggle-display" src="{{ e.pic_permalink }}{% if user==None %}?token={{ e.pic_permalink | path_token }}{% endif %}" class="mw-100 mb-3">
     {% endif %}
     <div>
     {{ e.text_html | safe }}
@@ -31,11 +31,11 @@
 </div>
 {% endfor %}
 
-<div class="border-top mt-5">
-  <p class="justify-content-center"><i>End of Locker Content</i></p>
+<div class="border-top mt-5 text-center">
+  <p><i>End of Locker Content</i></p>
 
   {% if "exhibit_verification" not in request.path %}
-  <p class="justify-content-center">The contents of this document may be verified against live EvidenceLocker data at the following link:</p>
+  <p>The contents of this document may be verified against live EvidenceLocker data at the following link:</p>
 
   <img class="mw-100 mx-auto" src="{{ verification_link | full_link | qrcode_img_data }}">
   <p class="text-small justify-content-center">{{ verification_link | full_link }}</p>

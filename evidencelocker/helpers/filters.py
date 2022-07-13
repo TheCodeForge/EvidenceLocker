@@ -39,6 +39,10 @@ def full_link(x):
 def nonce(x):
     return generate_hash(f"{session.get('session_id')}+{x}")
 
+@app.template_filter("path_token")
+def path_token(x):
+    return generate_hash(x)
+
 @app.template_filter('logged_out_token')
 def logged_out_token(x):
     return logged_out_csrf_token()
