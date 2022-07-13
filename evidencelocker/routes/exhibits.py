@@ -161,9 +161,6 @@ def get_locker_username_exhibit_verification(user, username):
 
     if not validate_hash(f"{target_user.username},{exhibit_ids}", token):
         abort(403)
-
-
-    verification_link=f"/locker/{target_user.username}/exhibit_verification?e={exhibit_ids}&token={token}"
     
     exhibit_ids=exhibit_ids.split(",")
     exhibits=get_exhibits_by_ids(exhibit_ids)
@@ -175,7 +172,6 @@ def get_locker_username_exhibit_verification(user, username):
         "exhibits_all.html",
         target_user=target_user,
         exhibits=exhibits,
-        verification_link=verification_link,
         user=user
         )
 

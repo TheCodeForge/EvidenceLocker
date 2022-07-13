@@ -36,9 +36,12 @@
 {% block footer_text %}
 <div class="border-top">
   <p class="justify-content-center"><i>End of Locker Content</i></p>
+
+  {% if "exhibit_verification" not in request.path %}
   <p class="justify-content-center">The contents of this document may be verified against live EvidenceLocker data at the following link:</p>
 
   <img class="mw-100 mx-auto" src="{{ verification_link | full_link | qrcode_img_data }}">
   <p class="text-small justify-content-center">{{ verification_link | full_link }}</p>
+  {% endif %}
 </div>
 {% endblock %}
