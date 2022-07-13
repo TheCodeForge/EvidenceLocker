@@ -33,7 +33,7 @@ def qrcode_filter(x):
 
 @app.template_filter('full_link')
 def full_link(x):
-    return urlunparse(urlparse(x)._replace(scheme=f"http{ 's' if app.config["FORCE_HTTPS"] else '' }", netloc=app.config['SERVER_NAME']))
+    return urlunparse(urlparse(x)._replace(scheme=f"http{ 's' if app.config['FORCE_HTTPS'] else '' }", netloc=app.config['SERVER_NAME']))
 
 @app.template_filter('nonce')
 def nonce(x):
