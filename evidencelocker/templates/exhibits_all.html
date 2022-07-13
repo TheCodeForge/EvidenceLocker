@@ -15,7 +15,7 @@
 
 {% block pagecontent %}
 {% for e in target_user.exhibits if e.signed_utc %}
-<div id="exhibit-{{ e.b36id }}" class="card border rounded mb-3">
+<div id="exhibit-{{ e.b36id }}" class="card border rounded mb-3 avoid-pagebreak">
   <div class="card-title"><h1 class="h3 text-primary px-3 py-2">{{ e.title }}</h1></div>
   <div class="card-body">
 
@@ -36,7 +36,7 @@
     {% endif %}
     {% if e.signed_utc %}
       <p><i class="fas fa-fw fa-signature-lock text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
-    {% else %}
+    {% endif %}
 
   </div>
 </div>

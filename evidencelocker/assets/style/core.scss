@@ -40,3 +40,8 @@ $small-font-size: 12px;
     width: 275px;
     z-index: 10000;
 }
+
+//Avoid pagebreak class
+.avoid-pagebreak {
+    page-break-inside: avoid;
+}
