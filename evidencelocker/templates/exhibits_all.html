@@ -1,6 +1,6 @@
 {% extends "base_centered.html" %}
 
-{% block title %}TEL - {{ e.title }}{% endblock %}
+{% block title %}TEL - {{ target_user.username }} exhibits{% endblock %}
 
 {% block rightsidebar %}
 <div id="exhibit-infocard" class="card border rounded d-none d-lg-block">
@@ -8,13 +8,13 @@
     <p class="fw-bold text-white m-0"><i class="fas fa-fw fa-circle-info"></i> Locker Information</p>
   </div>
   <div class="card-body">
-    <p><i class="fas fa-fw fa-user-pen" data-toggle="tooltip" data-placement="bottom" title="Exhibit Author"></i> <span class="text-small">{{ user.username }}</span></p>
+    <p><i class="fas fa-fw fa-user-pen" data-toggle="tooltip" data-placement="bottom" title="Exhibit Author"></i> <span class="text-small">{{ target_user.username }}</span></p>
   </div>
 </div>
 {% endblock %}
 
 {% block pagecontent %}
-{% for e in user.exhibits if e.signed_utc %}
+{% for e in target_user.exhibits if e.signed_utc %}
 <div id="exhibit-{{ e.b36id }}" class="card border rounded">
   <div class="card-title"><h1 class="h3 text-primary px-3 py-2">{{ e.title }}</h1></div>
   <div class="card-body">
