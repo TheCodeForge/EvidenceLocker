@@ -34,7 +34,7 @@
 <div class="border-top mt-5 text-center">
   <p><i>End of Locker Content</i></p>
 
-  {% if "exhibit_verification" not in request.path %}
+  {% if verification_link %}
   <p>The contents of this document may be verified against live EvidenceLocker data at the following link:</p>
 
   <img class="mw-100 mx-auto" src="{{ verification_link | full_link | qrcode_img_data }}">
