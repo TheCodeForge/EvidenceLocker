@@ -24,7 +24,7 @@
       <p><i class="fas fa-fw fa-pen-to-square" data-toggle="tooltip" data-placement="top" title="Exhibit last edited"></i> <span class="text-small">{{ e.edited_string }}</span></p>
     {% endif %}
     {% if e.signed_utc %}
-      <p><i class="fas fa-fw fa-signature-lock text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small"><a href="{{ e.sig_permalink }}{% if user==None %}?token={{ e.sig_permalink | path_token }}{% endif %}" target="_blank">{{ e.signed_string }}</a></span></p>
+      <p><i class="fas fa-fw {% if e.sig_valid %}fa-signature-lock text-success{% else %}fa-signature-slash text-danger{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small"><a href="{{ e.sig_permalink }}{% if user==None %}?token={{ e.sig_permalink | path_token }}{% endif %}" target="_blank">{{ e.signed_string }}</a></span></p>
     {% endif %}
 
   </div>
