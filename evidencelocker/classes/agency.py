@@ -23,7 +23,7 @@ class Agency(Base, b36ids, time_mixin, country_mixin):
     victims = association_proxy("share_records", "victim")
 
     def __repr__(self):
-        return f'<Agency(id={self.id})>'
+        return f'<Agency(id={self.b36id})>'
 
     @property
     @lazy

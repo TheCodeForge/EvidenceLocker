@@ -128,11 +128,11 @@ def get_locker_username_exhibit_eid_anything_signature(user, username, eid, anyt
         )
 
 @app.get("/locker/<username>/exhibits")
-@logged_in_any
+@logged_in_victim
 def get_locker_username_all_signed_exhibits(user, username):
 
     target_user = get_victim_by_username(username)
-    if not target_user.can_be_viewed_by_user(user):
+    if user != target_user:
         abort(404)
 
     exhibits=[e for e in target_user.exhibits if e.signed_utc]

@@ -33,7 +33,7 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin, country_mixin
     exhibits = relationship("Exhibit", order_by="Exhibit.id.desc()", back_populates="author")
 
     def __repr__(self):
-        return f'<VictimUser(id={self.id})>'
+        return f'<VictimUser(id={self.b36id}, username={self.username})>'
     
     @property
     def type_id(self):

@@ -34,7 +34,7 @@ class PoliceUser(Base, b36ids, time_mixin, user_mixin):
     victims = association_proxy("share_records", "victim")
 
     def __repr__(self):
-        return f'<PoliceUser(id={self.id})>'
+        return f'<PoliceUser(id={self.b36id})>'
 
     @property
     def permalink(self):

@@ -36,7 +36,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
     author = relationship("VictimUser", lazy="joined", back_populates="exhibits")
 
     def __repr__(self):
-        return f'<Exhibit(id={self.id})>'
+        return f'<Exhibit(id={self.b36id})>'
 
 
     @property
