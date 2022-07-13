@@ -2,6 +2,7 @@ import qrcode
 import io
 import base64
 import pprint
+from urllib.parse import urlparse, urlunparse
 
 from .hashes import *
 from .countries import COUNTRY_CODES
@@ -32,8 +33,7 @@ def qrcode_filter(x):
 
 @app.template_filter('full_link')
 def full_link(x):
-
-    return f"https://{app.config['SERVER_NAME']}{'/' if not x.startswith('/') else ''}{x}"
+    return urlunparse(urlparse(x)._replace(scheme=f"http{ 's' if app.config["FORCE_HTTPS"] else '' }", netloc=app.config['SERVER_NAME']))
 
 @app.template_filter('nonce')
 def nonce(x):
@@ -42,6 +42,11 @@ def nonce(x):
 @app.template_filter("path_token")
 def path_token(x):
     return generate_hash(x)
+
+@app.template_filter("add_token_param")
+def add_token_param(x):
+    parsed_url=urlparse(x)
+    return urlunparse(parsed_url._replace(query=f"token={generate_hash(parsed_url.path)}"))
 
 @app.template_filter('logged_out_token')
 def logged_out_token(x):
