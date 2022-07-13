@@ -39,18 +39,20 @@
   <p><i>End of Signed Locker Content</i></p>
 
   {% if verification_link %}
-  <p>The following is a public link for this page with this exact set of exhibits, including images and signature data:</p>
+  <div class="avoid-pagebreak">
+    <p>The following is a public link for this page with this exact set of exhibits, including images and signature data:</p>
 
-  <img class="mw-100 mx-auto avoid-pagebreak" src="{{ verification_link | full_link | add_token_param | qrcode_img_data }}">
-  <div class="d-flex w-75 mx-auto">
-    <input id="copy-addr" readonly="readonly" value="{{ verification_link | full_link | add_token_param }}" data-clipboard-text="{{ verification_link | full_link | add_token_param }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
-    <label for="copy-addr" class="input-overlay-icon" role="button">
-      <i class="fas fa-copy fa-fw"></i>
-    </label>
+    <img class="mw-100 mx-auto avoid-pagebreak" src="{{ verification_link | full_link | add_token_param | qrcode_img_data }}">
+    <div class="d-flex w-75 mx-auto">
+      <input id="copy-addr" readonly="readonly" value="{{ verification_link | full_link | add_token_param }}" data-clipboard-text="{{ verification_link | full_link | add_token_param }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
+      <label for="copy-addr" class="input-overlay-icon" role="button">
+        <i class="fas fa-copy fa-fw"></i>
+      </label>
+    </div>
+    <script nonce="{{ g.time | nonce }}">
+      window.onload=function(){window.print()}
+    </script>
   </div>
-  <script nonce="{{ g.time | nonce }}">
-    window.onload=function(){window.print()}
-  </script>
   {% endif %}
 </div>
 {% endblock %}
