@@ -138,9 +138,8 @@ def get_locker_username_all_signed_exhibits(user, username):
     exhibits=[e for e in target_user.exhibits if e.signed_utc]
 
     exhibit_ids=','.join([e.b36id for e in exhibits])
-    token=generate_hash(f"{target_user.username},{exhibit_ids}")
 
-    verification_link=f"/locker/{target_user.username}/exhibits_public?e={exhibit_ids}&token={token}"
+    verification_link=f"/locker/{target_user.username}/exhibits/{exhibit_ids}"
 
     return render_template(
         "exhibits_all.html",
@@ -150,16 +149,15 @@ def get_locker_username_all_signed_exhibits(user, username):
         user=user
         )
 
-@app.get("/locker/<username>/exhibits_public")
+@app.get("/locker/<username>/exhibits/<exhibit_ids>")
 @logged_in_desired
-def get_locker_username_exhibit_verification(user, username):
+def get_locker_username_exhibit_verification(user, username, exhibit_ids):
 
     target_user=get_victim_by_username(username)
 
-    exhibit_ids=request.args.get("e")
     token=request.args.get("token")
 
-    if not validate_hash(f"{target_user.username},{exhibit_ids}", token):
+    if not validate_hash(request.path, token):
         abort(403)
     
     exhibit_ids=exhibit_ids.split(",")
