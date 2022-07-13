@@ -104,7 +104,7 @@ def get_locker_username_exhibit_eid_anything(user, username, eid, anything):
         )
 
 @app.get("/locker/<username>/exhibit/<eid>/<anything>/signature")
-@logged_in_any
+@logged_in_desired
 def get_locker_username_exhibit_eid_anything_signature(user, username, eid, anything):
 
     exhibit = get_exhibit_by_id(eid)
@@ -272,7 +272,7 @@ def get_exhibit_image_eid_png(user, eid, digits):
 
     exhibit = get_exhibit_by_id(eid)
 
-    if not exhibit.author.can_be_viewed_by_user(user) and not validate_hash(request.path, request.args.get("token","")):
+    if not exhibit.author.can_be_viewed_by_user(user):
         abort(404)
 
     if exhibit.image_sha256[-6:] != digits:
