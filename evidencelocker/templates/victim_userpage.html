@@ -11,7 +11,7 @@
     <p><i class="fas fa-fw fa-user-plus" data-toggle="tooltip" data-placement="bottom" title="Account created"></i> <span class="text-small">{{ target_user.created_string }}</span></p>
     <p><i class="fas fa-fw fa-signature" data-toggle="tooltip" data-placement="bottom" title="Signed Exhibits"></i> <span class="text-small">{{ target_user.signed_exhibit_count }}</span></p>
     <p><i class="fas fa-fw fa-pen" data-toggle="tooltip" data-placement="bottom" title="Draft Exhibits"></i> <span class="text-small">{{ target_user.draft_exhibit_count }}</span></p>
-    <p><span class="text-small"><a href="{{ target_user.permalink }}/exhibits" target="_blank">Export Locker</a></span></p>
+    <p><span class="text-small"><a href="{{ target_user.permalink }}/exhibits" target="_blank">Export or Print Locker</a></span></p>
     {% if target_user==user %}
       <a class="btn btn-primary text-white" role="button" href="/settings/profile">Settings</a>
     {% endif %}
