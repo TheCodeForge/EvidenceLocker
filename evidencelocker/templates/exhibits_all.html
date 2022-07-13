@@ -24,7 +24,7 @@
       <p><i class="fas fa-fw fa-pen-to-square" data-toggle="tooltip" data-placement="top" title="Exhibit last edited"></i> <span class="text-small">{{ e.edited_string }}</span></p>
     {% endif %}
     {% if e.signed_utc %}
-      <p><i class="fas fa-fw fa-signature-lock text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small"><a href="{{ e.sig_permalink }}&token={{ e.sig_permalink | path_token }}" target="_blank">{{ e.signed_string }}</a></span></p>
+      <p><i class="fas fa-fw fa-signature-lock text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small"><a href="{{ e.sig_permalink }}{% if user==None %}?token={{ e.sig_permalink | path_token }}{% endif %}" target="_blank">{{ e.signed_string }}</a></span></p>
     {% endif %}
 
   </div>
@@ -39,7 +39,7 @@
   <p><i>End of Signed Locker Content</i></p>
 
   {% if verification_link %}
-  <p>The contents of this document may be verified against live EvidenceLocker data at the following link:</p>
+  <p>The following is a public link for this page with this exact set of exhibits:</p>
 
   <img class="mw-100 mx-auto" src="{{ verification_link | full_link | qrcode_img_data }}">
   <p class="text-small justify-content-center">{{ verification_link | full_link }}</p>
