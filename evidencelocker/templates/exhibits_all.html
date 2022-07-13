@@ -1,0 +1,47 @@
+{% extends "base_centered.html" %}
+
+{% block title %}TEL - {{ e.title }}{% endblock %}
+
+{% block rightsidebar %}
+<div id="exhibit-infocard" class="card border rounded d-none d-lg-block">
+  <div class="card-title bg-primary rounded-top px-2 py-1">
+    <p class="fw-bold text-white m-0"><i class="fas fa-fw fa-circle-info"></i> Locker Information</p>
+  </div>
+  <div class="card-body">
+    <p><i class="fas fa-fw fa-user-pen" data-toggle="tooltip" data-placement="bottom" title="Exhibit Author"></i> <span class="text-small">{{ user.username }}</span></p>
+  </div>
+</div>
+{% endblock %}
+
+{% block pagecontent %}
+{% for e in user.exhibits if e.signed_utc %}
+<div id="exhibit-{{ e.b36id }}" class="card border rounded">
+  <div class="card-title"><h1 class="h3 text-primary px-3 py-2">{{ e.title }}</h1></div>
+  <div class="card-body">
+
+    {% if e.image_sha256 %}
+    <img id="img-toggle-display" src="{{ e.pic_permalink }}" class="mw-100 mb-3">
+    {% endif %}
+    <div>
+    {{ e.text_html | safe }}
+    </div>
+    <div class="mt-4 border-top pt-4">
+    {% if e.signed_utc %}
+      <p>I swear, under penalty of perjury, that to the best of my current knowledge, the foregoing statement is true.</p>
+      <p><i class="fas fa-fw fa-signature-lock text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small"><a href="{{ e.sig_permalink }}" target="_blank">{{ e.signed_string }}</a></span></p>
+    {% else %}
+      <p><i class="fas fa-fw fa-signature text-danger"></i> Not signed</p>
+    {% endif %}
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <p><i class="fas fa-fw fa-file-plus" data-toggle="tooltip" data-placement="top" title="Exhibit created"></i> <span class="text-small">{{ e.created_string }}</span></p>
+    {% if e.edited_utc %}
+      <p><i class="fas fa-fw fa-pen-to-square" data-toggle="tooltip" data-placement="top" title="Exhibit last edited"></i> <span class="text-small">{{ e.edited_string }}</span></p>
+    {% endif %}
+
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

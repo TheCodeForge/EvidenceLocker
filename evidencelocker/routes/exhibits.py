@@ -126,6 +126,20 @@ def get_locker_username_exhibit_eid_anything_signature(user, username, eid, anyt
         user=user
         )
 
+@app.get("/locker/<username>/all_signed_exhibits")
+@logged_in_any
+def get_locker_username_all_signed_exhibits(user, username):
+
+    target_user = get_victim_by_username(username)
+    if not target_user.can_be_viewed_by_user(user):
+        abort(404)
+
+    return render_template(
+        "exhibits_all.html",
+        target_user=target_user,
+        user=user
+        )
+
 @app.get("/edit_exhibit/<eid>")
 @logged_in_victim
 def get_edit_exhibit_eid(user, eid):
