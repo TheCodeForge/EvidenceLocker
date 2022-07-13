@@ -2,18 +2,8 @@
 
 {% block title %}TEL - {{ target_user.username }} exhibits{% endblock %}
 
-{% block rightsidebar %}
-<div id="exhibit-infocard" class="card border rounded d-none d-lg-block">
-  <div class="card-title bg-primary rounded-top px-2 py-1">
-    <p class="fw-bold text-white m-0"><i class="fas fa-fw fa-circle-info"></i> Locker Information</p>
-  </div>
-  <div class="card-body">
-    <p><i class="fas fa-fw fa-user-pen" data-toggle="tooltip" data-placement="bottom" title="Exhibit Author"></i> <span class="text-small">{{ target_user.username }}</span></p>
-  </div>
-</div>
-{% endblock %}
-
 {% block pagecontent %}
+<h1>{{ target_user.username }}'s Locker</h1>
 {% for e in target_user.exhibits if e.signed_utc %}
 <div id="exhibit-{{ e.b36id }}" class="card border rounded mb-3 avoid-pagebreak">
   <div class="card-title"><h1 class="h3 text-primary px-3 py-2">{{ e.title }}</h1></div>
@@ -24,8 +14,6 @@
     {% endif %}
     <div>
     {{ e.text_html | safe }}
-    </div>
-    <div class="mt-4 border-top pt-4">
     </div>
   </div>
 
@@ -45,4 +33,9 @@
 
 
 
-{% block footer_text %}<i>End of Locker Content</i>{% endblock %}
+{% block footer_text %}
+<hr>
+<div class="justify-content-center">
+  <i>End of Locker Content</i>
+</div>
+{% endblock %}
