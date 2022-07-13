@@ -96,7 +96,12 @@ def get_exhibit_by_id(id, graceful=False):
 
 def get_exhibits_by_ids(ids):
 
-    id_list = tuple([base36decode(i) for i in ids if isinstance(id, str) else i])
+    id_list = []
+    for i in ids:
+        if isinstance(i, str):
+            id_list.append(base36decode(i))
+        else:
+            id_list.append(i)
 
     exhibits = g.db.query(Exhibit).filter(Exhibit.id.in_(id_list)).order_by(Exhibit.id.desc()).all()
     return exhibits
