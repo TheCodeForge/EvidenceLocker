@@ -45,16 +45,13 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin, country_mixin
     
     def can_be_viewed_by_user(self, other):
 
-        if self.is_banned:
+        if self.is_banned or (other and other.is_banned):
             return False
 
         if request.args.get("token") and validate_hash(request.path, request.args.get("token","")):
             return True
 
         if not other:
-            return False
-
-        if other.is_banned:
             return False
 
         if other is self:
