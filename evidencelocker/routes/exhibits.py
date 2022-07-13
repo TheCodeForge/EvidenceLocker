@@ -140,7 +140,7 @@ def get_locker_username_all_signed_exhibits(user, username):
     exhibit_ids=','.join([e.b36id for e in exhibits])
     token=generate_hash(f"{target_user.username},{exhibit_ids}")
 
-    verification_link=f"/locker/{target_user.username}/exhibit_verification?e={exhibit_ids}&token={token}"
+    verification_link=f"/locker/{target_user.username}/exhibits_public?e={exhibit_ids}&token={token}"
 
     return render_template(
         "exhibits_all.html",
@@ -150,7 +150,7 @@ def get_locker_username_all_signed_exhibits(user, username):
         user=user
         )
 
-@app.get("/locker/<username>/exhibit_verification")
+@app.get("/locker/<username>/exhibits_public")
 @logged_in_desired
 def get_locker_username_exhibit_verification(user, username):
 
@@ -267,12 +267,12 @@ def post_edit_exhibit_eid(user, eid):
 
 
 @app.get("/exhibit_image/<eid>/<digits>.png")
-@logged_in_any
+@logged_in_desired
 def get_exhibit_image_eid_png(user, eid, digits):
 
     exhibit = get_exhibit_by_id(eid)
 
-    if not exhibit.author.can_be_viewed_by_user(user):
+    if not exhibit.author.can_be_viewed_by_user(user) and not validate_hash(request.path, request.args.get("token","")):
         abort(404)
 
     if exhibit.image_sha256[-6:] != digits:
