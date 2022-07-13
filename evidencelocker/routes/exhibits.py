@@ -7,6 +7,7 @@ from io import BytesIO
 from evidencelocker.decorators.auth import *
 from evidencelocker.helpers.text import raw_to_html, bleachify
 from evidencelocker.helpers.aws import s3_upload_file, s3_download_file, s3_delete_file
+from evidencelocker.helpers.hashes import generate_hash, validate_hash
 
 from evidencelocker.__main__ import app
 
@@ -126,7 +127,7 @@ def get_locker_username_exhibit_eid_anything_signature(user, username, eid, anyt
         user=user
         )
 
-@app.get("/locker/<username>/all_signed_exhibits")
+@app.get("/locker/<username>/exhibits")
 @logged_in_any
 def get_locker_username_all_signed_exhibits(user, username):
 
@@ -134,9 +135,46 @@ def get_locker_username_all_signed_exhibits(user, username):
     if not target_user.can_be_viewed_by_user(user):
         abort(404)
 
+    exhibits=[e for e in target_user.exhibits if e.signed_utc]
+
+    exhibit_ids=','.join([e.b36id for e in exhibits])
+    token=generate_hash(f"{target_user.username},{exhibit_ids}")
+
+    verification_link=f"/locker/{target_user.username}/exhibit_verification?e={exhibit_ids}&token={token}"
+
     return render_template(
         "exhibits_all.html",
         target_user=target_user,
+        exhibits=exhibits,
+        verification_link=verification_link,
+        user=user
+        )
+
+@app.get("/locker/<username>/exhibit_verification")
+def get_locker_username_exhibit_verification(username):
+
+    target_user=get_victim_by_username(username)
+
+    exhibit_ids=request.args.get("e")
+    token=request.args.get("token")
+
+    if not validate_hash(f"{target_user.username},{exhibit_ids}", token):
+        abort(403)
+
+
+    verification_link=f"/locker/{target_user.username}/exhibit_verification?e={exhibit_ids}&token={token}"
+    
+    exhibit_ids=exhibit_ids.split(",")
+    exhibits=get_exhibits_by_ids(exhibit_ids)
+
+    if any([e.author_id != target_user.id for e in exhibits]):
+        abort(403)
+
+    return render_template(
+        "exhibits_all.html",
+        target_user=target_user,
+        exhibits=exhibits,
+        verification_link=verification_link,
         user=user
         )
 

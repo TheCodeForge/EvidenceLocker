@@ -94,6 +94,14 @@ def get_exhibit_by_id(id, graceful=False):
 
     return exhibit
 
+def get_exhibits_by_ids(ids):
+
+    id_list = tuple([base36decode(i) for i in ids if isinstance(id, str) else i])
+
+    exhibits = g.db.query(Exhibit).filter(Exhibit.id.in_(id_list)).order_by(Exhibit.id.desc()).all()
+    return exhibits
+
+
 def get_agency_by_id(id, graceful=False):
 
     if isinstance(id, str):

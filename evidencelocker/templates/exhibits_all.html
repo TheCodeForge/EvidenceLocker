@@ -4,7 +4,7 @@
 
 {% block pagecontent %}
 <h1>{{ target_user.username }}'s Locker</h1>
-{% for e in target_user.exhibits if e.signed_utc %}
+{% for e in exhibits %}
 <div id="exhibit-{{ e.b36id }}" class="card border rounded mb-3 avoid-pagebreak">
   <div class="card-title"><h1 class="h3 text-primary px-3 py-2">{{ e.title }}</h1></div>
   <div class="card-body">
@@ -23,7 +23,7 @@
       <p><i class="fas fa-fw fa-pen-to-square" data-toggle="tooltip" data-placement="top" title="Exhibit last edited"></i> <span class="text-small">{{ e.edited_string }}</span></p>
     {% endif %}
     {% if e.signed_utc %}
-      <p><i class="fas fa-fw fa-signature-lock text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small">{{ e.signed_string }}</span></p>
+      <p><i class="fas fa-fw fa-signature-lock text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small"><a href="{{ e.sig_permalink }}" target="_blank">{{ e.signed_string }}</a></span></p>
     {% endif %}
 
   </div>
@@ -34,8 +34,11 @@
 
 
 {% block footer_text %}
-<hr>
-<div class="justify-content-center">
-  <i>End of Locker Content</i>
+<div class="border-top">
+  <p class="justify-content-center"><i>End of Locker Content</i></p>
+  <p class="justify-content-center">The contents of this document may be verified against live EvidenceLocker data at the following link:</p>
+
+  <img class="mw-100 mx-auto" src="{{ verification_link | full_link | qrcode }}">
+  <p class="text-small justify-content-center">{{ verification_link | full_link }}</p>
 </div>
 {% endblock %}
