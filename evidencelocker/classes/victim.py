@@ -5,6 +5,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from .mixins import *
 
 from evidencelocker.helpers.countries import COUNTRY_CODES, RESTRICTED_COUNTRIES
+from evidencelocker.helpers.hashes import validate_hash
 from evidencelocker.__main__ import Base
 
 class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin, country_mixin):
@@ -72,7 +73,7 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin, country_mixin
 
             return False
 
-        return False
+        return validate_hash(request.path, request.args.get("token",""))
 
     @property
     def signed_exhibit_count(self):

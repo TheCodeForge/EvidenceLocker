@@ -24,15 +24,19 @@
       <p><i class="fas fa-fw fa-pen-to-square" data-toggle="tooltip" data-placement="top" title="Exhibit last edited"></i> <span class="text-small">{{ e.edited_string }}</span></p>
     {% endif %}
     {% if e.signed_utc %}
-      <p><i class="fas fa-fw fa-signature-lock text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small"><a href="{{ e.sig_permalink }}" target="_blank">{{ e.signed_string }}</a></span></p>
+      <p><i class="fas fa-fw fa-signature-lock text-success" data-toggle="tooltip" data-placement="bottom" title="Exhibit signed"></i> <span class="text-small"><a href="{{ e.sig_permalink }}&token={{ e.sig_permalink | path_token }}" target="_blank">{{ e.signed_string }}</a></span></p>
     {% endif %}
 
   </div>
 </div>
+{% else %}
+<div class="text-center">
+  <p>Your signed locker entries will appear here. You don't have any yet.</p>
+</div>
 {% endfor %}
 
 <div class="border-top mt-5 text-center">
-  <p><i>End of Locker Content</i></p>
+  <p><i>End of Signed Locker Content</i></p>
 
   {% if verification_link %}
   <p>The contents of this document may be verified against live EvidenceLocker data at the following link:</p>
