@@ -4,6 +4,7 @@
 
 {% block pagecontent %}
 <h1>{{ target_user.username }}'s Locker</h1>
+<h2>{{ target_user.name }}</h2>
 {% for e in exhibits %}
 <div id="exhibit-{{ e.b36id }}" class="card border rounded mb-3 avoid-pagebreak">
   <div class="card-title"><h1 class="h3 text-primary px-3 py-2">{{ e.title }}</h1></div>
@@ -29,12 +30,8 @@
   </div>
 </div>
 {% endfor %}
-{% endblock %}
 
-
-
-{% block footer_text %}
-<div class="border-top">
+<div class="border-top mt-5">
   <p class="justify-content-center"><i>End of Locker Content</i></p>
 
   {% if "exhibit_verification" not in request.path %}
@@ -45,3 +42,7 @@
   {% endif %}
 </div>
 {% endblock %}
+
+
+
+{% block footer_text %}{% endblock %}
