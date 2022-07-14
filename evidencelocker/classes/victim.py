@@ -26,6 +26,7 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin, country_mixin
     login_nonce =Column(Integer, default=0)
     allow_leo_sharing = Column(Boolean, default=False)
     last_otp_code = deferred(Column(String(6)))
+    public_link_nonce=Column(Integer, default=0)
 
     share_records = relationship("LockerShare", back_populates="victim")
     agencies = association_proxy('share_records', 'agency')
