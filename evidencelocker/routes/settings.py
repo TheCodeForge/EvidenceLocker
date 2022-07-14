@@ -69,6 +69,12 @@ def post_settings_page(user, page):
         if request.form.get("function")=="toggle_sharing":
             user.allow_leo_sharing=bool(request.form.get("allow_sharing", False))
 
+        elif request.form.get("function")=="revoke_public":
+            user.public_link_nonce +=1
+            g.db.add(user)
+            g.db.commit()
+            return jsonify({"message":"Public links revoked"})
+
     else:
         abort(404)
 
