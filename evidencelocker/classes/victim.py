@@ -49,7 +49,7 @@ class VictimUser(Base, b36ids, time_mixin, user_mixin, json_mixin, country_mixin
         if self.is_banned or (other and other.is_banned):
             return False
 
-        if request.args.get("token") and validate_hash(request.path, request.args.get("token","")):
+        if request.args.get("token") and validate_hash(f"{self.id}+{self.public_link_nonce}+{request.path}", request.args.get("token","")):
             return True
 
         if not other:
