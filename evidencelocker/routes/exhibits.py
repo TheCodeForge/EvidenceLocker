@@ -155,7 +155,7 @@ def get_locker_username_exhibit_verification(user, username, exhibit_ids):
 
     target_user=get_victim_by_username(username)
 
-    if not validate_hash(f"{target_user.id}+{target_user.public_link_nonce}+{request.path}", request.args.get("token")):
+    if not validate_hash(f"{target_user.id}+{target_user.public_link_nonce}+{request.path}", request.args.get("token",'')):
         abort(403)
     
     exhibit_ids=exhibit_ids.split(",")
