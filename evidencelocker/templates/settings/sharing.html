@@ -11,7 +11,7 @@
           <form id="revoke-public-form" method="post">
             <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
             <input type="hidden" name="function" value="revoke_public">
-            <input type="submit" class="btn btn-danger text-white" value="Revoke Public Links">
+            <a role="button" class="toast-form-submit btn btn-danger text-white w-25 mt-3" data-form="revoke-public-form">Revoke Public Links</a>
           </form>
         </div>
       </div>
