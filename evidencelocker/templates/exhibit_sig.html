@@ -15,7 +15,7 @@
 
   <div class="card-footer">
     <p>Exhibit's SHA-256 saved at time of signing ({{ e.signed_string }}):<br><code>{{ e.signing_sha256 }}</code></p>
-    <p>Exhibit's SHA-256 computed right now from raw data{% if e.image_sha256 %} including <a href="{{ e.pic_permalink }}{% if not user %}?token={{ e.pic_permalink | path_token }}{% endif %}" target="_blank">live image</a>{% endif %}:<br><code>{{ e.live_sha256_with_fresh_image_hash }}</code></p>
+    <p>Exhibit's SHA-256 computed right now from raw data{% if e.image_sha256 %} including <a href="{{ e.pic_permalink }}{% if not user %}?token={{ e.pic_permalink | path_token(e.author) }}{% endif %}" target="_blank">live image</a>{% endif %}:<br><code>{{ e.live_sha256_with_fresh_image_hash }}</code></p>
     <p>{% if e.sig_valid_with_fresh_image %}<i class="text-success fas fa-signature-lock"></i> This exhibit has not been altered since it was signed.{% else %}<i class="text-danger fas fa-signature-slash"></i> This exhibit may have been altered since it was signed.{% endif %}</p>
   </div>
 </div>

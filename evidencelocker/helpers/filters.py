@@ -40,13 +40,13 @@ def nonce(x):
     return generate_hash(f"{session.get('session_id')}+{x}")
 
 @app.template_filter("path_token")
-def path_token(x):
-    return generate_hash(x)
+def path_token(x, user):
+    return generate_hash(f"{user.id}+{user.public_link_nonce}+{x}")
 
 @app.template_filter("add_token_param")
-def add_token_param(x):
+def add_token_param(x, user):
     parsed_url=urlparse(x)
-    return urlunparse(parsed_url._replace(query=f"token={generate_hash(parsed_url.path)}"))
+    return urlunparse(parsed_url._replace(query=f"token={generate_hash(f"{user.id}+{user.public_link_nonce}+{parsed_url.path}")}"))
 
 @app.template_filter('logged_out_token')
 def logged_out_token(x):
