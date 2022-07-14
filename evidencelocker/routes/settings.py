@@ -1,6 +1,7 @@
 import bleach
 import mistletoe
 import pyotp
+from werkzeug.utils import safe_join
 
 from evidencelocker.decorators.auth import *
 from evidencelocker.helpers.text import raw_to_html
