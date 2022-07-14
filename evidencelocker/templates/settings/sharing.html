@@ -6,6 +6,18 @@
   <div class="d-grid gap-3">
     <div class="pb-4">
       <div class="body d-md-flex">
+        <label for="revoke-public" class="w-25 fw-bold text-md-end pe-3">Revoke Public Export Links</label>
+        <div class="w-100">
+          <form id="revoke-public-form" method="post">
+            <input type="hidden" name="csrf_token" value="{{ user.csrf_token }}">
+            <input type="hidden" name="function" value="revoke_public">
+            <input type="submit" class="btn btn-danger text-white" value="Revoke Public Links">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="pb-4">
+      <div class="body d-md-flex">
         <label for="allow-sharing" class="w-25 fw-bold text-md-end pe-3">Allow Sharing</label>
         <div class="w-100">
           <form id="sharing-settings-form" method="post">
