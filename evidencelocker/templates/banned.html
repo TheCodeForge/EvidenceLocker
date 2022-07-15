@@ -1,12 +1,12 @@
 {% extends "base_centered.html" %}
 
-{% block title %}TEL - B&{% endblock %}
+{% block title %}TEL - Suspended{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-12 col-md-6 my-auto p-3">
-  	<p class="h3 text-center text-primary my-4">Account Terminated</p>
-  	<p>Your Evidence Locker account ({{ user.username }}) has been permanently banned{% if user.ban_reason %} for the following reason: {{ user.ban_reason }}{% endif %}.
+  	<p class="h3 text-center text-primary my-4">Account Suspended</p>
+  	<p>Your Evidence Locker account ({{ user.username }}) has been permanently suspended{% if user.ban_reason %} for the following reason: {{ user.ban_reason }}{% endif %}.
   </div>
 </div>
 {% endblock %}
