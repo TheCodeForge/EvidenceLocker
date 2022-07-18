@@ -72,7 +72,7 @@ def post_create_exhibit(user):
                 title=title,
                 body=body_raw
                 )
-        exhibit.image_type=mime.split(";")[0].split('/').[1]
+        exhibit.image_type=mime.split(";")[0].split('/')[1].split('+')[0]
 
         file.seek(0)
         filetype = mime.split("/")[1]
@@ -247,7 +247,7 @@ def post_edit_exhibit_eid(user, eid):
                 error="Invalid file type, must be image",
                 e=exhibit
                 )
-        exhibit.image_type=mime.split(";")[0].split('/').[1]
+        exhibit.image_type=mime.split(";")[0].split('/')[1].split('+')[0]
 
         file.seek(0)
         exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
