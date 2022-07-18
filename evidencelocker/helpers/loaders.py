@@ -75,7 +75,11 @@ def get_admin_by_id(id, graceful=False):
 
 def get_admin_by_username(name, graceful=False):
 
-    user = g.db.query(AdminUser).filter_by(username=name).first()
+    name = name.replace('\\', '')
+    name = name.replace('_', '\_')
+    name = name.replace('%', '')
+
+    user = g.db.query(AdminUser).filter(AdminUser.username.ilike(name)).first()
 
     if not user and not graceful:
         abort(404)
