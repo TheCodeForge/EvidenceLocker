@@ -63,7 +63,7 @@ def post_create_exhibit(user):
         file=request.files["file"]
 
         #check file type
-        mime = magic.Magic(mime=True).from_buffer(file.read(2048))
+        mime = magic.from_buffer(file.read(2048), mime=True)
         if not mime.startswith("image/"):
             return render_template(
                 "create_exhibit.html",
@@ -237,7 +237,7 @@ def post_edit_exhibit_eid(user, eid):
         file=request.files["file"]
 
         #check file type
-        mime = magic.Magic(mime=True).from_buffer(file.read(2048))
+        mime = magic.from_buffer(file.read(2048), mime=True)
         if not mime.startswith("image/"):
             return render_template(
                 "create_exhibit.html",
