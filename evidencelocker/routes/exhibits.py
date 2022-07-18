@@ -3,6 +3,7 @@ import mistletoe
 import pyotp
 from pprint import pprint
 from io import BytesIO
+import magic
 
 from evidencelocker.decorators.auth import *
 from evidencelocker.helpers.text import raw_to_html, bleachify
@@ -60,6 +61,20 @@ def post_create_exhibit(user):
     #handle attached file
     if "file" in request.files:
         file=request.files["file"]
+
+        #check file type
+        mime = magic.Magic(mime=True).from_buffer(file.read(2048))
+        if not mime.startswith("image/"):
+            return render_template(
+                "create_exhibit.html",
+                user=user,
+                error="Invalid file type, must be image",
+                title=title,
+                body=body_raw
+                )
+
+        file.seek(0)
+
         exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
         file.seek(0)
         s3_upload_file(exhibit.pic_permalink, file)
@@ -220,6 +235,18 @@ def post_edit_exhibit_eid(user, eid):
             s3_delete_file(exhibit.pic_permalink)
 
         file=request.files["file"]
+
+        #check file type
+        mime = magic.Magic(mime=True).from_buffer(file.read(2048))
+        if not mime.startswith("image/"):
+            return render_template(
+                "create_exhibit.html",
+                user=user,
+                error="Invalid file type, must be image",
+                e=exhibit
+                )
+
+        file.seek(0)
         exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
         file.seek(0)
 
