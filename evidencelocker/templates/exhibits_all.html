@@ -38,13 +38,13 @@
 <div class="border-top mt-5 text-center">
   <p><i>End of Signed Locker Content</i></p>
 
-  {% if verification_link %}
+  {% if verification_link and user==target_user%}
   <div class="avoid-pagebreak">
     <p>The following is a public share link for this page with this exact set of exhibits, including images and signature data. Public links may be revoked at any time in your settings.</p>
 
-    <img class="mw-100 mx-auto avoid-pagebreak" src="{{ verification_link | full_link | add_token_param(target_user) | qrcode_img_data }}">
+    <img class="mw-100 mx-auto avoid-pagebreak" src="{{ verification_link | full_link | add_token_param(user) | qrcode_img_data }}">
     <div class="d-flex w-75 mx-auto">
-      <input id="copy-addr" readonly="readonly" value="{{ verification_link | full_link | add_token_param(target_user) }}" data-clipboard-text="{{ verification_link | full_link | add_token_param(target_user) }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
+      <input id="copy-addr" readonly="readonly" value="{{ verification_link | full_link | add_token_param(user) }}" data-clipboard-text="{{ verification_link | full_link | add_token_param(user) }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
       <label for="copy-addr" class="input-overlay-icon" role="button">
         <i class="fas fa-copy fa-fw"></i>
       </label>
