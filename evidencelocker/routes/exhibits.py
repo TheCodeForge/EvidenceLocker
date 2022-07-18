@@ -72,12 +72,12 @@ def post_create_exhibit(user):
                 title=title,
                 body=body_raw
                 )
+
         exhibit.image_type=mime.split(";")[0].split('/')[1].split('+')[0]
-
+        
         file.seek(0)
-        filetype = mime.split("/")[1]
-
         exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
+
         file.seek(0)
         s3_upload_file(exhibit.pic_permalink, file)
         g.db.add(exhibit)
