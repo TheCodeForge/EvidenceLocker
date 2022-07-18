@@ -40,7 +40,7 @@
 
   {% if verification_link %}
   <div class="avoid-pagebreak">
-    <p>The following is a public link for this page with this exact set of exhibits, including images and signature data:</p>
+    <p>The following is a public share link for this page with this exact set of exhibits, including images and signature data. Public links may be revoked at any time in your settings.</p>
 
     <img class="mw-100 mx-auto avoid-pagebreak" src="{{ verification_link | full_link | add_token_param(target_user) | qrcode_img_data }}">
     <div class="d-flex w-75 mx-auto">
