@@ -298,6 +298,9 @@ def get_exhibit_image_eid_png(user, eid, digits):
     if not exhibit.author.can_be_viewed_by_user(user):
         abort(404)
 
+    if not exhibit.image_sha256:
+        abort(404)
+
     if exhibit.image_sha256[-6:] != digits:
         abort(404)
 
