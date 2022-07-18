@@ -289,9 +289,9 @@ def post_edit_exhibit_eid(user, eid):
     return redirect(exhibit.permalink)
 
 
-@app.get("/exhibit_image/<eid>/<digits>.png")
+@app.get("/exhibit_image/<eid>/<digits>.<filetype>")
 @logged_in_desired
-def get_exhibit_image_eid_png(user, eid, digits):
+def get_exhibit_image_eid_png(user, eid, digits, filetype):
 
     exhibit = get_exhibit_by_id(eid)
 
@@ -304,7 +304,13 @@ def get_exhibit_image_eid_png(user, eid, digits):
     if exhibit.image_sha256[-6:] != digits:
         abort(404)
 
+    if request.path != request.pic_permalink:
+        return redirect(request.pic_permalink)
+
+    file = s3_download_file(exhibit.pic_permalink)
+    mime = magic.from_buffer(file.read(2048), mime=True)
+
     return send_file(
-        s3_download_file(exhibit.pic_permalink),
-        mimetype="image/png"
+        file,
+        mimetype=mime
         )
