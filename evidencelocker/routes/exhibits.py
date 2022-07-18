@@ -311,10 +311,7 @@ def get_exhibit_image_eid_png(user, eid, digits, filetype):
     if request.path != request.pic_permalink:
         return redirect(request.pic_permalink)
 
-    file = s3_download_file(exhibit.pic_permalink)
-    mime = magic.from_buffer(file.read(2048), mime=True)
-
     return send_file(
-        file,
-        mimetype=mime
+        s3_download_file(exhibit.pic_permalink),
+        mimetype=f"image/{exhibit.image_type}"
         )
