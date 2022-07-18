@@ -73,9 +73,11 @@ def post_create_exhibit(user):
                 body=body_raw
                 )
 
+        exhibit.image_type=mime.split(";")[0].split('/')[1].split('+')[0]
+        
         file.seek(0)
-
         exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
+
         file.seek(0)
         s3_upload_file(exhibit.pic_permalink, file)
         g.db.add(exhibit)
@@ -245,6 +247,7 @@ def post_edit_exhibit_eid(user, eid):
                 error="Invalid file type, must be image",
                 e=exhibit
                 )
+        exhibit.image_type=mime.split(";")[0].split('/')[1].split('+')[0]
 
         file.seek(0)
         exhibit.image_sha256=hashlib.sha256(file.read()).hexdigest()
@@ -256,6 +259,7 @@ def post_edit_exhibit_eid(user, eid):
     elif image_action=="delete":
         s3_delete_file(exhibit.pic_permalink)
         exhibit.image_sha256=None
+        exhibit.image_type=None
 
 
     signed = request.form.get("oath_perjury", False)
@@ -289,9 +293,9 @@ def post_edit_exhibit_eid(user, eid):
     return redirect(exhibit.permalink)
 
 
-@app.get("/exhibit_image/<eid>/<digits>.png")
+@app.get("/exhibit_image/<eid>/<digits>.<filetype>")
 @logged_in_desired
-def get_exhibit_image_eid_png(user, eid, digits):
+def get_exhibit_image_eid_png(user, eid, digits, filetype):
 
     exhibit = get_exhibit_by_id(eid)
 
@@ -304,7 +308,10 @@ def get_exhibit_image_eid_png(user, eid, digits):
     if exhibit.image_sha256[-6:] != digits:
         abort(404)
 
+    if request.path != exhibit.pic_permalink:
+        return redirect(request.pic_permalink)
+
     return send_file(
         s3_download_file(exhibit.pic_permalink),
-        mimetype="image/png"
+        mimetype=f"image/{exhibit.image_type}"
         )
