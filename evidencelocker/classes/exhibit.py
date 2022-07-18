@@ -93,7 +93,7 @@ class Exhibit(Base, b36ids, time_mixin, json_mixin):
         
         if not data["image_sha256"]:
             data.pop("image_sha256")
-        if not data["iamge_type"]:
+        if not data["image_type"]:
             data.pop("image_type")
 
         return data
