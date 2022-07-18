@@ -308,7 +308,7 @@ def get_exhibit_image_eid_png(user, eid, digits, filetype):
     if exhibit.image_sha256[-6:] != digits:
         abort(404)
 
-    if request.path != request.pic_permalink:
+    if request.path != exhibit.pic_permalink:
         return redirect(request.pic_permalink)
 
     return send_file(
