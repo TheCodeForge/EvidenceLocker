@@ -75,7 +75,7 @@ def pprint_filter(x):
 @app.template_filter("crypto_data")
 def crypto_data_filter(x):
 
-    data={
+    return {
         "btc": {
             "name": "Bitcoin",
             "addr": "37fctBbwVHwkMoF97FzvUHhurncMfwEqV4"
@@ -102,6 +102,3 @@ def crypto_data_filter(x):
             "addr": "GCXONVKCJRTTA46N4ML35TAJYRMIV7NBA4TXNKM7CWLZJTSOQ3U5MGBB"
         }
     }
-
-
-    return data
