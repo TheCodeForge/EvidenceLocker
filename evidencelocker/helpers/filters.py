@@ -1,4 +1,5 @@
 import qrcode
+import qrcode.image.svg
 import io
 import base64
 import pprint
@@ -30,6 +31,17 @@ def qrcode_filter(x):
     
     data=base64.b64encode(mem.read()).decode('ascii')
     return f"data:image/png;base64,{data}"
+
+@app.template_filter('qrcode_svg')
+def qrcode_filter(x):
+  
+    qr=qrcode.QRCode(image_factory = qrcode.image.svg.SvgPathImage)
+    qr.add_data(x)
+    img=qr.make_image(
+        fill_color="#2589bd",
+        back_color="white",
+    )
+    return img.to_string()
 
 @app.template_filter('full_link')
 def full_link(x):
