@@ -1,11 +1,8 @@
 {% extends "base_centered.html" %}
 
-{% set btc='37fctBbwVHwkMoF97FzvUHhurncMfwEqV4' %}
-{% set eth='0xf7378b181fa40e447a18f05efff5713c1519318b' %}
-{% set bch='qrpqs09gqdzpdpxj7kj2nuskpaaxum32rsjrlustyu' %}
-{% set xmr='481Zwedy6ydWGSBKBFZ5dCAV1DuMHTc7Y4xNSwYd63VHcfKf9bmpvoUXVognjjbb6fQA8pQXRgqUHcEJ88so62iqFxXaTyY' %}
-{% set ltc='M8NePw5tQgSGKm2jEHkvr8CmxHJfjkdoQ7' %}
-{% set xlm='GCXONVKCJRTTA46N4ML35TAJYRMIV7NBA4TXNKM7CWLZJTSOQ3U5MGBB' %}
+
+
+{% set data= ( 0 | crypto_data ) %}
 
 {% block pagecontent %}
 <div class="card m-0 border-0">
@@ -14,121 +11,33 @@
     <p>The Evidence Locker is free to use, but if it helped you, donations to keep it running would be greatly appreciated. Your contribution will allow it to stay running and help future victims of abuse.</p>
   </div>
   <div class="accordion" id="donateaccordion">
+
+
+    {% for x in data %}
     <div class="accordion-item">
-      <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          [BTC] Bitcoin
+      <h2 class="accordion-header" id="heading-{{ x }}">
+        <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ x }}" aria-expanded="true" aria-controls="collapse-{{ x }}">
+          [{{ x | upper }}] {{ data[x]['name'] }}
         </button>
       </h2>
-      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#donateaccordion">
+      <div id="collapse-{{ x }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ x }}" data-bs-parent="#donateaccordion">
         <div class="accordion-body">
-          <img class="mx-auto d-block w-75" src="{{ btc | qrcode_img_data }}">
+          <img class="mx-auto d-block w-75" src="{{ data[x]['addr'] | qrcode_img_data }}">
           <div class="d-flex w-75 mx-auto">
-            <input id="copy-btc" readonly="readonly" value="{{ btc }}" data-clipboard-text="{{ btc }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
-            <label for="copy-btc" class="input-overlay-icon" role="button">
+            <input id="copy-{{ x }}" readonly="readonly" value="{{ data[x]['addr'] }}" data-clipboard-text="{{ data[x]['addr'] }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
+            <label for="copy-{{ x }}" class="input-overlay-icon" role="button">
               <i class="fas fa-copy fa-fw"></i>
             </label>
           </div>
+          {% if data[x].get('text') %}
+          {% filter markdown %}
+          {{ data[x]['text'] }}
+          {% endfilter %}
+          {% endif %}
         </div>
       </div>
     </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingTwo">
-        <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          [ETH] Ether (and other Ethereum tokens)
-        </button>
-      </h2>
-      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#donateaccordion">
-        <div class="accordion-body">
-          <img class="mx-auto d-block w-75" src="{{ eth | qrcode_img_data }}">
-          <div class="d-flex w-75 mx-auto">
-            <input id="copy-eth" readonly="readonly" value="{{ eth }}" data-clipboard-text="{{ eth }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
-            <label for="copy-eth" class="input-overlay-icon" role="button">
-              <i class="fas fa-copy fa-fw"></i>
-            </label>
-          </div>
-          <p>The following Ethereum blockchain tokens are also accepted at this address:</p>
-          <ul>
-            <li>BAND</li>
-            <li>BAT</li>
-            <li>COMP</li>
-            <li>MKR</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingThree">
-        <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          [BCH] Bitcoin Cash
-        </button>
-      </h2>
-      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#donateaccordion">
-        <div class="accordion-body">
-          <img class="mx-auto d-block w-75" src="{{ bch | qrcode_img_data }}">
-          <div class="d-flex w-75 mx-auto">
-            <input id="copy-bch" readonly="readonly" value="{{ bch }}" data-clipboard-text="{{ bch }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
-            <label for="copy-bch" class="input-overlay-icon" role="button">
-              <i class="fas fa-copy fa-fw"></i>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingFour">
-        <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-          [XMR] Monero
-        </button>
-      </h2>
-      <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#donateaccordion">
-        <div class="accordion-body">
-          <img class="mx-auto d-block w-75" src="{{ xmr | qrcode_img_data }}">
-          <div class="d-flex w-75 mx-auto">
-            <input id="copy-xmr" readonly="readonly" value="{{ xmr }}" data-clipboard-text="{{ xmr }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
-            <label for="copy-xmr" class="input-overlay-icon" role="button">
-              <i class="fas fa-copy fa-fw"></i>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingFive">
-        <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-          [LTC] LiteCoin
-        </button>
-      </h2>
-      <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#donateaccordion">
-        <div class="accordion-body">
-          <img class="mx-auto d-block w-75" src="{{ ltc | qrcode_img_data }}">
-          <div class="d-flex w-75 mx-auto">
-            <input id="copy-ltc" readonly="readonly" value="{{ ltc }}" data-clipboard-text="{{ ltc }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
-            <label for="copy-ltc" class="input-overlay-icon" role="button">
-              <i class="fas fa-copy fa-fw"></i>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingSix">
-        <button class="accordion-button collapsed fw-bold text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-          [XLM] Stellar Lumen
-        </button>
-      </h2>
-      <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#donateaccordion">
-        <div class="accordion-body">
-          <img class="mx-auto d-block w-75" src="{{ xlm | qrcode_img_data }}">
-          <div class="d-flex w-75 mx-auto">
-            <input id="copy-xlm" readonly="readonly" value="{{ xlm }}" data-clipboard-text="{{ xlm }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
-            <label for="copy-xlm" class="input-overlay-icon" role="button">
-              <i class="fas fa-copy fa-fw"></i>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% endfor }
   </div>
 </div>
 {% endblock %}
