@@ -22,7 +22,7 @@
       </h2>
       <div id="collapse-{{ x }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ x }}" data-bs-parent="#donateaccordion">
         <div class="accordion-body">
-          {{ data[x]['addr'] | qrcode_svg | safe }}
+          <img class="mx-auto d-block w-75" src="{{ data[x]['addr'] | qrcode_svg }}">
           <div class="d-flex w-75 mx-auto">
             <input id="copy-{{ x }}" readonly="readonly" value="{{ data[x]['addr'] }}" data-clipboard-text="{{ data[x]['addr'] }}" role="button" class="clipboard-copy form-control rounded text-center bg-white">
             <label for="copy-{{ x }}" class="input-overlay-icon" role="button">
