@@ -31,7 +31,7 @@
           </div>
           {% if data[x].get('text') %}
           {% filter markdown %}
-          {{ data[x]['text'] }}
+          {{ '\n' + data[x]['text'] }}
           {% endfilter %}
           {% endif %}
         </div>
