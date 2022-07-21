@@ -41,7 +41,7 @@ def qrcode_filter(x):
         fill_color="#2589bd",
         back_color="white",
     )
-    return img.to_string()
+    return f"data:image/svg+xml;utf8,{img.to_string()}"
 
 @app.template_filter('full_link')
 def full_link(x):
