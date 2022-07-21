@@ -77,29 +77,29 @@ def crypto_data_filter(x):
 
     data={
         "btc": {
-            name: "Bitcoin",
-            addr: "37fctBbwVHwkMoF97FzvUHhurncMfwEqV4"
+            "name": "Bitcoin",
+            "addr": "37fctBbwVHwkMoF97FzvUHhurncMfwEqV4"
         },
         "eth": {
-            name: "Ether",
-            addr: "0xf7378b181fa40e447a18f05efff5713c1519318b"
-            text: "The following Ethereum blockchain tokens are also accepted at this address:\n\n* BAND\n* BAT\n* COMP\n* MKR"
+            "name": "Ether",
+            "addr": "0xf7378b181fa40e447a18f05efff5713c1519318b"
+            "text": "The following Ethereum blockchain tokens are also accepted at this address:\n\n* BAND\n* BAT\n* COMP\n* MKR"
         },
         "bch": {
-            name: "Bitcoin Cash",
-            addr: "qrpqs09gqdzpdpxj7kj2nuskpaaxum32rsjrlustyu"
+            "name": "Bitcoin Cash",
+            "addr": "qrpqs09gqdzpdpxj7kj2nuskpaaxum32rsjrlustyu"
         },
         "xmr": {
-            name: "Monero",
-            addr: "481Zwedy6ydWGSBKBFZ5dCAV1DuMHTc7Y4xNSwYd63VHcfKf9bmpvoUXVognjjbb6fQA8pQXRgqUHcEJ88so62iqFxXaTyY"
+            "name": "Monero",
+            "addr": "481Zwedy6ydWGSBKBFZ5dCAV1DuMHTc7Y4xNSwYd63VHcfKf9bmpvoUXVognjjbb6fQA8pQXRgqUHcEJ88so62iqFxXaTyY"
         },
         "ltc": {
-            name: "LiteCoin",
-            addr: "M8NePw5tQgSGKm2jEHkvr8CmxHJfjkdoQ7"
+            "name": "LiteCoin",
+            "addr": "M8NePw5tQgSGKm2jEHkvr8CmxHJfjkdoQ7"
         },
         "xlm": {
-            name: "Stellar Lumen",
-            addr: "GCXONVKCJRTTA46N4ML35TAJYRMIV7NBA4TXNKM7CWLZJTSOQ3U5MGBB"
+            "name": "Stellar Lumen",
+            "addr": "GCXONVKCJRTTA46N4ML35TAJYRMIV7NBA4TXNKM7CWLZJTSOQ3U5MGBB"
         }
     }
 
