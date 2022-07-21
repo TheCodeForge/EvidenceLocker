@@ -82,7 +82,7 @@ def crypto_data_filter(x):
         },
         "eth": {
             "name": "Ether",
-            "addr": "0xf7378b181fa40e447a18f05efff5713c1519318b"
+            "addr": "0xf7378b181fa40e447a18f05efff5713c1519318b",
             "text": "The following Ethereum blockchain tokens are also accepted at this address:\n\n* BAND\n* BAT\n* COMP\n* MKR"
         },
         "bch": {
